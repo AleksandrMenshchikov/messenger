@@ -253,6 +253,7 @@ svg circle {
   padding: 10px;
   display: grid;
   gap: 5px;
+  z-index: 1000;
 }
 
 .modal-add-delete-user__group {
