@@ -8,12 +8,24 @@
     <title>Чат</title>
   </head>
   <body>
+    <div class="modal-add-delete-user">
+      <button class="modal-add-delete-user__group">
+        <span class="modal-add-delete-user__add-icon"></span>
+        <p class="modal-add-delete-user__text">Добавить пользователя</p>
+      </button>
+      <button class="modal-add-delete-user__group">
+        <span class="modal-add-delete-user__delete-icon"></span>
+        <p class="modal-add-delete-user__text">Удалить пользователя</p>
+      </button>
+    </div>
+
     <div class='container'>
       <nav class='nav'>
-        <button class='button-profile' type='button'>
+        <div class="button-profile-container">
+          <button class='button-profile' type='button'>
           <span class='button-profile__text'>Профиль</span>
           <span class='button-profile__arrow'></span>
-        </button>
+        </button></div>
         <div class='search'>
           <input
             class='search__input'
@@ -40,7 +52,19 @@
           <span class='list__divider'></span>
         </ul>
       </nav>
-      <div class='messages'>2</div>
+      <div class='messages'>
+        <div class="messages__head">
+          <img class="messages__head-avatar" src="https://www.lightsong.net/wp-content/uploads/2020/12/blank-profile-circle.png" alt="Аватар">
+          <p class="messages__head-title">Вадим</p>
+          <div class="dots">
+            <svg width="3" height="16" viewBox="0 0 3 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="1.5" cy="2" r="1.5" fill="#1E1E1E"/>
+              <circle cx="1.5" cy="8" r="1.5" fill="#1E1E1E"/>
+              <circle cx="1.5" cy="14" r="1.5" fill="#1E1E1E"/>
+            </svg>
+          </div>
+        </div>
+      </div>
     </div>
   </body>
 </html>
