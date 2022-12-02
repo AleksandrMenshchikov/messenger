@@ -1,0 +1,107 @@
+<html lang='ru'>
+  <head>
+    <meta charset='UTF-8' />
+    <meta http-equiv='X-UA-Compatible' content='IE=edge' />
+    <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+    <link rel='stylesheet' href='../../../assets/fonts/fonts.css' />
+    <link rel='stylesheet' href='./index.css' />
+    <title>Регистрация</title>
+  </head>
+  <body>
+    <div class='container'>
+      <div class='wrapper'>
+        <h1 class='title'>Регистрация</h1>
+        <form class='form'>
+          <div class='group'>
+            <input
+              class='input'
+              type='email'
+              name='email'
+              placeholder='placeholder'
+              autocomplete='email'
+              required
+            />
+            <label class='label'>Почта</label>
+            <span class='error error_active'>Информация об ошибке</span>
+          </div>
+          <div class='group'>
+            <input
+              class='input'
+              type='text'
+              name='login'
+              placeholder='placeholder'
+              required
+            />
+            <label class='label'>Логин</label>
+            <span class='error'>Информация об ошибке</span>
+          </div>
+          <div class='group'>
+            <input
+              class='input'
+              type='text'
+              name='first_name'
+              placeholder='placeholder'
+              autocomplete='name'
+              required
+            />
+            <label class='label'>Имя</label>
+            <span class='error'>Информация об ошибке</span>
+          </div>
+          <div class='group'>
+            <input
+              class='input'
+              type='text'
+              name='second_name'
+              placeholder='placeholder'
+              autocomplete='family-name'
+              required
+            />
+            <label class='label'>Фамилия</label>
+            <span class='error'>Информация об ошибке</span>
+          </div>
+          <div class='group'>
+            <input
+              class='input'
+              type='tel'
+              name='phone'
+              placeholder='placeholder'
+              autocomplete='tel'
+              required
+            />
+            <label class='label'>Телефон</label>
+            <span class='error'>Информация об ошибке</span>
+          </div>
+          <div class='group'>
+            <input
+              class='input'
+              type='password'
+              name='password'
+              placeholder='placeholder'
+              autocomplete='off'
+              required
+            />
+            <label class='label'>Пароль</label>
+            <span class='error'>Информация об ошибке</span>
+          </div>
+          <div class='group'>
+            <input
+              class='input'
+              type='password'
+              name='password'
+              placeholder='placeholder'
+              autocomplete='off'
+              required
+            />
+            <label class='label'>Пароль (ещё раз)</label>
+            <span class='error'>Информация об ошибке</span>
+          </div>
+          <button
+            class='button-submit'
+            type='submit'
+          >Зарегистрироваться</button>
+          <a class='link' href='../login/index.hbs'>Войти</a>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
