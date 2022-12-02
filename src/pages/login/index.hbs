@@ -1,0 +1,44 @@
+<html lang='ru'>
+  <head>
+    <meta charset='UTF-8' />
+    <meta http-equiv='X-UA-Compatible' content='IE=edge' />
+    <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+    <link rel='stylesheet' href='../../../assets/fonts/fonts.css' />
+    <link rel='stylesheet' href='./index.css' />
+    <title>Login</title>
+  </head>
+  <body>
+    <div class='container'>
+      <div class='wrapper'>
+        <h1 class='title'>Авторизация</h1>
+        <form class='form'>
+          <div class='group'>
+            <input
+              class='input'
+              type='text'
+              name='login'
+              placeholder='placeholder'
+              required
+            />
+            <label class='label'>Логин</label>
+            <span class='error error_active'>Неверный логин</span>
+          </div>
+          <div class='group'>
+            <input
+              class='input'
+              type='password'
+              name='password'
+              placeholder='placeholder'
+              autocomplete='off'
+              required
+            />
+            <label class='label'>Пароль</label>
+            <span class='error'>Неверный логин</span>
+          </div>
+          <button class="button-submit" type="submit">Войти</button>
+          <button class="button" type="button">Нет аккаунта?</button>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
