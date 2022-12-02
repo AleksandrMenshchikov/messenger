@@ -82,7 +82,7 @@ body {
   padding: 0;
   margin: 14px 0;
   overflow: auto;
-  height: calc(100vh - 110px);
+  height: calc(100vh - 105px);
   box-sizing: content-box;
 }
 
