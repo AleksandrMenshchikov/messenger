@@ -445,11 +445,13 @@ svg circle {
   display: flex;
   flex-direction: column;
   align-items: center;
+  overflow: auto;
+  padding-bottom: 100px;
 }
 
 .profile__form-button-avatar {
   width: 130px;
-  height: 130px;
+  min-height: 130px;
   background: #efefef;
   border: none;
   border-radius: 50%;
@@ -485,7 +487,7 @@ svg circle {
   font-weight: 600;
   font-size: 1.6rem;
   color: #1e1e1e;
-  margin: 20px auto 60px;
+  margin: 20px auto 50px;
 }
 
 .modal-profile-avatar {
@@ -553,4 +555,68 @@ svg circle {
   cursor: pointer;
   border: none;
   color: #fff;
+}
+
+.profile__form-data-input-wrapper {
+  width: 100%;
+  max-width: 510px;
+  border-bottom: 1px solid #eaeaea;
+  padding-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-top: 10px;
+}
+
+.profile__label {
+  font-weight: 500;
+  font-size: 1.3rem;
+  color: #1e1e1e;
+}
+
+.profile__input {
+  border: none;
+  width: 100%;
+  height: 20px;
+  padding: 0 3px;
+  font-weight: 500;
+  font-size: 1.3rem;
+  text-align: right;
+  color: #1e1e1e;
+  background: transparent;
+}
+
+.profile__input:disabled {
+  color: #999;
+}
+
+.profile__input:focus {
+  text-align: left;
+}
+
+.profile__form-data-buttons {
+  margin-top: 60px;
+  width: 100%;
+  max-width: 510px;
+}
+
+.profile__form-data-button {
+  background-color: transparent;
+  border: none;
+  font-weight: 500;
+  font-size: 1.3rem;
+  color: #3369f3;
+  padding: 0;
+  cursor: pointer;
+}
+
+.profile__form-data-button-exit {
+  background-color: transparent;
+  border: none;
+  font-weight: 500;
+  font-size: 1.3rem;
+  color: #ff0000;
+  padding: 0;
+  cursor: pointer;
+  margin-top: 10px;
 }
