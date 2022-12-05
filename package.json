@@ -1,0 +1,35 @@
+{
+  "name": "messenger",
+  "version": "1.0.0",
+  "description": "messenger",
+  "browserslist": "> 0.5%, last 2 versions, not dead",
+  "engines": {
+    "node": ">= 12.0.0"
+  },
+  "scripts": {
+    "dev": "parcel src/pages/index.hbs --open",
+    "build": "rm -rf dist && parcel build src/pages/index.hbs --no-cache",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AleksandrMenshchikov/messenger.git"
+  },
+  "keywords": [
+    "messenger"
+  ],
+  "author": "Aleksandr Menshchikov",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AleksandrMenshchikov/messenger/issues"
+  },
+  "homepage": "https://github.com/AleksandrMenshchikov/messenger#readme",
+  "devDependencies": {
+    "@anikin/parcel-transformer-handlebars": "1.0.9",
+    "parcel": "2.8.0",
+    "postcss-import": "15.0.0"
+  },
+  "dependencies": {
+    "express": "4.18.2"
+  }
+}
