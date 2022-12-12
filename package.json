@@ -26,6 +26,7 @@
   "homepage": "https://github.com/AleksandrMenshchikov/messenger#readme",
   "devDependencies": {
     "@anikin/parcel-transformer-handlebars": "1.0.9",
+    "@types/node": "18.11.13",
     "parcel": "2.8.0",
     "postcss-import": "15.0.0"
   },

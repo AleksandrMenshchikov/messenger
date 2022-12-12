@@ -1,4 +1,4 @@
-function first(list) {
+function first(list: any[]): any {
   if (!Array.isArray(list) || !list.length) {
     return undefined;
   }
