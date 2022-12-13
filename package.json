@@ -26,7 +26,12 @@
   "homepage": "https://github.com/AleksandrMenshchikov/messenger#readme",
   "devDependencies": {
     "@anikin/parcel-transformer-handlebars": "1.0.9",
+    "@types/express": "4.17.14",
     "@types/node": "18.11.13",
+    "@typescript-eslint/eslint-plugin": "5.46.1",
+    "@typescript-eslint/parser": "5.46.1",
+    "eslint": "8.29.0",
+    "eslint-config-airbnb": "19.0.4",
     "parcel": "2.8.0",
     "postcss-import": "15.0.0"
   },

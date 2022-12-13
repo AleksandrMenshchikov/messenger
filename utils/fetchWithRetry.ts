@@ -1,4 +1,3 @@
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function fetchWithRetry(
   url: string,
   options: { tries: number; method: string } = { tries: 1, method: 'GET' },
@@ -16,3 +15,5 @@ function fetchWithRetry(
 
   return fetch(url, options).catch(onError);
 }
+
+export default fetchWithRetry;
