@@ -9,11 +9,23 @@
   "scripts": {
     "dev": "parcel src/pages/index.hbs --open",
     "build": "rm -rf dist && parcel build src/pages/index.hbs --no-cache",
-    "start": "node app.js"
+    "start": "node app.js",
+    "lintjs": "./node_modules/.bin/eslint .",
+    "lintcss": "./node_modules/.bin/stylelint **/*.css"
+  },
+  "lint-staged": {
+    "*.{js,ts}": [
+      "npm run lintjs",
+      "git add"
+    ],
+    "*.{css}": [
+      "npm run lintcss",
+      "git add"
+    ]
   },
   "husky": {
     "hooks": {
-      "pre-commit": "eslint . && stylelint \"**/*.css\""
+      "pre-commit": "lint-staged"
     }
   },
   "repository": {
@@ -38,6 +50,7 @@
     "eslint": "8.29.0",
     "eslint-config-airbnb": "19.0.4",
     "husky": "8.0.2",
+    "lint-staged": "^13.1.0",
     "parcel": "2.8.0",
     "postcss-import": "15.0.0",
     "stylelint": "14.16.0",
