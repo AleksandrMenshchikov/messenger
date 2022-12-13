@@ -8,25 +8,12 @@
   },
   "scripts": {
     "dev": "parcel src/pages/index.hbs --open",
-    "build": "rm -rf dist && parcel build src/pages/index.hbs --no-cache",
+    "build": "rm -rf dist && npm run test && parcel build src/pages/index.hbs --no-cache",
     "start": "node app.js",
     "lintjs": "./node_modules/.bin/eslint .",
-    "lintcss": "./node_modules/.bin/stylelint **/*.css"
-  },
-  "lint-staged": {
-    "*.{js,ts}": [
-      "npm run lintjs",
-      "git add"
-    ],
-    "*.{css}": [
-      "npm run lintcss",
-      "git add"
-    ]
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
+    "lintcss": "./node_modules/.bin/stylelint \"**/*.css\"",
+    "prepare": "husky install",
+    "test": "npm run lintjs && npm run lintcss"
   },
   "repository": {
     "type": "git",
@@ -49,13 +36,12 @@
     "@typescript-eslint/parser": "5.46.1",
     "eslint": "8.29.0",
     "eslint-config-airbnb": "19.0.4",
-    "husky": "8.0.2",
-    "lint-staged": "^13.1.0",
     "parcel": "2.8.0",
     "postcss-import": "15.0.0",
     "stylelint": "14.16.0",
     "stylelint-config-standard": "29.0.0",
-    "stylelint-selector-bem-pattern": "2.1.1"
+    "stylelint-selector-bem-pattern": "2.1.1",
+    "husky": "8.0.0"
   },
   "dependencies": {
     "express": "4.18.2"

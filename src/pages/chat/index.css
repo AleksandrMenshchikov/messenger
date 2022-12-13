@@ -8,8 +8,8 @@
   --color-middle-gray: #efefef;
   --color-gray: #eaeaea;
   --color-dark-gray: #999;
-  --color-background-modal: rgba(0, 0, 0, 0.4);
-  --box-shadow: rgba(0, 0, 0, 0.14);
+  --color-background-modal: rgb(0 0 0 / 40%);
+  --box-shadow: rgb(0 0 0 / 14%);
 }
 
 html,
@@ -18,15 +18,27 @@ body {
   margin: 0;
   font-size: 62.5%;
   height: 100vh;
+
   /* mobile viewport bug fix */
-  min-height: -webkit-fill-available;
+  min-height: fill-available;
   overflow: hidden;
 }
 
 * {
   box-sizing: border-box;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
-    Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family:
+    Inter,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    "Fira Sans",
+    "Droid Sans",
+    "Helvetica Neue",
+    sans-serif;
 }
 
 .container {
@@ -72,7 +84,7 @@ body {
 }
 
 .search {
-  padding: 0 10px 0;
+  padding: 0 10px;
   position: relative;
   margin-bottom: 14px;
 }
@@ -137,10 +149,6 @@ body {
   object-position: center;
 }
 
-.list__item-time-counter {
-  margin-left: auto;
-}
-
 .list__item-title {
   font-weight: 600;
   font-size: 13px;
@@ -174,6 +182,7 @@ body {
 }
 
 .list__item-time-counter {
+  margin-left: auto;
   width: 25px;
   display: flex;
   flex-direction: column;
@@ -187,7 +196,6 @@ body {
 }
 
 .list__item-counter {
-  display: block;
   width: 20px;
   height: 20px;
   background: var(--color-blue);
@@ -265,7 +273,7 @@ svg circle {
   top: 65px;
   right: 10px;
   background: var(--color-white);
-  box-shadow: 0px 0px 6px var(--box-shadow);
+  box-shadow: 0 0 6px var(--box-shadow);
   border-radius: 12px;
   padding: 10px;
   display: grid;
@@ -300,7 +308,7 @@ svg circle {
 
 .modal-add-delete-user__add-icon::after {
   position: absolute;
-  content: '';
+  content: "";
   width: 2px;
   height: 11px;
   top: 50%;
@@ -311,7 +319,7 @@ svg circle {
 
 .modal-add-delete-user__add-icon::before {
   position: absolute;
-  content: '';
+  content: "";
   width: 11px;
   height: 2px;
   top: 50%;
@@ -331,7 +339,7 @@ svg circle {
 
 .modal-add-delete-user__delete-icon::after {
   position: absolute;
-  content: '';
+  content: "";
   width: 2px;
   height: 11px;
   top: 50%;
@@ -342,7 +350,7 @@ svg circle {
 
 .modal-add-delete-user__delete-icon::before {
   position: absolute;
-  content: '';
+  content: "";
   width: 11px;
   height: 2px;
   top: 50%;
@@ -384,7 +392,7 @@ svg circle {
   bottom: 65px;
   left: 336px;
   background: var(--color-white);
-  box-shadow: 0px 0px 6px var(--box-shadow);
+  box-shadow: 0 0 6px var(--box-shadow);
   border-radius: 12px;
   padding: 10px;
   display: grid;
@@ -527,7 +535,7 @@ svg circle {
 
 .modal-profile-avatar__wrapper {
   background: var(--color-white);
-  box-shadow: 0px 0px 6px var(--box-shadow);
+  box-shadow: 0 0 6px var(--box-shadow);
   border-radius: 12px;
   padding: 40px 30px;
   width: 340px;
