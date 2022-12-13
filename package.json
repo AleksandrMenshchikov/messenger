@@ -11,6 +11,11 @@
     "build": "rm -rf dist && parcel build src/pages/index.hbs --no-cache",
     "start": "node app.js"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "eslint . && stylelint \"**/*.css\""
+    }
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/AleksandrMenshchikov/messenger.git"
@@ -32,8 +37,12 @@
     "@typescript-eslint/parser": "5.46.1",
     "eslint": "8.29.0",
     "eslint-config-airbnb": "19.0.4",
+    "husky": "8.0.2",
     "parcel": "2.8.0",
-    "postcss-import": "15.0.0"
+    "postcss-import": "15.0.0",
+    "stylelint": "14.16.0",
+    "stylelint-config-standard": "29.0.0",
+    "stylelint-selector-bem-pattern": "2.1.1"
   },
   "dependencies": {
     "express": "4.18.2"
