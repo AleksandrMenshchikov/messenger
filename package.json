@@ -5,8 +5,8 @@
   "browserslist": "> 0.5%, last 2 versions, not dead",
   "scripts": {
     "dev": "parcel src/pages/index.html --no-source-maps --open",
-    "build": "rm -rf dist && npm run test && parcel build src/pages/index.hbs --no-source-maps --no-cache",
-    "start": "node app.js",
+    "build": "rm -rf dist && npm run test && parcel build src/pages/index.html --no-source-maps --no-cache",
+    "start": "node app.ts",
     "lintjs": "./node_modules/.bin/eslint .",
     "lintcss": "./node_modules/.bin/stylelint \"**/*.css\"",
     "prepare": "husky install",
