@@ -18,6 +18,7 @@ require('babel-core/register');
 
 // TODO: // Добавить MyComponent
 class MyComponent extends Block {
+  // eslint-disable-next-line class-methods-use-this
   render() {
     return template;
   }
