@@ -79,7 +79,7 @@ export default class Block<P extends {} = any> {
     this.componentDidMount(props);
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  // eslint-disable-next-line @typescript-eslint/no-empty-function, class-methods-use-this
   componentDidMount(props: P) {
   }
 
@@ -91,7 +91,7 @@ export default class Block<P extends {} = any> {
     this._render();
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars, class-methods-use-this
   componentDidUpdate(oldProps: P, newProps: P) {
     return true;
   }
@@ -130,6 +130,7 @@ export default class Block<P extends {} = any> {
     this._addEvents();
   }
 
+  // eslint-disable-next-line class-methods-use-this
   protected render(): string {
     return '';
   }
