@@ -3,14 +3,16 @@
     <h1 class="title">Авторизация</h1>
     <form class="form">
       <div class="group">
-
+        {{{ Input type="text" name="login" ref="login" autocomplete="off" minLength="3"
+        maxLength="20" pattern="^(?=.*[a-zA-Z])(?:.*[a-zA-Z0-9-_])$"}}}
+        {{{ InputError ref="loginError" }}}
         <label class="label">Логин</label>
-        <span class="error error_active">Неверный логин</span>
       </div>
       <div class="group">
-        <input class="input" type="password" name="password" placeholder="placeholder" autocomplete="off" required />
+        {{{ Input type="password" name="password" ref="password" autocomplete="current-password" minLength="8"
+        maxLength="40" pattern="^(?=.*[A-Z])(?=.*[0-9])\S*$" }}}
+        {{{ InputError ref="passwordError" }}}
         <label class="label">Пароль</label>
-        <span class="error">Неверный логин</span>
       </div>
       <button class="button-submit" type="submit">Войти</button>
       <a class="link" href="../signup/index.hbs">Нет аккаунта?</a>

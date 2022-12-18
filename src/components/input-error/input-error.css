@@ -1,0 +1,12 @@
+.error {
+  display: block;
+  margin-top: 6px;
+  font-weight: 500;
+  font-size: 1rem;
+  color: var(--color-red);
+  visibility: hidden;
+}
+
+.error_active {
+  visibility: visible;
+}

@@ -2,26 +2,16 @@ import template from 'bundle-text:./index.hbs';
 import { Block, renderDOM, registerComponent } from '../../core';
 
 import './index.css';
+import { Input } from '../../components/input/input';
 
 require('babel-core/register');
-// import './app.css';
 
-// import Button from './components/button';
-// import Link from './components/link';
-// import Input from './components/input';
-// import Layout from './components/layout';
+registerComponent(Input);
 
-// registerComponent(Button);
-// registerComponent(Link);
-// registerComponent(Input);
-// registerComponent(Layout);
-
-// TODO: // Добавить MyComponent
-class MyComponent extends Block {
-  // eslint-disable-next-line class-methods-use-this
+class Index extends Block {
   constructor() {
     super();
-    console.log(this.element);
+    console.log(this.refs);
   }
 
   // eslint-disable-next-line class-methods-use-this
@@ -31,5 +21,5 @@ class MyComponent extends Block {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  renderDOM(new MyComponent());
+  renderDOM(new Index());
 });
