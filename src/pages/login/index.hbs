@@ -1,20 +1,23 @@
 <main class="container">
   <div class="wrapper">
     <h1 class="title">Авторизация</h1>
-    <form class="form">
+    <form class="form" novalidate>
       <div class="group">
-        {{{ Input type="text" name="login" ref="login" autocomplete="off" minLength="3"
+        {{{ Input ref="login" type="text" name="login" autocomplete="off" minLength="3"
         maxLength="20" pattern="^(?=.*[a-zA-Z])(?:.*[a-zA-Z0-9-_])$"}}}
-        {{{ InputError ref="loginError" }}}
+        {{{ InputError ref="loginError" error="от 3 до 20 символов, латиница, может содержать цифры, но не состоять из
+        них, без пробелов, без спецсимволов (допустимы
+        дефис и нижнее подчёркивание)." }}}
         <label class="label">Логин</label>
       </div>
       <div class="group">
-        {{{ Input type="password" name="password" ref="password" autocomplete="current-password" minLength="8"
+        {{{ Input ref="password" type="password" name="password" autocomplete="current-password" minLength="8"
         maxLength="40" pattern="^(?=.*[A-Z])(?=.*[0-9])\S*$" }}}
-        {{{ InputError ref="passwordError" }}}
+        {{{ InputError ref="passwordError" error="от 8 до 40 символов, обязательно хотя бы одна заглавная буква и цифра."
+        }}}
         <label class="label">Пароль</label>
       </div>
-      <button class="button-submit" type="submit">Войти</button>
+      {{{Button ref="button" type="submit" content="Войти" }}}
       <a class="link" href="../signup/index.hbs">Нет аккаунта?</a>
     </form>
   </div>
