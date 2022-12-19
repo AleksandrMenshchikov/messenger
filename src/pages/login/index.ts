@@ -1,6 +1,7 @@
 import template from './index.hbs';
 import { Block, renderDOM } from '../../core';
 import Button from '../../components/button';
+import { Input } from '../../components/input/input';
 
 import './index.css';
 
@@ -15,6 +16,9 @@ class Index extends Block {
           console.log(e);
         },
       },
+    });
+    this.children['input-login'] = new Input({
+      type: 'text', name: 'login', autocomplete: 'off', minLength: '3', maxLength: '20', pattern: '^(?=.*[a-zA-Z])(?:.*[a-zA-Z0-9-_])$',
     });
   }
 
