@@ -1,11 +1,9 @@
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export type Listener<T extends unknown[] = any[]> = (...args: T) => void;
+ type Handler = (...args: unknown[]) => void;
 
-// eslint-disable-next-line max-len, @typescript-eslint/no-explicit-any
-export default class EventBus<E extends string = string, M extends { [K in E]: unknown[] } = Record<E, any[]>> {
-  private listeners: { [key in E]?: Listener<M[E]>[] } = {};
+export default class EventBus {
+  private listeners: Record<string, Handler[]> = {};
 
-  on(event: E, callback: Listener<M[E]>) {
+  on(event: string, callback: Handler) {
     if (!this.listeners[event]) {
       this.listeners[event] = [];
     }
@@ -13,7 +11,7 @@ export default class EventBus<E extends string = string, M extends { [K in E]: u
     this.listeners[event]?.push(callback);
   }
 
-  off(event: E, callback: Listener<M[E]>) {
+  off(event: string, callback: Handler) {
     if (!this.listeners[event]) {
       throw new Error(`Нет события: ${event}`);
     }
@@ -23,10 +21,9 @@ export default class EventBus<E extends string = string, M extends { [K in E]: u
     );
   }
 
-  emit(event: E, ...args: M[E]) {
+  emit(event: string, ...args: unknown[]) {
     if (!this.listeners[event]) {
-      return;
-      // throw new Error(`Нет события: ${event}`);
+      throw new Error(`Нет события: ${event}`);
     }
 
     this.listeners[event]?.forEach((listener) => {

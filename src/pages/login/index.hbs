@@ -13,11 +13,12 @@
       <div class="group">
         {{{ Input ref="password" type="password" name="password" autocomplete="current-password" minLength="8"
         maxLength="40" pattern="^(?=.*[A-Z])(?=.*[0-9])\S*$" }}}
-        {{{ InputError ref="passwordError" error="от 8 до 40 символов, обязательно хотя бы одна заглавная буква и цифра."
+        {{{ InputError ref="passwordError" error="от 8 до 40 символов, обязательно хотя бы одна заглавная буква и
+        цифра."
         }}}
         <label class="label">Пароль</label>
       </div>
-      {{{Button ref="button" type="submit" content="Войти" }}}
+      {{{ button }}}
       <a class="link" href="../signup/index.hbs">Нет аккаунта?</a>
     </form>
   </div>

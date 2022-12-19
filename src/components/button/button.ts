@@ -1,11 +1,21 @@
-import template from 'bundle-text:./button.hbs';
+import template from './button.hbs';
 import './button.css';
 import { Block } from '../../core';
 
+type ButtonProps = {
+  type: string,
+  content: string,
+  events?: Record<string, (e?:Event) => void>
+}
+
 // eslint-disable-next-line import/prefer-default-export
 export class Button extends Block {
+  constructor({ type, content, events }: ButtonProps) {
+    super({ type, content, events });
+  }
+
   // eslint-disable-next-line class-methods-use-this
   render() {
-    return template;
+    return this.compile(template, { ...this.props });
   }
 }

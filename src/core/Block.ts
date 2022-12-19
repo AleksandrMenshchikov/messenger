@@ -1,89 +1,129 @@
-/* eslint-disable no-use-before-define */
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { nanoid } from 'nanoid';
-import Handlebars from 'handlebars';
 import EventBus from './EventBus';
 
-interface BlockMeta<P = any> {
-  props: P;
-}
-
-type Events = Values<typeof Block.EVENTS>;
-
-// eslint-disable-next-line @typescript-eslint/ban-types
-export default class Block<P extends {} = any> {
+export default class Block {
   static EVENTS = {
     INIT: 'init',
     FLOW_CDM: 'flow:component-did-mount',
     FLOW_CDU: 'flow:component-did-update',
     FLOW_RENDER: 'flow:render',
-  } as const;
+  };
 
-  public id = nanoid(6);
+  private _id = nanoid(6);
 
-  private readonly _meta: BlockMeta;
+  private _meta: { props: any; };
 
-  protected _element: Nullable<HTMLElement> = null;
+  protected props: any;
 
-  protected readonly props: P;
+  protected eventBus: () => EventBus;
 
-  protected children: {[id: string]: Block} = {};
+  private _element: any;
 
-  eventBus: () => EventBus<Events>;
+  protected children: any;
 
-  protected state: any = {};
-
-  protected refs: {[key: string]: HTMLElement} = {};
-
-  public constructor(props?: P) {
-    const eventBus = new EventBus<Events>();
-
-    this._meta = {
-      props,
-    };
-
-    this.getStateFromProps(props);
-
-    this.props = this._makePropsProxy(props || {} as P);
-    this.state = this._makePropsProxy(this.state);
-
+  constructor(propsAndChildren: any = {}) {
+    const { children, props } = this._getChildren(propsAndChildren);
+    this.children = children;
+    this.initChildren();
+    const eventBus = new EventBus();
+    this._meta = { props };
+    this.props = this._makePropsProxy(props);
     this.eventBus = () => eventBus;
-
     this._registerEvents(eventBus);
-
-    eventBus.emit(Block.EVENTS.INIT, this.props);
+    eventBus.emit(Block.EVENTS.INIT);
   }
 
-  _registerEvents(eventBus: EventBus<Events>) {
+  // eslint-disable-next-line class-methods-use-this, @typescript-eslint/no-empty-function
+  initChildren() {}
+
+  // eslint-disable-next-line class-methods-use-this
+  _getChildren(propsAndChildren: any) {
+    const children: any = {};
+    const props: any = {};
+    Object.entries(propsAndChildren).forEach(([key, value]) => {
+      if (value instanceof Block) {
+        children[key] = value;
+      } else if (Array.isArray(value) && value.every((v) => v instanceof Block)) {
+        children[key] = value;
+      } else {
+        props[key] = value;
+      }
+    });
+    return { children, props };
+  }
+
+  compile(template: (context: any) => string, props: any) {
+    const propsAndStubs = { ...props };
+    Object.entries(this.children).forEach(([key, child]) => {
+      if (Array.isArray(child)) {
+        // eslint-disable-next-line no-underscore-dangle
+        propsAndStubs[key].map((ch: any) => `<div data-id="${ch._id}"></div>`);
+      }
+      // eslint-disable-next-line no-underscore-dangle
+      propsAndStubs[key] = `<div data-id="${(child as any)._id}"></div>`;
+    });
+    const fragment = this._createDocumentElement('template') as HTMLTemplateElement;
+    const htmlString = template(propsAndStubs);
+    fragment.innerHTML = htmlString;
+    Object.entries(this.children).forEach(([key, child]) => {
+      // eslint-disable-next-line no-underscore-dangle
+      const stub = fragment.content.querySelector(`[data-id="${(child as any)._id}"]`);
+      if (!stub) {
+        return;
+      }
+      stub.replaceWith((child as any).getContent());
+    });
+    return fragment.content;
+  }
+
+  _addEvents() {
+    const { events = {} } = this.props;
+    if (!events || !this._element) {
+      return;
+    }
+    Object.entries(events).forEach(([event, listener]) => {
+      this._element.addEventListener(event, listener);
+    });
+  }
+
+  _removeEvents() {
+    const { events } = this.props;
+
+    if (!events || !this._element) {
+      return;
+    }
+
+    Object.entries(events).forEach(([event, listener]) => {
+      this._element.removeEventListener(event, listener);
+    });
+  }
+
+  _registerEvents(eventBus: EventBus) {
     eventBus.on(Block.EVENTS.INIT, this.init.bind(this));
     eventBus.on(Block.EVENTS.FLOW_CDM, this._componentDidMount.bind(this));
     eventBus.on(Block.EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this));
     eventBus.on(Block.EVENTS.FLOW_RENDER, this._render.bind(this));
   }
 
-  _createResources() {
-    this._element = this._createDocumentElement('div');
-  }
-
-  protected getStateFromProps(props: any): void {
-    this.state = {};
-  }
-
   init() {
-    this._createResources();
-    this.eventBus().emit(Block.EVENTS.FLOW_RENDER, this.props);
+    this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
   }
 
-  _componentDidMount(props: P) {
-    this.componentDidMount(props);
+  _componentDidMount() {
+    this.componentDidMount();
+    Object.values(this.children).forEach((child) => {
+      (child as any).dispatchComponentDidMount();
+    });
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-empty-function, class-methods-use-this
-  componentDidMount(props: P) {
+  // eslint-disable-next-line class-methods-use-this
+  componentDidMount(oldProps?: any) { return ''; }
+
+  dispatchComponentDidMount() {
+    this.eventBus().emit(Block.EVENTS.FLOW_CDM);
   }
 
-  _componentDidUpdate(oldProps: P, newProps: P) {
+  _componentDidUpdate(oldProps: any, newProps: any) {
     const response = this.componentDidUpdate(oldProps, newProps);
     if (!response) {
       return;
@@ -91,25 +131,16 @@ export default class Block<P extends {} = any> {
     this._render();
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars, class-methods-use-this
-  componentDidUpdate(oldProps: P, newProps: P) {
+  // eslint-disable-next-line class-methods-use-this
+  componentDidUpdate(oldProps: any, newProps: any) {
     return true;
   }
 
-  setProps = (nextProps: P) => {
+  setProps = (nextProps: any) => {
     if (!nextProps) {
       return;
     }
-
     Object.assign(this.props, nextProps);
-  };
-
-  setState = (nextState: any) => {
-    if (!nextState) {
-      return;
-    }
-
-    Object.assign(this.state, nextState);
   };
 
   get element() {
@@ -117,140 +148,48 @@ export default class Block<P extends {} = any> {
   }
 
   _render() {
-    const fragment = this._compile();
-
-    this._removeEvents();
-
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    const newElement = fragment.firstElementChild!;
-
-    this._element?.replaceWith(newElement);
-
-    this._element = newElement as HTMLElement;
+    const fragment = this.render();
+    const newElement = fragment.firstElementChild;
+    if (this._element) {
+      this._removeEvents();
+      this._element.replaceWith(newElement);
+    }
+    this._element = newElement;
     this._addEvents();
   }
 
   // eslint-disable-next-line class-methods-use-this
-  protected render(): string {
-    return '';
+  render(): DocumentFragment { return new DocumentFragment(); }
+
+  getContent() {
+    return this.element;
   }
 
-  getContent(): HTMLElement {
-    // Хак, чтобы вызвать CDM только после добавления в DOM
-    if (this.element?.parentNode?.nodeType === Node.DOCUMENT_FRAGMENT_NODE) {
-      setTimeout(() => {
-        if (this.element?.parentNode?.nodeType !== Node.DOCUMENT_FRAGMENT_NODE) {
-          this.eventBus().emit(Block.EVENTS.FLOW_CDM);
-        }
-      }, 100);
-    }
-
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    return this.element!;
-  }
-
-  _makePropsProxy(props: any): any {
-    // Можно и так передать this
-    // Такой способ больше не применяется с приходом ES6+
+  _makePropsProxy(props: any) {
     // eslint-disable-next-line @typescript-eslint/no-this-alias
     const self = this;
-
-    return new Proxy(props as unknown as object, {
-      get(target: Record<string, unknown>, prop: string) {
+    return new Proxy(props, {
+      get(target, prop) {
         const value = target[prop];
         return typeof value === 'function' ? value.bind(target) : value;
       },
-      set(target: Record<string, unknown>, prop: string, value: unknown) {
+      set(target, prop, value) {
+        const oldProps = { ...target };
         // eslint-disable-next-line no-param-reassign
         target[prop] = value;
-
-        // Запускаем обновление компоненты
-        // Плохой cloneDeep, в след итерации нужно заставлять добавлять cloneDeep им самим
-        self.eventBus().emit(Block.EVENTS.FLOW_CDU, { ...target }, target);
+        self.eventBus().emit(Block.EVENTS.FLOW_CDU, oldProps, target);
         return true;
       },
       deleteProperty() {
         throw new Error('Нет доступа');
       },
-    }) as unknown as P;
+    });
   }
 
   // eslint-disable-next-line class-methods-use-this
   _createDocumentElement(tagName: string) {
+    // Можно сделать метод, который через фрагменты в цикле создаёт сразу несколько блоков
     return document.createElement(tagName);
-  }
-
-  _removeEvents() {
-    const { events } = this.props as any;
-
-    if (!events || !this._element) {
-      return;
-    }
-
-    Object.entries(events).forEach(([event, listener]) => {
-      this._element!.removeEventListener(event, listener);
-    });
-  }
-
-  _addEvents() {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const { events } = this.props as any;
-
-    if (!events) {
-      return;
-    }
-
-    Object.entries(events).forEach(([event, listener]) => {
-      this._element!.addEventListener(event, listener);
-    });
-  }
-
-  _compile(): DocumentFragment {
-    const fragment = document.createElement('template');
-
-    /**
-     * Рендерим шаблон
-     */
-    const template = Handlebars.compile(this.render());
-    fragment.innerHTML = template({
-      ...this.state, ...this.props, children: this.children, refs: this.refs,
-    });
-
-    /**
-     * Заменяем заглушки на компоненты
-     */
-    Object.entries(this.children).forEach(([id, component]) => {
-      /**
-       * Ищем заглушку по id
-       */
-      const stub = fragment.content.querySelector(`[data-id="${id}"]`);
-
-      if (!stub) {
-        return;
-      }
-
-      const stubChilds = stub.childNodes.length ? stub.childNodes : [];
-
-      /**
-       * Заменяем заглушку на component._element
-       */
-      const content = component.getContent();
-      stub.replaceWith(content);
-
-      /**
-       * Ищем элемент layout-а, куда вставлять детей
-       */
-      const layoutContent = content.querySelector('[data-layout="1"]');
-
-      if (layoutContent && stubChilds.length) {
-        layoutContent.append(...stubChilds);
-      }
-    });
-
-    /**
-     * Возвращаем фрагмент
-     */
-    return fragment.content;
   }
 
   show() {

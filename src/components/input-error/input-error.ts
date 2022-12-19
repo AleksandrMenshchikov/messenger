@@ -1,4 +1,4 @@
-import template from 'bundle-text:./input-error.hbs';
+import template from './input-error.hbs';
 import './input-error.css';
 import { Block } from '../../core';
 

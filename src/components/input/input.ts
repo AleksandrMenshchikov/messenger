@@ -1,4 +1,4 @@
-import template from 'bundle-text:./input.hbs';
+import template from './input.hbs';
 import './input.css';
 import { Block } from '../../core';
 
