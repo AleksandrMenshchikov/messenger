@@ -58,7 +58,7 @@ class Index extends Block {
       minLength: '5',
       maxLength: '100',
       autocomplete: 'email',
-      pattern: '^[a-zA-Z]+[a-zA-Z0-9-]*@[a-zA-Z]+\\.[a-zA-Z]+$',
+      pattern: '^[a-zA-Z]+[a-zA-Z0-9-._]*@[a-zA-Z]+\\.[a-zA-Z]+$',
       events: {
         focus: (e) => {
           this.handleInputFocusBlur(e, 'email');
