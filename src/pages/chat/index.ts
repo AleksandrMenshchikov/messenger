@@ -1,7 +1,7 @@
 import template from './index.hbs';
-import { renderDOM, Block } from '../../core';
-
 import './index.css';
+import { renderDOM, Block } from '../../core';
+import Member from '../../components/member';
 
 const foto: URL = new URL(
   '../../../assets/foto.svg',
@@ -41,6 +41,10 @@ class Index extends Block {
     super({
       foto, file, location, arrowLeft, avatar, search, arrowRight,
     });
+  }
+
+  initChildren(): void {
+    this.children.member = new Member();
   }
 
   // eslint-disable-next-line class-methods-use-this
