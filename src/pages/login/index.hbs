@@ -4,16 +4,12 @@
     <form class="form" novalidate>
       <div class="group">
         {{{ input-login }}}
-        {{{ InputError ref="loginError" error="от 3 до 20 символов, латиница, может содержать цифры, но не состоять из
-        них, без пробелов, без спецсимволов (допустимы
-        дефис и нижнее подчёркивание)." }}}
+        {{{ input-error-login }}}
         <label class="label">Логин</label>
       </div>
       <div class="group">
         {{{ input-password }}}
-        {{{ InputError ref="passwordError" error="от 8 до 40 символов, обязательно хотя бы одна заглавная буква и
-        цифра."
-        }}}
+        {{{ input-error-password }}}
         <label class="label">Пароль</label>
       </div>
       {{{ button }}}
