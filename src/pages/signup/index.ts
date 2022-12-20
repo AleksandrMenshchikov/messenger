@@ -176,7 +176,7 @@ class Index extends Block {
     this.children['input-error-password-confirm'] = new InputError({ content: 'Введите ещё раз пароль.' });
     this.children.button = new Button({
       type: 'submit',
-      content: 'Авторизоваться',
+      content: 'Зарегистрироваться',
     });
   }
 
