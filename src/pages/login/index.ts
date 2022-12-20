@@ -35,9 +35,6 @@ class Index extends Block {
     } else {
       (this.form[element] as HTMLInputElement).nextElementSibling?.classList.remove('error_active');
     }
-    if ((e.target as HTMLElement).matches('button-submit')) {
-      (e.target as HTMLButtonElement).click();
-    }
   }
 
   initChildren(): void {
