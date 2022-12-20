@@ -162,7 +162,7 @@ export default class Block {
   render(): DocumentFragment { return new DocumentFragment(); }
 
   getContent() {
-    return this.element;
+    return this.element as HTMLElement;
   }
 
   _makePropsProxy(props: any) {
