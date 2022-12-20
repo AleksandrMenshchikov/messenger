@@ -23,19 +23,19 @@
         <label class='label'>Фамилия</label>
       </div>
       <div class='group'>
-        <input class='input' type='tel' name='phone' placeholder='placeholder' autocomplete='tel' required />
+        {{{ input-phone }}}
+        {{{ input-error-phone }}}
         <label class='label'>Телефон</label>
-        <span class='error'>Информация об ошибке</span>
       </div>
       <div class='group'>
-        <input class='input' type='password' name='password' placeholder='placeholder' autocomplete='off' required />
+        {{{ input-password }}}
+        {{{ input-error-password }}}
         <label class='label'>Пароль</label>
-        <span class='error'>Информация об ошибке</span>
       </div>
       <div class='group'>
-        <input class='input' type='password' name='password' placeholder='placeholder' autocomplete='off' required />
+        {{{ input-password-confirm }}}
+        {{{ input-error-password-confirm }}}
         <label class='label'>Пароль (ещё раз)</label>
-        <span class='error'>Информация об ошибке</span>
       </div>
       <button class='button-submit' type='submit'>Зарегистрироваться</button>
       <a class='link' href='../login/index.hbs'>Войти</a>

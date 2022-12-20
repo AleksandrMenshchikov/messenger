@@ -1,11 +1,14 @@
 .error {
-  display: none;
+  display: block;
   margin-top: 6px;
   font-weight: 500;
   font-size: 1rem;
   color: var(--color-red);
+  height: 0;
+  overflow: hidden;
 }
 
 .error_active {
-  display: block;
+  height: auto;
+  overflow: visible;
 }

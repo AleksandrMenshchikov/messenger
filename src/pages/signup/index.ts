@@ -21,7 +21,14 @@ class Index extends Block {
           elem.nextElementSibling?.classList.add('error_active');
         }
       });
-      if (this.form.checkValidity()) {
+      const inputPassword = this.form.querySelector('[name=password]') as HTMLInputElement;
+      const inputPasswordConfirm = this.form.querySelector('[name=password-confirm]')as HTMLInputElement;
+      if (inputPassword.value !== inputPasswordConfirm.value || inputPasswordConfirm.value === '') {
+        inputPasswordConfirm.nextElementSibling?.classList.add('error_active');
+      } else {
+        inputPasswordConfirm.nextElementSibling?.classList.remove('error_active');
+      }
+      if (this.form.checkValidity() && inputPassword.value === inputPasswordConfirm.value) {
         const obj = {
           email: this.form.email.value,
           login: this.form.login.value,
@@ -35,7 +42,7 @@ class Index extends Block {
     });
   }
 
-  handleInputFocusBlur(e: Event, element: 'login' | 'password' | 'email' | 'first_name' | 'second_name') {
+  handleInputFocusBlur(e: Event, element: 'login' | 'email' | 'first_name' | 'second_name' | 'phone' | 'password' | 'password-confirm') {
     const isValidInputLogin = (e.currentTarget as HTMLInputElement).checkValidity();
     if (!isValidInputLogin) {
       (this.form[element] as HTMLInputElement).nextElementSibling?.classList.add('error_active');
@@ -109,6 +116,22 @@ class Index extends Block {
         },
       },
     });
+    this.children['input-phone'] = new Input({
+      type: 'tel',
+      name: 'phone',
+      autocomplete: 'tel',
+      minLength: '10',
+      maxLength: '15',
+      pattern: '^[+]*[0-9]+$',
+      events: {
+        focus: (e) => {
+          this.handleInputFocusBlur(e, 'phone');
+        },
+        blur: (e) => {
+          this.handleInputFocusBlur(e, 'phone');
+        },
+      },
+    });
     this.children['input-password'] = new Input({
       type: 'password',
       name: 'password',
@@ -125,11 +148,29 @@ class Index extends Block {
         },
       },
     });
+    this.children['input-password-confirm'] = new Input({
+      type: 'password',
+      name: 'password-confirm',
+      autocomplete: 'current-password',
+      minLength: '8',
+      maxLength: '40',
+      pattern: '^(?=.*[A-Z])(?=.*[0-9])\\S*$',
+      events: {
+        focus: (e) => {
+          this.handleInputFocusBlur(e, 'password-confirm');
+        },
+        blur: (e) => {
+          this.handleInputFocusBlur(e, 'password-confirm');
+        },
+      },
+    });
     this.children['input-error-email'] = new InputError({ content: 'Введите email.' });
     this.children['input-error-login'] = new InputError({ content: 'Введите логин (от 3 до 20 символов, латиница, может содержать цифры, но не состоять из них, без пробелов, без спецсимволов, допустимы дефис и нижнее подчёркивание).' });
     this.children['input-error-first-name'] = new InputError({ content: 'Введите имя (латиница или кириллица, первая буква должна быть заглавной, без пробелов и без цифр, нет спецсимволов, допустим только дефис).' });
     this.children['input-error-second-name'] = new InputError({ content: 'Введите фамилию (латиница или кириллица, первая буква должна быть заглавной, без пробелов и без цифр, нет спецсимволов, допустим только дефис).' });
+    this.children['input-error-phone'] = new InputError({ content: 'Введите телефон (от 10 до 15 символов, состоит из цифр, может начинается с плюса).' });
     this.children['input-error-password'] = new InputError({ content: 'Введите пароль (от 8 до 40 символов, обязательно хотя бы одна заглавная буква и цифра).' });
+    this.children['input-error-password-confirm'] = new InputError({ content: 'Введите ещё раз пароль.' });
     this.children.button = new Button({
       type: 'submit',
       content: 'Авторизоваться',
