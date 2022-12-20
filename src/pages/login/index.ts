@@ -14,8 +14,14 @@ class Index extends Block {
     this.form = this.element.querySelector('form') as HTMLFormElement;
     this.form.addEventListener('submit', (e) => {
       e.preventDefault();
+      this.form.querySelectorAll('input').forEach((elem) => {
+        if (elem.checkValidity()) {
+          elem.nextElementSibling?.classList.remove('error_active');
+        } else {
+          elem.nextElementSibling?.classList.add('error_active');
+        }
+      });
       if (this.form.checkValidity()) {
-        this.form.querySelectorAll('.error').forEach((elem) => elem.classList.remove('error_active'));
         const obj = { login: this.form.login.value, password: this.form.password.value };
         console.log(obj);
       }
@@ -68,8 +74,8 @@ class Index extends Block {
         },
       },
     });
-    this.children['input-error-login'] = new InputError({ content: 'от 3 до 20 символов, латиница, может содержать цифры, но не состоять из них, без пробелов, без спецсимволов (допустимы дефис и нижнее подчёркивание).' });
-    this.children['input-error-password'] = new InputError({ content: 'от 8 до 40 символов, обязательно хотя бы одна заглавная буква и цифра.' });
+    this.children['input-error-login'] = new InputError({ content: 'Введите от 3 до 20 символов, латиница, может содержать цифры, но не состоять из них, без пробелов, без спецсимволов (допустимы дефис и нижнее подчёркивание).' });
+    this.children['input-error-password'] = new InputError({ content: 'Введите от 8 до 40 символов, обязательно хотя бы одна заглавная буква и цифра.' });
   }
 
   // eslint-disable-next-line class-methods-use-this
