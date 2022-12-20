@@ -74,8 +74,8 @@ class Index extends Block {
         },
       },
     });
-    this.children['input-error-login'] = new InputError({ content: 'Введите от 3 до 20 символов, латиница, может содержать цифры, но не состоять из них, без пробелов, без спецсимволов (допустимы дефис и нижнее подчёркивание).' });
-    this.children['input-error-password'] = new InputError({ content: 'Введите от 8 до 40 символов, обязательно хотя бы одна заглавная буква и цифра.' });
+    this.children['input-error-login'] = new InputError({ content: 'Введите логин (от 3 до 20 символов, латиница, может содержать цифры, но не состоять из них, без пробелов, без спецсимволов, допустимы дефис и нижнее подчёркивание).' });
+    this.children['input-error-password'] = new InputError({ content: 'Введите пароль (от 8 до 40 символов, обязательно хотя бы одна заглавная буква и цифра).' });
   }
 
   // eslint-disable-next-line class-methods-use-this
