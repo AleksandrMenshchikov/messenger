@@ -4,7 +4,7 @@
   "description": "messenger",
   "browserslist": "> 0.5%, last 2 versions, not dead",
   "scripts": {
-    "dev": "parcel src/pages/index.html --open",
+    "dev": "parcel src/pages/index.html --no-cache --open",
     "build": "rm -rf dist && npm run test && parcel build src/pages/index.html --no-cache",
     "start": "node app.ts",
     "lintjs": "./node_modules/.bin/eslint .",

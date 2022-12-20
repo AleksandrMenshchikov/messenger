@@ -20,6 +20,9 @@ class Index extends Block {
     this.children['input-login'] = new Input({
       type: 'text', name: 'login', autocomplete: 'off', minLength: '3', maxLength: '20', pattern: '^(?=.*[a-zA-Z])(?:.*[a-zA-Z0-9-_])$',
     });
+    this.children['input-password'] = new Input({
+      type: 'password', name: 'password', autocomplete: 'current-password', minLength: '8', maxLength: '40', pattern: '^(?=.*[A-Z])(?=.*[0-9])\\S*$',
+    });
   }
 
   // eslint-disable-next-line class-methods-use-this

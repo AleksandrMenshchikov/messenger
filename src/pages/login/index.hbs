@@ -3,15 +3,14 @@
     <h1 class="title">Авторизация</h1>
     <form class="form" novalidate>
       <div class="group">
-        {{{ input-login  }}}
+        {{{ input-login }}}
         {{{ InputError ref="loginError" error="от 3 до 20 символов, латиница, может содержать цифры, но не состоять из
         них, без пробелов, без спецсимволов (допустимы
         дефис и нижнее подчёркивание)." }}}
         <label class="label">Логин</label>
       </div>
       <div class="group">
-        {{{ Input ref="password" type="password" name="password" autocomplete="current-password" minLength="8"
-        maxLength="40" pattern="^(?=.*[A-Z])(?=.*[0-9])\S*$" }}}
+        {{{ input-password }}}
         {{{ InputError ref="passwordError" error="от 8 до 40 символов, обязательно хотя бы одна заглавная буква и
         цифра."
         }}}
