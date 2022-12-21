@@ -43,17 +43,20 @@ class Index extends Block {
 
     let strChildren = '';
     // eslint-disable-next-line no-restricted-syntax
-    for (const key in this.children) {
-      if (Object.prototype.hasOwnProperty.call(this.children, key)) {
-        strChildren += this.children[key].getContent().outerHTML;
+    for (const key in this.children.members) {
+      if (key.includes('member')) {
+        if (Object.prototype.hasOwnProperty.call(this.children.members, key)) {
+          strChildren += this.children.members[key].getContent().outerHTML;
+        }
       }
     }
     list?.insertAdjacentHTML('afterbegin', strChildren);
   }
 
   initChildren(): void {
+    this.children.members = {};
     [...new Array(15).keys()].forEach((_, index) => {
-      this.children[`member${index}`] = new Member();
+      this.children.members[`member${index}`] = new Member();
     });
   }
 
