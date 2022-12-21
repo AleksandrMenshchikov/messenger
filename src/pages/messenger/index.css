@@ -154,32 +154,6 @@ body {
   width: calc(100vw - 445px);
 }
 
-.dots {
-  cursor: pointer;
-  width: 25px;
-  height: 25px;
-  align-self: center;
-  margin-bottom: 10px;
-  margin-left: auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  transition: all 0.2s;
-}
-
-.dots:hover {
-  background: var(--color-middle-gray);
-}
-
-svg circle {
-  transition: all 0.2s;
-}
-
-.dots:hover svg circle {
-  fill: var(--color-blue);
-}
-
 .modal-add-delete-user {
   position: absolute;
   top: 65px;

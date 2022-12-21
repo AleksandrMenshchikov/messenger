@@ -2,6 +2,8 @@ import './index.css';
 import template from './index.hbs';
 import { renderDOM, Block } from '../../core';
 import Member from '../../components/member';
+import Clip from '../../components/clip';
+import Dots from '../../components/dots';
 
 const foto: URL = new URL(
   '../../../assets/foto.svg',
@@ -84,6 +86,8 @@ class Index extends Block {
     [...new Array(15).keys()].forEach((_, index) => {
       this.children.members[`member${index}`] = new Member();
     });
+    this.children.clip = new Clip();
+    this.children.dots = new Dots();
   }
 
   // eslint-disable-next-line class-methods-use-this
