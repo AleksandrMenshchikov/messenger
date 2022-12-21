@@ -1,9 +1,9 @@
+import './index.css';
 import template from './index.hbs';
 import { Block, renderDOM } from '../../core';
 import Button from '../../components/button';
 import { Input } from '../../components/input/input';
 import { InputError } from '../../components/input-error/input-error';
-import './index.css';
 
 class Index extends Block {
   form: HTMLFormElement;

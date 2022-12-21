@@ -1,7 +1,6 @@
+import './index.css';
 import template from './index.hbs';
 import { renderDOM, Block } from '../../core';
-
-import './index.css';
 
 class Index extends Block {
   // eslint-disable-next-line class-methods-use-this

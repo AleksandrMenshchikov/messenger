@@ -1,5 +1,5 @@
-import template from './index.hbs';
 import './index.css';
+import template from './index.hbs';
 import { renderDOM, Block } from '../../core';
 import Member from '../../components/member';
 
@@ -51,6 +51,24 @@ class Index extends Block {
       }
     }
     list?.insertAdjacentHTML('afterbegin', strChildren);
+
+    const buttonProfile = this.element.querySelector('.button-profile');
+    const profile = this.element.querySelector('.profile');
+    const profileArrowImg = this.element.querySelector('.profile__arrow-img');
+    const modalProfileAvatar = this.element.querySelector('.modal-profile-avatar');
+    const profilFormButtonAvatar = this.element.querySelector('.profile__form-button-avatar');
+    profilFormButtonAvatar.addEventListener('click', () => modalProfileAvatar.classList.add('modal-profile-avatar_active'));
+    buttonProfile.addEventListener('click', () => {
+      profile.classList.add('profile_active');
+    });
+    profileArrowImg.addEventListener('click', () => {
+      profile.classList.remove('profile_active');
+    });
+    document.addEventListener(
+      'click',
+      (e) => e.target === modalProfileAvatar
+          && modalProfileAvatar.classList.remove('modal-profile-avatar_active'),
+    );
   }
 
   initChildren(): void {
