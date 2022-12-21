@@ -1,4 +1,5 @@
 <div>
+  {{!--start modals --}}
   <div class="modal-add-delete-user">
     <button class="modal-add-delete-user__group">
       <span class="modal-add-delete-user__add-icon"></span>
@@ -33,7 +34,9 @@
       </button>
     </div>
   </div>
+  {{!--end modals --}}
 
+  {{!--start profile --}}
   <div class="profile">
     <div class="profile__arrow">
       <img class="profile__arrow-img" src="{{arrowLeft}}" alt="Иконка" />
@@ -86,7 +89,9 @@
       </div>
     </form>
   </div>
+  {{!--end profile --}}
 
+  {{!--start chats --}}
   <main class="container">
     <nav class="nav">
       <div class="button-profile-container">
@@ -100,15 +105,6 @@
         <img class="search__icon" src="{{search}}" alt="Иконка" />
       </div>
       <ul class="list">
-        {{{member}}}
-        {{{member}}}
-        {{{member}}}
-        {{{member}}}
-        {{{member}}}
-        {{{member}}}
-        {{{member}}}
-        {{{member}}}
-        {{{member}}}
         <span class="list__divider"></span>
       </ul>
     </nav>
@@ -150,4 +146,5 @@
       </div>
     </div>
   </main>
+  {{!--end chats --}}
 </div>
