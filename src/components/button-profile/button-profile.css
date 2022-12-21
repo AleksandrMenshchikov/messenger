@@ -1,0 +1,9 @@
+.profile__form-data-button {
+  background-color: transparent;
+  border: none;
+  font-weight: 500;
+  font-size: 1.3rem;
+  color: var(--color-blue);
+  padding: 0;
+  cursor: pointer;
+}

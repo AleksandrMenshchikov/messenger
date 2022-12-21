@@ -4,6 +4,7 @@ import { renderDOM, Block } from '../../core';
 import Member from '../../components/member';
 import Clip from '../../components/clip';
 import Dots from '../../components/dots';
+import ButtonProfile from '../../components/button-profile';
 
 const foto: URL = new URL(
   '../../../assets/foto.svg',
@@ -88,6 +89,8 @@ class Index extends Block {
     });
     this.children.clip = new Clip();
     this.children.dots = new Dots();
+    this.children['button-profile-1'] = new ButtonProfile({ content: 'Изменить данные' });
+    this.children['button-profile-2'] = new ButtonProfile({ content: 'Изменить пароль' });
   }
 
   // eslint-disable-next-line class-methods-use-this
