@@ -5,6 +5,8 @@ import Member from '../../components/member';
 import Clip from '../../components/clip';
 import Dots from '../../components/dots';
 import ButtonProfile from '../../components/button-profile';
+import Button from '../../components/button';
+import ButtonExit from '../../components/button-exit';
 
 const foto: URL = new URL(
   '../../../assets/foto.svg',
@@ -89,8 +91,21 @@ class Index extends Block {
     });
     this.children.clip = new Clip();
     this.children.dots = new Dots();
-    this.children['button-profile-1'] = new ButtonProfile({ content: 'Изменить данные' });
+    this.children.button = new Button({ type: 'button', content: 'Сохранить' });
+    this.children.button.hide();
+    this.children['button-profile-1'] = new ButtonProfile({
+      content: 'Изменить данные',
+      events: {
+        click: () => {
+          this.children['button-profile-1'].hide();
+          this.children['button-profile-2'].hide();
+          this.children['button-exit'].hide();
+          this.children.button.show();
+        },
+      },
+    });
     this.children['button-profile-2'] = new ButtonProfile({ content: 'Изменить пароль' });
+    this.children['button-exit'] = new ButtonExit({});
   }
 
   // eslint-disable-next-line class-methods-use-this
