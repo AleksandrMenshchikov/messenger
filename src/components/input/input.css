@@ -20,3 +20,23 @@ input::placeholder {
   top: -18px;
   font-size: 1.2rem;
 }
+
+.profile__input {
+  border: none;
+  width: 100%;
+  height: 20px;
+  padding: 0 3px;
+  font-weight: 500;
+  font-size: 1.3rem;
+  text-align: right;
+  color: var(--color-black);
+  background: transparent;
+}
+
+.profile__input:disabled {
+  color: var(--color-dark-gray);
+}
+
+.profile__input:focus {
+  text-align: left;
+}

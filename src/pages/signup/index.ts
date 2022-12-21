@@ -52,6 +52,8 @@ class Index extends Block {
 
   initChildren(): void {
     this.children['input-email'] = new Input({
+      id: 'email',
+      classValue: 'input',
       type: 'email',
       name: 'email',
       minLength: '5',
@@ -68,6 +70,8 @@ class Index extends Block {
       },
     });
     this.children['input-login'] = new Input({
+      id: 'login',
+      classValue: 'input',
       type: 'text',
       name: 'login',
       autocomplete: 'off',
@@ -84,6 +88,8 @@ class Index extends Block {
       },
     });
     this.children['input-first-name'] = new Input({
+      id: 'first_name',
+      classValue: 'input',
       type: 'text',
       name: 'first_name',
       autocomplete: 'name',
@@ -100,6 +106,8 @@ class Index extends Block {
       },
     });
     this.children['input-second-name'] = new Input({
+      id: 'second_name',
+      classValue: 'input',
       type: 'text',
       name: 'second_name',
       autocomplete: 'family-name',
@@ -116,6 +124,8 @@ class Index extends Block {
       },
     });
     this.children['input-phone'] = new Input({
+      id: 'phone',
+      classValue: 'input',
       type: 'tel',
       name: 'phone',
       autocomplete: 'tel',
@@ -132,6 +142,8 @@ class Index extends Block {
       },
     });
     this.children['input-password'] = new Input({
+      id: 'password',
+      classValue: 'input',
       type: 'password',
       name: 'password',
       autocomplete: 'current-password',
@@ -148,6 +160,8 @@ class Index extends Block {
       },
     });
     this.children['input-password-confirm'] = new Input({
+      id: 'password-confirm',
+      classValue: 'input',
       type: 'password',
       name: 'password-confirm',
       autocomplete: 'current-password',

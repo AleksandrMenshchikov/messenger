@@ -42,6 +42,8 @@ class Index extends Block {
       content: 'Авторизоваться',
     });
     this.children['input-login'] = new Input({
+      id: 'login',
+      classValue: 'input',
       type: 'text',
       name: 'login',
       autocomplete: 'off',
@@ -58,6 +60,8 @@ class Index extends Block {
       },
     });
     this.children['input-password'] = new Input({
+      id: 'password',
+      classValue: 'input',
       type: 'password',
       name: 'password',
       autocomplete: 'current-password',

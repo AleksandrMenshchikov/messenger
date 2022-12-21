@@ -3,6 +3,8 @@ import template from './input.hbs';
 import { Block } from '../../core';
 
 type InputProps = {
+  id: string,
+  classValue: string,
   type: string,
   name: string,
   autocomplete: string,
@@ -15,10 +17,10 @@ type InputProps = {
 // eslint-disable-next-line import/prefer-default-export
 export class Input extends Block {
   constructor({
-    type, name, autocomplete, minLength, maxLength, pattern, events,
+    id, classValue, type, name, autocomplete, minLength, maxLength, pattern, events,
   }:InputProps) {
     super({
-      type, name, autocomplete, minLength, maxLength, pattern, events,
+      id, classValue, type, name, autocomplete, minLength, maxLength, pattern, events,
     });
   }
 

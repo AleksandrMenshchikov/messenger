@@ -7,6 +7,8 @@ import Dots from '../../components/dots';
 import ButtonProfile from '../../components/button-profile';
 import Button from '../../components/button';
 import ButtonExit from '../../components/button-exit';
+import Input from '../../components/input';
+import InputError from '../../components/input-error';
 
 const foto: URL = new URL(
   '../../../assets/foto.svg',
@@ -38,12 +40,15 @@ const arrowRight: URL = new URL(
 );
 
 class Index extends Block {
+  form: HTMLFormElement;
+
   constructor({
     foto, file, location, arrowLeft, avatar, search, arrowRight,
   }: Record<string, URL>) {
     super({
       foto, file, location, arrowLeft, avatar, search, arrowRight,
     });
+    this.form = this.element.querySelector('form') as HTMLFormElement;
     const list = (this.element as HTMLElement).querySelector('.list');
 
     let strChildren = '';
@@ -84,6 +89,15 @@ class Index extends Block {
     });
   }
 
+  handleInputFocusBlur(e: Event, element: 'login' | 'email' | 'first_name' | 'second_name' | 'phone' | 'password' | 'password-confirm') {
+    const isValidInputLogin = (e.currentTarget as HTMLInputElement).checkValidity();
+    if (!isValidInputLogin) {
+      (this.form[element] as HTMLInputElement).nextElementSibling?.classList.add('error_active');
+    } else {
+      (this.form[element] as HTMLInputElement).nextElementSibling?.classList.remove('error_active');
+    }
+  }
+
   initChildren(): void {
     this.children.members = {};
     [...new Array(15).keys()].forEach((_, index) => {
@@ -101,11 +115,34 @@ class Index extends Block {
           this.children['button-profile-2'].hide();
           this.children['button-exit'].hide();
           this.children.button.show();
+          this.children['input-email'].getContent().disabled = false;
         },
       },
     });
     this.children['button-profile-2'] = new ButtonProfile({ content: 'Изменить пароль' });
     this.children['button-exit'] = new ButtonExit({});
+    this.children['input-email'] = new Input({
+      id: 'email',
+      classValue: 'profile__input',
+      type: 'email',
+      name: 'email',
+      minLength: '5',
+      maxLength: '100',
+      autocomplete: 'email',
+      pattern: '^[a-zA-Z]+[a-zA-Z0-9-._]*@[a-zA-Z]+\\.[a-zA-Z]+$',
+      events: {
+        focus: (e) => {
+          this.handleInputFocusBlur(e, 'email');
+        },
+        blur: (e) => {
+          this.handleInputFocusBlur(e, 'email');
+        },
+      },
+    });
+    this.children['input-email'].getContent().value = 'pochta@yandex.ru';
+    this.children['input-email'].getContent().disabled = true;
+
+    this.children['input-error-email'] = new InputError({ content: 'Введите email.' });
   }
 
   // eslint-disable-next-line class-methods-use-this

@@ -6,6 +6,8 @@
   color: var(--color-red);
   height: 0;
   overflow: hidden;
+  width: 100%;
+  max-width: 510px;
 }
 
 .error_active {
