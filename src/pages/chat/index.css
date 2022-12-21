@@ -328,7 +328,7 @@ svg circle {
   background: var(--color-middle-gray);
 }
 
-.message__textarea {
+.message-textarea {
   resize: none;
   overflow: hidden;
   width: 100%;
@@ -341,18 +341,15 @@ svg circle {
   margin-top: 10px;
 }
 
-.message__textarea[contenteditable]:empty::before {
+.message-textarea[contenteditable]:empty::before {
   content: "Сообщение...";
   font-weight: 500;
   font-size: 1.2rem;
   color: var(--color-dark-gray);
 }
 
-.messages__arrow {
-  min-width: 28px;
-  height: 28px;
-  background-color: var(--color-blue);
-  border-radius: 50%;
+.message-arrowRight {
+  cursor: pointer;
 }
 
 .profile {
@@ -493,6 +490,10 @@ svg circle {
   cursor: pointer;
   border: none;
   color: var(--color-white);
+}
+
+.profile__arrow-img {
+  cursor: pointer;
 }
 
 .profile__form-data-input-wrapper {

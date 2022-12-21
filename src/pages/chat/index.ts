@@ -57,6 +57,8 @@ class Index extends Block {
     const profileArrowImg = this.element.querySelector('.profile__arrow-img');
     const modalProfileAvatar = this.element.querySelector('.modal-profile-avatar');
     const profilFormButtonAvatar = this.element.querySelector('.profile__form-button-avatar');
+    const messageArrowRight = this.element.querySelector('.message-arrowRight');
+    const messageTextarea = this.element.querySelector('.message-textarea');
     profilFormButtonAvatar.addEventListener('click', () => modalProfileAvatar.classList.add('modal-profile-avatar_active'));
     buttonProfile.addEventListener('click', () => {
       profile.classList.add('profile_active');
@@ -69,6 +71,12 @@ class Index extends Block {
       (e) => e.target === modalProfileAvatar
           && modalProfileAvatar.classList.remove('modal-profile-avatar_active'),
     );
+    messageArrowRight.addEventListener('click', () => {
+      const content = messageTextarea.textContent.trim();
+      if (content.length > 0) {
+        console.log(messageTextarea.textContent.trim());
+      }
+    });
   }
 
   initChildren(): void {
