@@ -1,5 +1,5 @@
-import template from './input.hbs';
 import './input.css';
+import template from './input.hbs';
 import { Block } from '../../core';
 
 type InputProps = {

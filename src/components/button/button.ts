@@ -1,5 +1,5 @@
-import template from './button.hbs';
 import './button.css';
+import template from './button.hbs';
 import { Block } from '../../core';
 
 type ButtonProps = {

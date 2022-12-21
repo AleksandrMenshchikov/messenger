@@ -1,0 +1,11 @@
+.clip {
+  cursor: pointer;
+}
+
+.clip path {
+  transition: all 0.2s;
+}
+
+.clip:hover path {
+  fill: var(--color-blue);
+}

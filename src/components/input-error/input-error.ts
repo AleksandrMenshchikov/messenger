@@ -1,5 +1,5 @@
-import template from './input-error.hbs';
 import './input-error.css';
+import template from './input-error.hbs';
 import { Block } from '../../core';
 
 type InputErrorProps = {

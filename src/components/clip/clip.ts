@@ -1,9 +1,9 @@
-import './member.css';
-import template from './member.hbs';
+import './clip.css';
+import template from './clip.hbs';
 import { Block } from '../../core';
 
 // eslint-disable-next-line import/prefer-default-export
-export class Member extends Block {
+export class Clip extends Block {
   // eslint-disable-next-line class-methods-use-this
   render() {
     return this.compile(template, { });
