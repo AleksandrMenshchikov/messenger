@@ -145,15 +145,14 @@ class Index extends Block {
     });
   }
 
-  handleInputFocusBlur(
-    e: Event,
-    element: 'login' | 'email' | 'first_name' | 'second_name' | 'phone' | 'password' | 'password-confirm' | 'password-old',
-  ) {
-    const isValidInput = (e.currentTarget as HTMLInputElement).checkValidity();
+  // eslint-disable-next-line class-methods-use-this
+  handleInputFocusBlur(e: Event) {
+    const input = e.currentTarget as HTMLInputElement;
+    const isValidInput = input.checkValidity();
     if (!isValidInput) {
-      (this.form[element] as HTMLInputElement).parentElement?.nextElementSibling?.classList.add('error_active');
+      input.parentElement?.nextElementSibling?.classList.add('error_active');
     } else {
-      (this.form[element] as HTMLInputElement).parentElement?.nextElementSibling?.classList.remove('error_active');
+      input.parentElement?.nextElementSibling?.classList.remove('error_active');
     }
   }
 
@@ -202,10 +201,10 @@ class Index extends Block {
       pattern: '^[a-zA-Z]+[a-zA-Z0-9-._]*@[a-zA-Z]+\\.[a-zA-Z]+$',
       events: {
         focus: (e) => {
-          this.handleInputFocusBlur(e, 'email');
+          this.handleInputFocusBlur(e);
         },
         blur: (e) => {
-          this.handleInputFocusBlur(e, 'email');
+          this.handleInputFocusBlur(e);
         },
       },
     });
@@ -220,10 +219,10 @@ class Index extends Block {
       pattern: '^(?=.*[a-zA-Z])(?:.*[a-zA-Z0-9-_])$',
       events: {
         focus: (e) => {
-          this.handleInputFocusBlur(e, 'login');
+          this.handleInputFocusBlur(e);
         },
         blur: (e) => {
-          this.handleInputFocusBlur(e, 'login');
+          this.handleInputFocusBlur(e);
         },
       },
     });
@@ -238,10 +237,10 @@ class Index extends Block {
       pattern: '^[A-ZА-ЯЁ]+[a-zA-Zа-яА-ЯЁё-]*$',
       events: {
         focus: (e) => {
-          this.handleInputFocusBlur(e, 'first_name');
+          this.handleInputFocusBlur(e);
         },
         blur: (e) => {
-          this.handleInputFocusBlur(e, 'first_name');
+          this.handleInputFocusBlur(e);
         },
       },
     });
@@ -256,10 +255,10 @@ class Index extends Block {
       pattern: '^[A-ZА-ЯЁ]+[a-zA-Zа-яА-ЯЁё-]*$',
       events: {
         focus: (e) => {
-          this.handleInputFocusBlur(e, 'second_name');
+          this.handleInputFocusBlur(e);
         },
         blur: (e) => {
-          this.handleInputFocusBlur(e, 'second_name');
+          this.handleInputFocusBlur(e);
         },
       },
     });
@@ -274,10 +273,10 @@ class Index extends Block {
       pattern: '^[+]*[0-9]+$',
       events: {
         focus: (e) => {
-          this.handleInputFocusBlur(e, 'phone');
+          this.handleInputFocusBlur(e);
         },
         blur: (e) => {
-          this.handleInputFocusBlur(e, 'phone');
+          this.handleInputFocusBlur(e);
         },
       },
     });
@@ -292,10 +291,10 @@ class Index extends Block {
       pattern: '^(?=.*[A-Z])(?=.*[0-9])\\S*$',
       events: {
         focus: (e) => {
-          this.handleInputFocusBlur(e, 'password-old');
+          this.handleInputFocusBlur(e);
         },
         blur: (e) => {
-          this.handleInputFocusBlur(e, 'password-old');
+          this.handleInputFocusBlur(e);
         },
       },
     });
@@ -310,10 +309,10 @@ class Index extends Block {
       pattern: '^(?=.*[A-Z])(?=.*[0-9])\\S*$',
       events: {
         focus: (e) => {
-          this.handleInputFocusBlur(e, 'password');
+          this.handleInputFocusBlur(e);
         },
         blur: (e) => {
-          this.handleInputFocusBlur(e, 'password');
+          this.handleInputFocusBlur(e);
         },
       },
     });
@@ -328,10 +327,10 @@ class Index extends Block {
       pattern: '^(?=.*[A-Z])(?=.*[0-9])\\S*$',
       events: {
         focus: (e) => {
-          this.handleInputFocusBlur(e, 'password-confirm');
+          this.handleInputFocusBlur(e);
         },
         blur: (e) => {
-          this.handleInputFocusBlur(e, 'password-confirm');
+          this.handleInputFocusBlur(e);
         },
       },
     });
