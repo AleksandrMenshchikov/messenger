@@ -7,21 +7,21 @@ export default class Block {
     FLOW_CDM: 'flow:component-did-mount',
     FLOW_CDU: 'flow:component-did-update',
     FLOW_RENDER: 'flow:render',
-  };
+  } as const;
 
   private _id = nanoid(6);
 
-  private _meta: { props: any; };
+  private _meta: { props: unknown; };
 
-  protected props: any;
+  protected props: Record<string, unknown>;
 
   protected eventBus: () => EventBus;
 
-  private _element: any;
+  private _element: unknown;
 
-  protected children: any;
+  protected children: Record<string, unknown>;
 
-  constructor(propsAndChildren: any = {}) {
+  constructor(propsAndChildren: Record<string, unknown> = {}) {
     const { children, props } = this._getChildren(propsAndChildren);
     this.children = children;
     this.initChildren();
@@ -37,12 +37,12 @@ export default class Block {
   initChildren() {}
 
   // eslint-disable-next-line class-methods-use-this
-  _getChildren(propsAndChildren: any) {
-    const children: any = {};
-    const props: any = {};
-    Object.entries(propsAndChildren).forEach(([key, value]) => {
+  _getChildren(propsAndChildren: Record<string, unknown>) {
+    const children: Record<string, unknown> = {};
+    const props: Record<string, unknown> = {};
+    Object.entries((propsAndChildren)).forEach(([key, value]) => {
       if (value instanceof Block) {
-        children[key] = value;
+        (children as Record<string, unknown>)[key] = value;
       } else if (Array.isArray(value) && value.every((v) => v instanceof Block)) {
         children[key] = value;
       } else {
@@ -52,26 +52,22 @@ export default class Block {
     return { children, props };
   }
 
-  compile(template: (context: any) => string, props: any) {
+  compile(template: (context: unknown) => string, props: Record<string, unknown>) {
     const propsAndStubs = { ...props };
     Object.entries(this.children).forEach(([key, child]) => {
-      if (Array.isArray(child)) {
-        // eslint-disable-next-line no-underscore-dangle
-        propsAndStubs[key].map((ch: any) => `<div data-id="${ch._id}"></div>`);
-      }
       // eslint-disable-next-line no-underscore-dangle
-      propsAndStubs[key] = `<div data-id="${(child as any)._id}"></div>`;
+      propsAndStubs[key] = `<div data-id="${(child as Block)._id}"></div>`;
     });
     const fragment = this._createDocumentElement('template') as HTMLTemplateElement;
     const htmlString = template(propsAndStubs);
     fragment.innerHTML = htmlString;
-    Object.entries(this.children).forEach(([key, child]) => {
+    Object.values(this.children).forEach((child) => {
       // eslint-disable-next-line no-underscore-dangle
-      const stub = fragment.content.querySelector(`[data-id="${(child as any)._id}"]`);
+      const stub = fragment.content.querySelector(`[data-id="${(child as Block)._id}"]`);
       if (!stub) {
         return;
       }
-      stub.replaceWith((child as any).getContent());
+      stub.replaceWith((child as Block).getContent());
     });
     return fragment.content;
   }
@@ -82,7 +78,7 @@ export default class Block {
       return;
     }
     Object.entries(events).forEach(([event, listener]) => {
-      this._element.addEventListener(event, listener);
+      (this._element as HTMLElement).addEventListener(event, listener);
     });
   }
 
@@ -94,7 +90,7 @@ export default class Block {
     }
 
     Object.entries(events).forEach(([event, listener]) => {
-      this._element.removeEventListener(event, listener);
+      (this._element as HTMLElement).removeEventListener(event, listener);
     });
   }
 
@@ -112,18 +108,18 @@ export default class Block {
   _componentDidMount() {
     this.componentDidMount();
     Object.values(this.children).forEach((child) => {
-      (child as any).dispatchComponentDidMount();
+      (child as Block).dispatchComponentDidMount();
     });
   }
 
   // eslint-disable-next-line class-methods-use-this
-  componentDidMount(oldProps?: any) { return ''; }
+  componentDidMount(oldProps?: Record<string, unknown>) { return ''; }
 
   dispatchComponentDidMount() {
     this.eventBus().emit(Block.EVENTS.FLOW_CDM);
   }
 
-  _componentDidUpdate(oldProps: any, newProps: any) {
+  _componentDidUpdate(oldProps: Record<string, unknown>, newProps: Record<string, unknown>) {
     const response = this.componentDidUpdate(oldProps, newProps);
     if (!response) {
       return;
@@ -132,11 +128,11 @@ export default class Block {
   }
 
   // eslint-disable-next-line class-methods-use-this
-  componentDidUpdate(oldProps: any, newProps: any) {
+  componentDidUpdate(oldProps: Record<string, unknown>, newProps: Record<string, unknown>) {
     return true;
   }
 
-  setProps = (nextProps: any) => {
+  setProps = (nextProps: Record<string, unknown>) => {
     if (!nextProps) {
       return;
     }
@@ -152,7 +148,7 @@ export default class Block {
     const newElement = fragment.firstElementChild;
     if (this._element) {
       this._removeEvents();
-      this._element.replaceWith(newElement);
+      (this._element as HTMLElement).replaceWith(newElement as HTMLElement);
     }
     this._element = newElement;
     this._addEvents();
@@ -165,18 +161,18 @@ export default class Block {
     return this.element as HTMLElement;
   }
 
-  _makePropsProxy(props: any) {
+  _makePropsProxy(props: Record<string, unknown>) {
     // eslint-disable-next-line @typescript-eslint/no-this-alias
     const self = this;
     return new Proxy(props, {
       get(target, prop) {
-        const value = target[prop];
+        const value = target[prop as string];
         return typeof value === 'function' ? value.bind(target) : value;
       },
       set(target, prop, value) {
         const oldProps = { ...target };
         // eslint-disable-next-line no-param-reassign
-        target[prop] = value;
+        target[prop as string] = value;
         self.eventBus().emit(Block.EVENTS.FLOW_CDU, oldProps, target);
         return true;
       },
