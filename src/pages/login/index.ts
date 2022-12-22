@@ -27,12 +27,14 @@ class Index extends Block {
     });
   }
 
-  handleInputFocusBlur(e: Event, element: 'login' | 'password') {
-    const isValidInputLogin = (e.currentTarget as HTMLInputElement).checkValidity();
-    if (!isValidInputLogin) {
-      (this.form[element] as HTMLInputElement).nextElementSibling?.classList.add('error_active');
+  // eslint-disable-next-line class-methods-use-this
+  handleInputFocusBlur(e: Event) {
+    const input = e.currentTarget as HTMLInputElement;
+    const isValidInput = input.checkValidity();
+    if (!isValidInput) {
+      input.nextElementSibling?.classList.add('error_active');
     } else {
-      (this.form[element] as HTMLInputElement).nextElementSibling?.classList.remove('error_active');
+      input.nextElementSibling?.classList.remove('error_active');
     }
   }
 
@@ -52,10 +54,10 @@ class Index extends Block {
       pattern: '^(?=.*[a-zA-Z])(?:.*[a-zA-Z0-9-_])$',
       events: {
         focus: (e) => {
-          this.handleInputFocusBlur(e, 'login');
+          this.handleInputFocusBlur(e);
         },
         blur: (e) => {
-          this.handleInputFocusBlur(e, 'login');
+          this.handleInputFocusBlur(e);
         },
       },
     });
@@ -70,10 +72,10 @@ class Index extends Block {
       pattern: '^(?=.*[A-Z])(?=.*[0-9])\\S*$',
       events: {
         focus: (e) => {
-          this.handleInputFocusBlur(e, 'password');
+          this.handleInputFocusBlur(e);
         },
         blur: (e) => {
-          this.handleInputFocusBlur(e, 'password');
+          this.handleInputFocusBlur(e);
         },
       },
     });
