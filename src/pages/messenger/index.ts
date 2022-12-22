@@ -42,9 +42,9 @@ const arrowRight: URL = new URL(
 class Index extends Block {
   form: HTMLFormElement;
 
-  profilePasswords: HTMLDivElement;
+  profilePasswords: HTMLElement;
 
-  profileData: HTMLDivElement;
+  profileData: HTMLElement;
 
   constructor({
     foto, file, location, arrowLeft, avatar, search, arrowRight,
@@ -52,9 +52,9 @@ class Index extends Block {
     super({
       foto, file, location, arrowLeft, avatar, search, arrowRight,
     });
-    this.profileData = this.element.querySelector('.profile-data');
+    this.profileData = this.element.querySelector('.profile-data') as HTMLElement;
     this.profileData.querySelectorAll('input').forEach((elem) => { elem.setAttribute('disabled', 'true'); });
-    this.profilePasswords = this.element.querySelector('.profile-passwords');
+    this.profilePasswords = this.element.querySelector('.profile-passwords') as HTMLElement;
     this.profilePasswords.style.display = 'none';
     this.form = this.element.querySelector('form') as HTMLFormElement;
     this.form.addEventListener('submit', (e) => {
@@ -114,13 +114,13 @@ class Index extends Block {
     }
     list?.insertAdjacentHTML('afterbegin', strChildren);
 
-    const buttonProfile = this.element.querySelector('.button-profile');
-    const profile = this.element.querySelector('.profile');
-    const profileArrowImg = this.element.querySelector('.profile__arrow-img');
-    const modalProfileAvatar = this.element.querySelector('.modal-profile-avatar');
-    const profilFormButtonAvatar = this.element.querySelector('.profile__form-button-avatar');
-    const messageArrowRight = this.element.querySelector('.message-arrowRight');
-    const messageTextarea = this.element.querySelector('.message-textarea');
+    const buttonProfile = this.element.querySelector('.button-profile') as HTMLElement;
+    const profile = this.element.querySelector('.profile') as HTMLElement;
+    const profileArrowImg = this.element.querySelector('.profile__arrow-img') as HTMLElement;
+    const modalProfileAvatar = this.element.querySelector('.modal-profile-avatar') as HTMLElement;
+    const profilFormButtonAvatar = this.element.querySelector('.profile__form-button-avatar') as HTMLElement;
+    const messageArrowRight = this.element.querySelector('.message-arrowRight') as HTMLElement;
+    const messageTextarea = this.element.querySelector('.message-textarea') as HTMLElement;
     profilFormButtonAvatar.addEventListener('click', () => modalProfileAvatar.classList.add('modal-profile-avatar_active'));
     buttonProfile.addEventListener('click', () => {
       profile.classList.add('profile_active');
@@ -138,9 +138,9 @@ class Index extends Block {
       (e) => e.key === 'Escape' && modalProfileAvatar.classList.remove('modal-profile-avatar_active'),
     );
     messageArrowRight.addEventListener('click', () => {
-      const content = messageTextarea.textContent.trim();
-      if (content.length > 0) {
-        console.log(messageTextarea.textContent.trim());
+      const content = messageTextarea.textContent?.trim();
+      if (content && content.length > 0) {
+        console.log(messageTextarea.textContent?.trim());
       }
     });
   }
@@ -160,7 +160,7 @@ class Index extends Block {
   initChildren(): void {
     this.children.members = {};
     [...new Array(15).keys()].forEach((_, index) => {
-      this.children.members[`member${index}`] = new Member();
+      (this.children.members as Record<string, unknown>)[`member${index}`] = new Member();
     });
     this.children.clip = new Clip();
     this.children.dots = new Dots();

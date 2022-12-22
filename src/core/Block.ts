@@ -11,15 +11,15 @@ export default class Block {
 
   private _id = nanoid(6);
 
-  private _meta: { props: unknown; };
+  private _meta: { props: Record<string, unknown>; };
 
   protected props: Record<string, unknown>;
 
   protected eventBus: () => EventBus;
 
-  private _element: unknown;
+  private _element!: HTMLElement;
 
-  protected children: Record<string, unknown>;
+  protected children: any;
 
   constructor(propsAndChildren: Record<string, unknown> = {}) {
     const { children, props } = this._getChildren(propsAndChildren);
@@ -38,7 +38,7 @@ export default class Block {
 
   // eslint-disable-next-line class-methods-use-this
   _getChildren(propsAndChildren: Record<string, unknown>) {
-    const children: Record<string, unknown> = {};
+    const children: any = {};
     const props: Record<string, unknown> = {};
     Object.entries((propsAndChildren)).forEach(([key, value]) => {
       if (value instanceof Block) {
@@ -78,7 +78,7 @@ export default class Block {
       return;
     }
     Object.entries(events).forEach(([event, listener]) => {
-      (this._element as HTMLElement).addEventListener(event, listener);
+      this._element.addEventListener(event, listener);
     });
   }
 
@@ -90,7 +90,7 @@ export default class Block {
     }
 
     Object.entries(events).forEach(([event, listener]) => {
-      (this._element as HTMLElement).removeEventListener(event, listener);
+      this._element.removeEventListener(event, listener);
     });
   }
 
@@ -145,10 +145,10 @@ export default class Block {
 
   _render() {
     const fragment = this.render();
-    const newElement = fragment.firstElementChild;
+    const newElement = fragment.firstElementChild as HTMLElement;
     if (this._element) {
       this._removeEvents();
-      (this._element as HTMLElement).replaceWith(newElement as HTMLElement);
+      this._element.replaceWith(newElement);
     }
     this._element = newElement;
     this._addEvents();

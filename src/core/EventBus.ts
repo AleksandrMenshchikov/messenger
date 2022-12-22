@@ -1,4 +1,4 @@
- type Handler = (...args: unknown[]) => void;
+ type Handler = (...args: Record<string, unknown>[]) => void;
 
 export default class EventBus {
   private listeners: Record<string, Handler[]> = {};
@@ -21,7 +21,7 @@ export default class EventBus {
     );
   }
 
-  emit(event: string, ...args: unknown[]) {
+  emit(event: string, ...args: Record<string, unknown>[]) {
     if (!this.listeners[event]) {
       throw new Error(`Нет события: ${event}`);
     }

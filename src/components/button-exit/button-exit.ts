@@ -8,8 +8,9 @@ type ButtonProps = {
 
 // eslint-disable-next-line import/prefer-default-export
 export class ButtonExit extends Block {
-  constructor({ events }: ButtonProps) {
-    super({ events });
+  // eslint-disable-next-line no-useless-constructor
+  constructor(props: ButtonProps) {
+    super(props);
   }
 
   // eslint-disable-next-line class-methods-use-this

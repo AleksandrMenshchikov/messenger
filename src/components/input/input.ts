@@ -16,12 +16,9 @@ type InputProps = {
 
 // eslint-disable-next-line import/prefer-default-export
 export class Input extends Block {
-  constructor({
-    id, classValue, type, name, autocomplete, minLength, maxLength, pattern, events,
-  }:InputProps) {
-    super({
-      id, classValue, type, name, autocomplete, minLength, maxLength, pattern, events,
-    });
+  // eslint-disable-next-line no-useless-constructor
+  constructor(props:InputProps) {
+    super(props);
   }
 
   // eslint-disable-next-line class-methods-use-this

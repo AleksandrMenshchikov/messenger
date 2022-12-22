@@ -10,8 +10,9 @@ type ButtonProps = {
 
 // eslint-disable-next-line import/prefer-default-export
 export class Button extends Block {
-  constructor({ type, content, events }: ButtonProps) {
-    super({ type, content, events });
+  // eslint-disable-next-line no-useless-constructor
+  constructor(props: ButtonProps) {
+    super(props);
   }
 
   // eslint-disable-next-line class-methods-use-this
