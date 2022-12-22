@@ -157,6 +157,14 @@ class Index extends Block {
   }
 
   initChildren(): void {
+    const events = {
+      focus: (e: Event) => {
+        this.handleInputFocusBlur(e);
+      },
+      blur: (e: Event) => {
+        this.handleInputFocusBlur(e);
+      },
+    };
     this.children.members = {};
     [...new Array(15).keys()].forEach((_, index) => {
       (this.children.members as Record<string, unknown>)[`member${index}`] = new Member();
@@ -199,14 +207,7 @@ class Index extends Block {
       maxLength: '100',
       autocomplete: 'email',
       pattern: '^[a-zA-Z]+[a-zA-Z0-9-._]*@[a-zA-Z]+\\.[a-zA-Z]+$',
-      events: {
-        focus: (e) => {
-          this.handleInputFocusBlur(e);
-        },
-        blur: (e) => {
-          this.handleInputFocusBlur(e);
-        },
-      },
+      events,
     });
     this.children['input-login'] = new Input({
       id: 'login',
@@ -217,14 +218,7 @@ class Index extends Block {
       minLength: '3',
       maxLength: '20',
       pattern: '^(?=.*[a-zA-Z])(?:.*[a-zA-Z0-9-_])$',
-      events: {
-        focus: (e) => {
-          this.handleInputFocusBlur(e);
-        },
-        blur: (e) => {
-          this.handleInputFocusBlur(e);
-        },
-      },
+      events,
     });
     this.children['input-first-name'] = new Input({
       id: 'first_name',
@@ -235,14 +229,7 @@ class Index extends Block {
       minLength: '1',
       maxLength: '100',
       pattern: '^[A-ZА-ЯЁ]+[a-zA-Zа-яА-ЯЁё-]*$',
-      events: {
-        focus: (e) => {
-          this.handleInputFocusBlur(e);
-        },
-        blur: (e) => {
-          this.handleInputFocusBlur(e);
-        },
-      },
+      events,
     });
     this.children['input-second-name'] = new Input({
       id: 'second_name',
@@ -253,14 +240,7 @@ class Index extends Block {
       minLength: '1',
       maxLength: '100',
       pattern: '^[A-ZА-ЯЁ]+[a-zA-Zа-яА-ЯЁё-]*$',
-      events: {
-        focus: (e) => {
-          this.handleInputFocusBlur(e);
-        },
-        blur: (e) => {
-          this.handleInputFocusBlur(e);
-        },
-      },
+      events,
     });
     this.children['input-phone'] = new Input({
       id: 'phone',
@@ -271,14 +251,7 @@ class Index extends Block {
       minLength: '10',
       maxLength: '15',
       pattern: '^[+]*[0-9]+$',
-      events: {
-        focus: (e) => {
-          this.handleInputFocusBlur(e);
-        },
-        blur: (e) => {
-          this.handleInputFocusBlur(e);
-        },
-      },
+      events,
     });
     this.children['input-password-old'] = new Input({
       id: 'password-old',
@@ -289,14 +262,7 @@ class Index extends Block {
       minLength: '8',
       maxLength: '40',
       pattern: '^(?=.*[A-Z])(?=.*[0-9])\\S*$',
-      events: {
-        focus: (e) => {
-          this.handleInputFocusBlur(e);
-        },
-        blur: (e) => {
-          this.handleInputFocusBlur(e);
-        },
-      },
+      events,
     });
     this.children['input-password'] = new Input({
       id: 'password',
@@ -307,14 +273,7 @@ class Index extends Block {
       minLength: '8',
       maxLength: '40',
       pattern: '^(?=.*[A-Z])(?=.*[0-9])\\S*$',
-      events: {
-        focus: (e) => {
-          this.handleInputFocusBlur(e);
-        },
-        blur: (e) => {
-          this.handleInputFocusBlur(e);
-        },
-      },
+      events,
     });
     this.children['input-password-confirm'] = new Input({
       id: 'password-confirm',
@@ -325,14 +284,7 @@ class Index extends Block {
       minLength: '8',
       maxLength: '40',
       pattern: '^(?=.*[A-Z])(?=.*[0-9])\\S*$',
-      events: {
-        focus: (e) => {
-          this.handleInputFocusBlur(e);
-        },
-        blur: (e) => {
-          this.handleInputFocusBlur(e);
-        },
-      },
+      events,
     });
     this.children['input-email'].getContent().value = 'pochta@yandex.ru';
     this.children['input-login'].getContent().value = 'ivanivanov';

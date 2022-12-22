@@ -8,18 +8,8 @@ import { InputError } from '../../components/input-error/input-error';
 class Index extends Block {
   form: HTMLFormElement;
 
-  events: { focus: (e: Event) => void; blur: (e: Event) => void; };
-
   constructor() {
     super();
-    this.events = {
-      focus: (e) => {
-        this.handleInputFocusBlur(e);
-      },
-      blur: (e) => {
-        this.handleInputFocusBlur(e);
-      },
-    };
     this.form = this.element.querySelector('form') as HTMLFormElement;
     this.form.addEventListener('submit', (e) => {
       e.preventDefault();
@@ -63,6 +53,14 @@ class Index extends Block {
   }
 
   initChildren(): void {
+    const events = {
+      focus: (e: Event) => {
+        this.handleInputFocusBlur(e);
+      },
+      blur: (e: Event) => {
+        this.handleInputFocusBlur(e);
+      },
+    };
     this.children['input-email'] = new Input({
       id: 'email',
       classValue: 'input',
@@ -72,7 +70,7 @@ class Index extends Block {
       maxLength: '100',
       autocomplete: 'email',
       pattern: '^[a-zA-Z]+[a-zA-Z0-9-._]*@[a-zA-Z]+\\.[a-zA-Z]+$',
-      events: this.events,
+      events,
     });
     this.children['input-login'] = new Input({
       id: 'login',
@@ -83,7 +81,7 @@ class Index extends Block {
       minLength: '3',
       maxLength: '20',
       pattern: '^(?=.*[a-zA-Z])(?:.*[a-zA-Z0-9-_])$',
-      events: this.events,
+      events,
     });
     this.children['input-first-name'] = new Input({
       id: 'first_name',
@@ -94,7 +92,7 @@ class Index extends Block {
       minLength: '1',
       maxLength: '100',
       pattern: '^[A-ZА-ЯЁ]+[a-zA-Zа-яА-ЯЁё-]*$',
-      events: this.events,
+      events,
     });
     this.children['input-second-name'] = new Input({
       id: 'second_name',
@@ -105,7 +103,7 @@ class Index extends Block {
       minLength: '1',
       maxLength: '100',
       pattern: '^[A-ZА-ЯЁ]+[a-zA-Zа-яА-ЯЁё-]*$',
-      events: this.events,
+      events,
     });
     this.children['input-phone'] = new Input({
       id: 'phone',
@@ -116,7 +114,7 @@ class Index extends Block {
       minLength: '10',
       maxLength: '15',
       pattern: '^[+]*[0-9]+$',
-      events: this.events,
+      events,
     });
     this.children['input-password'] = new Input({
       id: 'password',
@@ -127,7 +125,7 @@ class Index extends Block {
       minLength: '8',
       maxLength: '40',
       pattern: '^(?=.*[A-Z])(?=.*[0-9])\\S*$',
-      events: this.events,
+      events,
     });
     this.children['input-password-confirm'] = new Input({
       id: 'password-confirm',
@@ -138,7 +136,7 @@ class Index extends Block {
       minLength: '8',
       maxLength: '40',
       pattern: '^(?=.*[A-Z])(?=.*[0-9])\\S*$',
-      events: this.events,
+      events,
     });
     this.children['input-error-email'] = new InputError({ content: 'Введите email.' });
     this.children['input-error-login'] = new InputError({ content: 'Введите логин (от 3 до 20 символов, латиница, может содержать цифры, но не состоять из них, без пробелов, без спецсимволов, допустимы дефис и нижнее подчёркивание).' });
