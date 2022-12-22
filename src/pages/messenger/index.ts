@@ -5,6 +5,8 @@ import Member from '../../components/member';
 import Clip from '../../components/clip';
 import Dots from '../../components/dots';
 import FormMessenger from '../../components/form-messenger';
+import ButtonOpenProfile from '../../components/button-open-profile';
+import ProfileArrow from '../../components/profile-arrow';
 
 const foto: URL = new URL(
   '../../../assets/foto.svg',
@@ -22,10 +24,6 @@ const arrowLeft: URL = new URL(
   '../../../assets/arrowLeft.svg',
   import.meta.url,
 );
-const avatar: URL = new URL(
-  '../../../assets/avatar.svg',
-  import.meta.url,
-);
 const search: URL = new URL(
   '../../../assets/search.svg',
   import.meta.url,
@@ -40,12 +38,21 @@ class Index extends Block {
 
   profileData: HTMLElement;
 
+  modalProfileAvatar: HTMLElement;
+
+  profile: HTMLElement;
+
+  messageTextarea: HTMLElement;
+
   constructor({
     foto, file, location, arrowLeft, avatar, search, arrowRight,
   }: Record<string, URL>) {
     super({
       foto, file, location, arrowLeft, avatar, search, arrowRight,
     });
+    this.messageTextarea = this.element.querySelector('.message-textarea') as HTMLElement;
+    this.profile = this.element.querySelector('.profile') as HTMLElement;
+    this.modalProfileAvatar = this.element.querySelector('.modal-profile-avatar') as HTMLElement;
     this.profileData = this.element.querySelector('.profile-data') as HTMLElement;
     this.profileData.querySelectorAll('input').forEach((elem) => { elem.setAttribute('disabled', 'true'); });
     this.profilePasswords = this.element.querySelector('.profile-passwords') as HTMLElement;
@@ -63,35 +70,15 @@ class Index extends Block {
     }
     list?.insertAdjacentHTML('afterbegin', strChildren);
 
-    const buttonProfile = this.element.querySelector('.button-profile') as HTMLElement;
-    const profile = this.element.querySelector('.profile') as HTMLElement;
-    const profileArrowImg = this.element.querySelector('.profile__arrow-img') as HTMLElement;
-    const modalProfileAvatar = this.element.querySelector('.modal-profile-avatar') as HTMLElement;
-    const profilFormButtonAvatar = this.element.querySelector('.profile__form-button-avatar') as HTMLElement;
-    const messageArrowRight = this.element.querySelector('.message-arrowRight') as HTMLElement;
-    const messageTextarea = this.element.querySelector('.message-textarea') as HTMLElement;
-    profilFormButtonAvatar.addEventListener('click', () => modalProfileAvatar.classList.add('modal-profile-avatar_active'));
-    buttonProfile.addEventListener('click', () => {
-      profile.classList.add('profile_active');
-    });
-    profileArrowImg.addEventListener('click', () => {
-      profile.classList.remove('profile_active');
-    });
     document.addEventListener(
       'click',
-      (e) => e.target === modalProfileAvatar
-          && modalProfileAvatar.classList.remove('modal-profile-avatar_active'),
+      (e) => e.target === this.modalProfileAvatar
+          && this.modalProfileAvatar.classList.remove('modal-profile-avatar_active'),
     );
     document.addEventListener(
       'keydown',
-      (e) => e.key === 'Escape' && modalProfileAvatar.classList.remove('modal-profile-avatar_active'),
+      (e) => e.key === 'Escape' && this.modalProfileAvatar.classList.remove('modal-profile-avatar_active'),
     );
-    messageArrowRight.addEventListener('click', () => {
-      const content = messageTextarea.textContent?.trim();
-      if (content && content.length > 0) {
-        console.log(messageTextarea.textContent?.trim());
-      }
-    });
   }
 
   initChildren(): void {
@@ -101,8 +88,34 @@ class Index extends Block {
     });
     this.children.clip = new Clip();
     this.children.dots = new Dots();
+    this.children['button-open-profile'] = new ButtonOpenProfile({
+      events: {
+        click: () => {
+          this.profile.classList.add('profile_active');
+        },
+      },
+    });
+    this.children['profile-arrow-left'] = new ProfileArrow({
+      arrow: arrowLeft,
+      events: {
+        click: () => {
+          this.profile.classList.remove('profile_active');
+        },
+      },
+    });
+    this.children['profile-arrow-right'] = new ProfileArrow({
+      arrow: arrowRight,
+      events: {
+        click: () => {
+          const content = this.messageTextarea.textContent?.trim();
+          if (content && content.length > 0) {
+            console.log(this.messageTextarea.textContent?.trim());
+          }
+        },
+      },
+    });
     this.children['form-messenger'] = new FormMessenger({
-      avatar,
+      onClickButtonAvatar: () => this.modalProfileAvatar.classList.add('modal-profile-avatar_active'),
       events: {
         submit: (e) => {
           e.preventDefault();
@@ -160,6 +173,6 @@ class Index extends Block {
 
 document.addEventListener('DOMContentLoaded', () => {
   renderDOM('#app', new Index({
-    foto, file, location, arrowLeft, avatar, search, arrowRight,
+    foto, file, location, arrowLeft, search, arrowRight,
   }));
 });

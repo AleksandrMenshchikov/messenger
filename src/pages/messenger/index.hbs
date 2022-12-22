@@ -39,7 +39,7 @@
   {{!--start profile --}}
   <div class="profile">
     <div class="profile__arrow">
-      <img class="profile__arrow-img" src="{{arrowLeft}}" alt="Иконка" />
+      {{{profile-arrow-left}}}
     </div>
     {{{form-messenger}}}
   </div>
@@ -49,10 +49,7 @@
   <main class="container">
     <nav class="nav">
       <div class="button-profile-container">
-        <button class="button-profile" type="button">
-          <span class="button-profile__text">Профиль</span>
-          <span class="button-profile__arrow"></span>
-        </button>
+        {{{button-open-profile}}}
       </div>
       <div class="search">
         <input class="search__input" type="text" name="search" placeholder="Поиск" />
@@ -72,7 +69,7 @@
       <div class="messages__footer">
         {{{clip}}}
         <span class="message-textarea" name="message" placeholder="Сообщение" role="textbox" contenteditable></span>
-        <img class="message-arrowRight" src="{{arrowRight}}" alt="Иконка" />
+        {{{profile-arrow-right}}}
       </div>
     </div>
   </main>

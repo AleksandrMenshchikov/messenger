@@ -1,0 +1,33 @@
+.profile__form-button-avatar {
+  width: 130px;
+  min-height: 130px;
+  background: var(--color-middle-gray);
+  border: none;
+  border-radius: 50%;
+  margin-top: 60px;
+  cursor: pointer;
+  position: relative;
+}
+
+.profile__form-avatar-text {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 50%;
+  font-weight: 500;
+  font-size: 1.3rem;
+  color: var(--color-white);
+  background: var(--color-black);
+  opacity: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  padding: 20px;
+}
+
+.profile__form-button-avatar:hover .profile__form-avatar-text {
+  opacity: 0.5;
+}

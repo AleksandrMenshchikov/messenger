@@ -6,10 +6,16 @@ import Button from '../button';
 import ButtonExit from '../button-exit';
 import Input from '../input';
 import InputError from '../input-error';
+import ButtonAvatar from '../button-avatar';
+
+const avatar: URL = new URL(
+  '../../../assets/avatar.svg',
+  import.meta.url,
+);
 
 type FormMessengerProps = {
-  avatar: URL,
   events: Record<string, (e: Event) => void>
+  onClickButtonAvatar: (e?: Event) => void
 }
 
 // eslint-disable-next-line import/prefer-default-export
@@ -47,6 +53,7 @@ export class FormMessenger extends Block {
       },
     };
     this.children.button = new Button({ type: 'submit', content: 'Сохранить' });
+    this.children['button-avatar'] = new ButtonAvatar({ avatar, events: { click: () => (this.props.onClickButtonAvatar as (e?: Event)=> void)() } });
     this.children['button-profile-1'] = new ButtonProfile({
       content: 'Изменить данные',
       events: {
