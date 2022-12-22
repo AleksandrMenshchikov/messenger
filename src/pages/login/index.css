@@ -56,33 +56,3 @@ body {
   margin: 0 0 30px;
   text-align: center;
 }
-
-.form {
-  min-width: 280px;
-}
-
-.group {
-  position: relative;
-  margin: 26px 0;
-  width: 100%;
-}
-
-.label {
-  display: block;
-  position: absolute;
-  top: 5px;
-  font-size: 1.4rem;
-  color: var(--color-gray);
-  pointer-events: none;
-  transition: 0.3s ease all;
-}
-
-.link {
-  text-decoration: none;
-  display: block;
-  margin: 14px auto 0;
-  color: var(--color-blue);
-  font-size: 1.2rem;
-  cursor: pointer;
-  width: fit-content;
-}

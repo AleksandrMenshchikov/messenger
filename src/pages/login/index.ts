@@ -1,80 +1,29 @@
 import './index.css';
 import template from './index.hbs';
 import { Block, renderDOM } from '../../core';
-import Button from '../../components/button';
-import { Input } from '../../components/input/input';
-import { InputError } from '../../components/input-error/input-error';
+import FormLogin from '../../components/form-login';
 
 class Index extends Block {
-  form: HTMLFormElement;
-
-  constructor() {
-    super();
-    this.form = this.element.querySelector('form') as HTMLFormElement;
-    this.form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      this.form.querySelectorAll('input').forEach((elem) => {
-        if (elem.checkValidity()) {
-          elem.nextElementSibling?.classList.remove('error_active');
-        } else {
-          elem.nextElementSibling?.classList.add('error_active');
-        }
-      });
-      if (this.form.checkValidity()) {
-        const obj = { login: this.form.login.value, password: this.form.password.value };
-        console.log(obj);
-      }
-    });
-  }
-
-  // eslint-disable-next-line class-methods-use-this
-  handleInputFocusBlur(e: Event) {
-    const input = e.currentTarget as HTMLInputElement;
-    const isValidInput = input.checkValidity();
-    if (!isValidInput) {
-      input.nextElementSibling?.classList.add('error_active');
-    } else {
-      input.nextElementSibling?.classList.remove('error_active');
-    }
-  }
-
   initChildren(): void {
-    const events = {
-      focus: (e: Event) => {
-        this.handleInputFocusBlur(e);
+    this.children['form-login'] = new FormLogin({
+      events: {
+        submit: (e) => {
+          e.preventDefault();
+          const form = e.currentTarget as HTMLFormElement;
+          form.querySelectorAll('input').forEach((elem) => {
+            if (elem.checkValidity()) {
+              elem.nextElementSibling?.classList.remove('error_active');
+            } else {
+              elem.nextElementSibling?.classList.add('error_active');
+            }
+          });
+          if (form.checkValidity()) {
+            const obj = { login: form.login.value, password: form.password.value };
+            console.log(obj);
+          }
+        },
       },
-      blur: (e: Event) => {
-        this.handleInputFocusBlur(e);
-      },
-    };
-    this.children.button = new Button({
-      type: 'submit',
-      content: 'Авторизоваться',
     });
-    this.children['input-login'] = new Input({
-      id: 'login',
-      classValue: 'input',
-      type: 'text',
-      name: 'login',
-      autocomplete: 'off',
-      minLength: '3',
-      maxLength: '20',
-      pattern: '^(?=.*[a-zA-Z])(?:.*[a-zA-Z0-9-_])$',
-      events,
-    });
-    this.children['input-password'] = new Input({
-      id: 'password',
-      classValue: 'input',
-      type: 'password',
-      name: 'password',
-      autocomplete: 'current-password',
-      minLength: '8',
-      maxLength: '40',
-      pattern: '^(?=.*[A-Z])(?=.*[0-9])\\S*$',
-      events,
-    });
-    this.children['input-error-login'] = new InputError({ content: 'Введите логин (от 3 до 20 символов, латиница, может содержать цифры, но не состоять из них, без пробелов, без спецсимволов, допустимы дефис и нижнее подчёркивание).' });
-    this.children['input-error-password'] = new InputError({ content: 'Введите пароль (от 8 до 40 символов, обязательно хотя бы одна заглавная буква и цифра).' });
   }
 
   // eslint-disable-next-line class-methods-use-this
