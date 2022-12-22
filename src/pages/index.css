@@ -14,3 +14,11 @@
     "Helvetica Neue",
     sans-serif;
 }
+
+.list {
+  padding: 0;
+}
+
+.list__item {
+  margin: 20px;
+}

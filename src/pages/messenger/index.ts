@@ -347,6 +347,7 @@ class Index extends Block {
     this.children['input-error-first-name'] = new InputError({ content: 'Введите имя (латиница или кириллица, первая буква должна быть заглавной, без пробелов и без цифр, нет спецсимволов, допустим только дефис).' });
     this.children['input-error-second-name'] = new InputError({ content: 'Введите фамилию (латиница или кириллица, первая буква должна быть заглавной, без пробелов и без цифр, нет спецсимволов, допустим только дефис).' });
     this.children['input-error-phone'] = new InputError({ content: 'Введите телефон (от 10 до 15 символов, состоит из цифр, может начинается с плюса).' });
+    this.children['input-error-password-old'] = new InputError({ content: 'Введите старый пароль (от 8 до 40 символов, обязательно хотя бы одна заглавная буква и цифра).' });
     this.children['input-error-password'] = new InputError({ content: 'Введите новый пароль (от 8 до 40 символов, обязательно хотя бы одна заглавная буква и цифра).' });
     this.children['input-error-password-confirm'] = new InputError({ content: 'Введите ещё раз новый пароль.' });
 
