@@ -8,8 +8,18 @@ import { InputError } from '../../components/input-error/input-error';
 class Index extends Block {
   form: HTMLFormElement;
 
+  events: { focus: (e: Event) => void; blur: (e: Event) => void; };
+
   constructor() {
     super();
+    this.events = {
+      focus: (e) => {
+        this.handleInputFocusBlur(e);
+      },
+      blur: (e) => {
+        this.handleInputFocusBlur(e);
+      },
+    };
     this.form = this.element.querySelector('form') as HTMLFormElement;
     this.form.addEventListener('submit', (e) => {
       e.preventDefault();
@@ -52,14 +62,7 @@ class Index extends Block {
       minLength: '3',
       maxLength: '20',
       pattern: '^(?=.*[a-zA-Z])(?:.*[a-zA-Z0-9-_])$',
-      events: {
-        focus: (e) => {
-          this.handleInputFocusBlur(e);
-        },
-        blur: (e) => {
-          this.handleInputFocusBlur(e);
-        },
-      },
+      events: this.events,
     });
     this.children['input-password'] = new Input({
       id: 'password',
@@ -70,14 +73,7 @@ class Index extends Block {
       minLength: '8',
       maxLength: '40',
       pattern: '^(?=.*[A-Z])(?=.*[0-9])\\S*$',
-      events: {
-        focus: (e) => {
-          this.handleInputFocusBlur(e);
-        },
-        blur: (e) => {
-          this.handleInputFocusBlur(e);
-        },
-      },
+      events: this.events,
     });
     this.children['input-error-login'] = new InputError({ content: 'Введите логин (от 3 до 20 символов, латиница, может содержать цифры, но не состоять из них, без пробелов, без спецсимволов, допустимы дефис и нижнее подчёркивание).' });
     this.children['input-error-password'] = new InputError({ content: 'Введите пароль (от 8 до 40 символов, обязательно хотя бы одна заглавная буква и цифра).' });
