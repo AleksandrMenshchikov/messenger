@@ -1,0 +1,11 @@
+.profile__form-data-button-exit {
+  background-color: transparent;
+  border: none;
+  font-weight: 500;
+  font-size: 1.3rem;
+  color: var(--color-red);
+  padding: 0;
+  cursor: pointer;
+  margin-top: 10px;
+  align-self: flex-start;
+}

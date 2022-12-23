@@ -1,0 +1,23 @@
+.button-profile {
+  border: none;
+  background-color: transparent;
+  display: flex;
+  gap: 7px;
+  width: fit-content;
+  cursor: pointer;
+}
+
+.button-profile__text {
+  font-weight: 500;
+  font-size: 1.3rem;
+  color: var(--color-dark-gray);
+}
+
+.button-profile__arrow {
+  display: block;
+  border-top: 1px solid var(--color-dark-gray);
+  border-right: 1px solid var(--color-dark-gray);
+  width: 7px;
+  height: 7px;
+  transform: rotate(45deg) translateY(80%);
+}

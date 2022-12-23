@@ -1,0 +1,5 @@
+{
+  "extends": ["stylelint-config-standard", "stylelint-selector-bem-pattern"],
+  "rules": { "selector-class-pattern": null },
+  "ignoreFiles": ["dist/**/*.css"]
+}

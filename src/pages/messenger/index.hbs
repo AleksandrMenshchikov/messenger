@@ -1,0 +1,77 @@
+<div>
+  {{!--start modals --}}
+  <div class="modal-add-delete-user">
+    <button class="modal-add-delete-user__group">
+      <span class="modal-add-delete-user__add-icon"></span>
+      <p class="modal-add-delete-user__text">Добавить пользователя</p>
+    </button>
+    <button class="modal-add-delete-user__group">
+      <span class="modal-add-delete-user__delete-icon"></span>
+      <p class="modal-add-delete-user__text">Удалить пользователя</p>
+    </button>
+  </div>
+  <div class="modal-clip">
+    <button class="modal-clip__group">
+      <img src="{{foto}}" alt="Иконка" />
+      <p class="modal-add-delete-user__text">Фото или Видео</p>
+    </button>
+    <button class="modal-add-delete-user__group">
+      <img src="{{file}}" alt="Иконка" />
+      <p class="modal-add-delete-user__text">Файл</p>
+    </button>
+    <button class="modal-add-delete-user__group">
+      <img src="{{location}}" alt="Иконка" />
+      <p class="modal-add-delete-user__text">Локация</p>
+    </button>
+  </div>
+  <div class="modal-profile-avatar">
+    <div class="modal-profile-avatar__wrapper">
+      <p class="modal-profile-avatar__title">Загрузите файл</p>
+      <label class="modal-profile-avatar__label" for="file">Выбрать файл на компьютере</label>
+      <input class="modal-profile-avatar__input" type="file" name="file" id="file" />
+      <button class="modal-profile-avatar__button" type="button">
+        Поменять
+      </button>
+    </div>
+  </div>
+  {{!--end modals --}}
+
+  {{!--start profile --}}
+  <div class="profile">
+    <div class="profile__arrow">
+      {{{profile-arrow-left}}}
+    </div>
+    {{{form-messenger}}}
+  </div>
+  {{!--end profile --}}
+
+  {{!--start chats --}}
+  <main class="container">
+    <nav class="nav">
+      <div class="button-profile-container">
+        {{{button-open-profile}}}
+      </div>
+      <div class="search">
+        <input class="search__input" type="text" name="search" placeholder="Поиск" />
+        <img class="search__icon" src="{{search}}" alt="Иконка" />
+      </div>
+      <ul class="list">
+        <span class="list__divider"></span>
+      </ul>
+    </nav>
+    <div class="messages">
+      <div class="messages__head">
+        <img class="messages__head-avatar"
+          src="https://www.lightsong.net/wp-content/uploads/2020/12/blank-profile-circle.png" alt="Аватар" />
+        <p class="messages__head-title">Вадим</p>
+        {{{dots}}}
+      </div>
+      <div class="messages__footer">
+        {{{clip}}}
+        <span class="message-textarea" name="message" placeholder="Сообщение" role="textbox" contenteditable></span>
+        {{{profile-arrow-right}}}
+      </div>
+    </div>
+  </main>
+  {{!--end chats --}}
+</div>
