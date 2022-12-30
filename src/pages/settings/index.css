@@ -1,0 +1,83 @@
+.container {
+  position: relative;
+}
+
+.modal-profile-avatar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: var(--color-background-modal);
+  z-index: 2010;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s;
+}
+
+.modal-profile-avatar_active {
+  pointer-events: auto;
+  opacity: 1;
+}
+
+.modal-profile-avatar__wrapper {
+  background: var(--color-white);
+  box-shadow: 0 0 6px var(--box-shadow);
+  border-radius: 12px;
+  padding: 40px 30px;
+  width: 340px;
+}
+
+.modal-profile-avatar__title {
+  margin: 0 auto 40px;
+  font-weight: 500;
+  font-size: 1.5rem;
+  color: var(--color-black);
+  text-align: center;
+}
+
+.modal-profile-avatar__label {
+  display: block;
+  font-weight: 500;
+  font-size: 1.2rem;
+  text-align: center;
+  text-decoration-line: underline;
+  color: var(--color-blue);
+  cursor: pointer;
+  width: 122px;
+  margin: auto;
+}
+
+.modal-profile-avatar__input {
+  display: block;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+.modal-profile-avatar__button {
+  margin-top: 40px;
+  width: 100%;
+  background-color: var(--color-blue);
+  border-radius: 8px;
+  height: 37px;
+  cursor: pointer;
+  border: none;
+  color: var(--color-white);
+}
+
+.profile {
+  background-color: var(--color-white);
+  display: flex;
+}
+
+.profile__arrow {
+  width: 64px;
+  background: var(--color-light-gray);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

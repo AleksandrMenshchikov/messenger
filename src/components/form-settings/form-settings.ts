@@ -1,5 +1,5 @@
-import './form-messenger.css';
-import template from './form-messenger.hbs';
+import './form-settings.css';
+import template from './form-settings.hbs';
 import { Block } from '../../core';
 import ButtonProfile from '../button-profile';
 import Button from '../button';
@@ -13,18 +13,18 @@ const avatar: URL = new URL(
   import.meta.url,
 );
 
-type FormMessengerProps = {
+type FormSettingsProps = {
   events: Record<string, (e: Event) => void>
   onClickButtonAvatar: (e?: Event) => void
 }
 
 // eslint-disable-next-line import/prefer-default-export
-export class FormMessenger extends Block {
+export class FormSettings extends Block {
   profileData: HTMLElement;
 
   profilePasswords: HTMLElement;
 
-  constructor(props: FormMessengerProps) {
+  constructor(props: FormSettingsProps) {
     super(props);
     this.profileData = this.element.querySelector('.profile-data') as HTMLElement;
     this.profileData.querySelectorAll('input').forEach((elem) => { elem.setAttribute('disabled', 'true'); });

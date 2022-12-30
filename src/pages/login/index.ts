@@ -1,9 +1,9 @@
 import './index.css';
 import template from './index.hbs';
-import { Block, renderDOM } from '../../core';
+import { Block } from '../../core';
 import FormLogin from '../../components/form-login';
 
-class Index extends Block {
+class LoginPage extends Block {
   initChildren(): void {
     this.children['form-login'] = new FormLogin({
       events: {
@@ -32,6 +32,6 @@ class Index extends Block {
   }
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-  renderDOM('#app', new Index());
-});
+const loginPage = new LoginPage();
+
+export default loginPage;
