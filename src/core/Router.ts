@@ -28,8 +28,8 @@ export default class Router {
     Router.__instance = this;
   }
 
-  use(pathname: string, block: Block) {
-    const route = new Route(pathname, block, { rootQuery: this._rootQuery });
+  use(pathname: string, block: Block, props: Record<string, unknown> = {}) {
+    const route = new Route(pathname, block, props, this._rootQuery);
 
     this.routes.push(route);
 

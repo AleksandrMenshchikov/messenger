@@ -8,13 +8,16 @@ export default class Route {
 
   private _block: Block | null;
 
-  private _props: Record<string, string>;
+  private _props: Record<string, unknown>;
 
-  constructor(pathname: string, view: Block, props: Record<string, string>) {
+  private _rootQuery: string;
+
+  constructor(pathname: string, view: Block, props: Record<string, unknown>, rootQuery: string) {
     this._pathname = pathname;
     this._blockClass = view;
     this._block = null;
     this._props = props;
+    this._rootQuery = rootQuery;
   }
 
   navigate(pathname: string) {
@@ -36,8 +39,8 @@ export default class Route {
 
   render() {
     if (!this._block) {
-      this._block = new (this._blockClass as any)();
-      renderDOM(this._props.rootQuery, this._block as Block);
+      this._block = new (this._blockClass as any)(this._props);
+      renderDOM(this._rootQuery, this._block as Block);
       return;
     }
 
