@@ -1,7 +1,7 @@
 import Route from './Route';
 import Block from './Block';
 
-export default class Router {
+class Router {
   static __instance: unknown;
 
   routes: Route[] = [];
@@ -28,8 +28,8 @@ export default class Router {
     Router.__instance = this;
   }
 
-  use(pathname: string, block: Block, props: Record<string, unknown> = {}) {
-    const route = new Route(pathname, block, props, this._rootQuery);
+  use(pathname: string, block: Block) {
+    const route = new Route(pathname, block, this._rootQuery);
 
     this.routes.push(route);
 
@@ -59,7 +59,12 @@ export default class Router {
   }
 
   go(pathname: string) {
-    this.history?.pushState({}, '', pathname);
+    this.history?.pushState({ }, '', pathname);
+    this._onRoute(pathname);
+  }
+
+  replace(pathname: string) {
+    this.history?.replaceState({ url: window.location.pathname }, '', pathname);
     this._onRoute(pathname);
   }
 
@@ -75,3 +80,6 @@ export default class Router {
     return this.routes.find((route) => route.match(pathname));
   }
 }
+
+const router = new Router('#app');
+export default router;

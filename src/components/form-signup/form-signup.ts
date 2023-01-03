@@ -4,6 +4,8 @@ import { Block } from '../../core';
 import Button from '../button';
 import Input from '../input';
 import InputError from '../input-error';
+import ButtonSwitchPage from '../button-switch-page';
+import router from '../../core/Router';
 
 type FormSignupProps = {
   events: Record<string, (e: Event) => void>
@@ -123,6 +125,12 @@ export class FormSignup extends Block {
     this.children.button = new Button({
       type: 'submit',
       content: 'Зарегистрироваться',
+    });
+    this.children['button-switch-page'] = new ButtonSwitchPage({
+      content: 'Войти',
+      events: {
+        click: () => router.go('/'),
+      },
     });
   }
 

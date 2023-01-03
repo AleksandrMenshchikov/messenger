@@ -17,13 +17,3 @@
   pointer-events: none;
   transition: 0.3s ease all;
 }
-
-.link {
-  text-decoration: none;
-  display: block;
-  margin: 14px auto 0;
-  color: var(--color-blue);
-  font-size: 1.2rem;
-  cursor: pointer;
-  width: fit-content;
-}

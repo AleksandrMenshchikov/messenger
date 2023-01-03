@@ -1,0 +1,10 @@
+.button-switch {
+  display: block;
+  margin: 14px auto 0;
+  color: var(--color-blue);
+  font-size: 1.2rem;
+  cursor: pointer;
+  width: fit-content;
+  background: transparent;
+  border: none;
+}

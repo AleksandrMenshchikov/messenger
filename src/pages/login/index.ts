@@ -3,7 +3,7 @@ import template from './index.hbs';
 import { Block } from '../../core';
 import FormLogin from '../../components/form-login';
 
-export default class LoginPage extends Block {
+class LoginPage extends Block {
   initChildren(): void {
     this.children['form-login'] = new FormLogin({
       events: {
@@ -31,3 +31,6 @@ export default class LoginPage extends Block {
     return this.compile(template, { });
   }
 }
+
+const loginPage = new LoginPage();
+export default loginPage;
