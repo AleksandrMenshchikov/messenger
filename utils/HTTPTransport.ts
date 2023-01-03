@@ -7,9 +7,9 @@ const enum METHODS {
 
 type Options = {
   headers?: {[x:string]: string}
-  method: string;
+  method?: string;
   data?: {[x: string]: unknown};
-  timeout: 5000
+  timeout?: 5000
 };
 
 function queryStringify(data: {[x: string]: unknown}) {
@@ -21,27 +21,33 @@ function queryStringify(data: {[x: string]: unknown}) {
   return keys.reduce((result, key, index) => `${result}${key}=${data && data[key]}${index < keys.length - 1 ? '&' : ''}`, '?');
 }
 
-class HTTPTransport {
+export default class HTTPTransport {
+  private _baseURL: string;
+
+  constructor(baseURL: string) {
+    this._baseURL = baseURL;
+  }
+
   get = (url: string, options: Options) => this.request(
-    url,
+    `${this._baseURL}${url}`,
     { ...options, method: METHODS.GET },
     options.timeout,
   );
 
   post = (url: string, options: Options) => this.request(
-    url,
+    `${this._baseURL}${url}`,
     { ...options, method: METHODS.POST },
     options.timeout,
   );
 
   put = (url: string, options: Options) => this.request(
-    url,
+    `${this._baseURL}${url}`,
     { ...options, method: METHODS.PUT },
     options.timeout,
   );
 
   delete = (url: string, options:Options) => this.request(
-    url,
+    `${this._baseURL}${url}`,
     { ...options, method: METHODS.DELETE },
     options.timeout,
   );
@@ -83,6 +89,3 @@ class HTTPTransport {
     });
   };
 }
-
-const httpTransport = new HTTPTransport();
-export default httpTransport;

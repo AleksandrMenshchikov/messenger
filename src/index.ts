@@ -6,6 +6,7 @@ import messengerPage from './pages/messenger';
 import loginPage from './pages/login';
 import serverErrorPage from './pages/500';
 import notFoundPage from './pages/404';
+import httpTransport from '../utils/HTTPTransport';
 
 document.addEventListener('DOMContentLoaded', () => {
   let _404 = '/404';
