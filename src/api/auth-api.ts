@@ -17,6 +17,15 @@ class AuthApi extends BaseAPI {
     return httpTransport.get(URLs['https://ya-praktikum.tech/api/v2/auth/user'], {});
   }
 
+  get(obj: Record<string, unknown>) {
+    return httpTransport.post(URLs['https://ya-praktikum.tech/api/v2/auth/signin'], {
+      headers: {
+        'content-type': 'application/json', // Данные отправляем в формате JSON
+      },
+      data: obj,
+    });
+  }
+
   delete() {
     return httpTransport.post(URLs['https://ya-praktikum.tech/api/v2/auth/logout'], {});
   }

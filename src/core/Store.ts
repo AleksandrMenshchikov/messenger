@@ -10,7 +10,7 @@ class Store extends EventBus {
   private state: Record<string, any> = {
     button: {
       type: 'submit',
-      content: 'Зарегистрироваться',
+      content: '',
     },
     formMessageError: {
       content: '',

@@ -2,6 +2,7 @@ import './index.css';
 import template from './index.hbs';
 import { Block } from '../../core';
 import FormLogin from '../../components/form-login';
+import loginController from '../../controllers/login-controller';
 
 class LoginPage extends Block {
   initChildren(): void {
@@ -19,7 +20,7 @@ class LoginPage extends Block {
           });
           if (form.checkValidity()) {
             const obj = { login: form.login.value, password: form.password.value };
-            console.log(obj);
+            loginController.getUser(obj);
           }
         },
       },
