@@ -1,6 +1,6 @@
 import isEqual from '../../utils/isEqual';
-import { Block } from '../core';
-import store, { StoreEvents } from '../core/Store';
+import Block from './Block';
+import store, { StoreEvents } from './Store';
 
 type Indexed<T = unknown> = {
   [key in string]: T;

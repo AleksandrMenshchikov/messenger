@@ -64,7 +64,7 @@ class Router {
   }
 
   replace(pathname: string) {
-    this.history?.replaceState({ url: window.location.pathname }, '', pathname);
+    this.history?.replaceState({ }, '', pathname);
     this._onRoute(pathname);
   }
 
