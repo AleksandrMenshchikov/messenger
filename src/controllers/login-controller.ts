@@ -10,8 +10,17 @@ class LoginController {
     const timer = setTimeout(() => {
       authApi.get(obj).then((res) => {
         if ((res as XMLHttpRequest).status === 200) {
-          store.set('user', JSON.parse((res as XMLHttpRequest).response));
-          router.replace('/messenger');
+          authApi.request().then((res) => {
+            if ((res as XMLHttpRequest).status === 200) {
+              store.set('user', JSON.parse((res as XMLHttpRequest).response));
+              router.replace('/messenger');
+            }
+          }).catch((err) => {
+            store.set('formMessageError', { content: 'Что-то пошло не так:(' });
+            throw new Error(err);
+          }).finally(() => {
+            store.set('button.content', 'Зарегистрироваться');
+          });
         } else {
           store.set('formMessageError', { content: JSON.parse((res as XMLHttpRequest).response).reason });
         }
