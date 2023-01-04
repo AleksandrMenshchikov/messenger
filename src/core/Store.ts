@@ -8,6 +8,7 @@ export enum StoreEvents {
 // наследуем Store от EventBus, чтобы его методы были сразу доступны у экземпляра Store
 class Store extends EventBus {
   private state: Record<string, any> = {
+    isLoggedIn: false,
     button: {
       type: 'submit',
       content: '',
