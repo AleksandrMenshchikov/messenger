@@ -2,8 +2,19 @@ import './index.css';
 import template from './index.hbs';
 import { Block } from '../../core';
 import FormSignup from '../../components/form-signup';
+import signupController from '../../controllers/signup-controller';
+import store, { StoreEvents } from '../../core/Store';
 
 class SignupPage extends Block {
+  constructor() {
+    super();
+    // подписываемся на событие
+    store.on(StoreEvents.Updated, () => {
+      // вызываем обновление компонента, передав данные из хранилища
+      console.log(store.getState());
+    });
+  }
+
   initChildren(): void {
     this.children['form-signup'] = new FormSignup({
       events: {
@@ -33,7 +44,7 @@ class SignupPage extends Block {
               phone: form.phone.value,
               password: form.password.value,
             };
-            console.log(obj);
+            signupController.createUser(obj);
           }
         },
       },

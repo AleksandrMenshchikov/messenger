@@ -1,23 +1,43 @@
-function isObject(object: any) {
-  return object != null && typeof object === 'object';
+/* eslint-disable no-continue */
+/* eslint-disable no-restricted-syntax */
+type PlainObject<T = any> = {
+    [k in string]: T;
+};
+
+function isPlainObject(value: unknown): value is PlainObject {
+  return typeof value === 'object'
+        && value !== null
+        && value.constructor === Object
+        && Object.prototype.toString.call(value) === '[object Object]';
 }
 
-function isEqual(a: object, b: object): boolean {
-  const keys1 = Object.keys(a);
-  const keys2 = Object.keys(b);
-  if (keys1.length !== keys2.length) {
+function isArray(value: unknown): value is [] {
+  return Array.isArray(value);
+}
+
+function isArrayOrObject(value: unknown): value is [] | PlainObject {
+  return isPlainObject(value) || isArray(value);
+}
+
+function isEqual(lhs: PlainObject, rhs: PlainObject) {
+  if (Object.keys(lhs).length !== Object.keys(rhs).length) {
     return false;
   }
-  // eslint-disable-next-line no-restricted-syntax
-  for (const key of keys1) {
-    const val1 = a[key as keyof object];
-    const val2 = b[key as keyof object];
-    const areObjects = isObject(a[key as keyof object]) && isObject(b[key as keyof object]);
-    if ((areObjects && !isEqual(val1, val2)) || (!areObjects && val1 !== val2)
-    ) {
+
+  for (const [key, value] of Object.entries(lhs)) {
+    const rightValue = rhs[key];
+    if (isArrayOrObject(value) && isArrayOrObject(rightValue)) {
+      if (isEqual(value, rightValue)) {
+        continue;
+      }
+      return false;
+    }
+
+    if (value !== rightValue) {
       return false;
     }
   }
+
   return true;
 }
 

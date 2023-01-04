@@ -21,33 +21,27 @@ function queryStringify(data: {[x: string]: unknown}) {
   return keys.reduce((result, key, index) => `${result}${key}=${data && data[key]}${index < keys.length - 1 ? '&' : ''}`, '?');
 }
 
-export default class HTTPTransport {
-  private _baseURL: string;
-
-  constructor(baseURL: string) {
-    this._baseURL = baseURL;
-  }
-
-  get = (url: string, options: Options) => this.request(
-    `${this._baseURL}${url}`,
+class HTTPTransport {
+  get = (_url: string, options: Options) => this.request(
+    _url,
     { ...options, method: METHODS.GET },
     options.timeout,
   );
 
-  post = (url: string, options: Options) => this.request(
-    `${this._baseURL}${url}`,
+  post = (_url: string, options: Options) => this.request(
+    _url,
     { ...options, method: METHODS.POST },
     options.timeout,
   );
 
-  put = (url: string, options: Options) => this.request(
-    `${this._baseURL}${url}`,
+  put = (_url: string, options: Options) => this.request(
+    _url,
     { ...options, method: METHODS.PUT },
     options.timeout,
   );
 
-  delete = (url: string, options:Options) => this.request(
-    `${this._baseURL}${url}`,
+  delete = (_url: string, options:Options) => this.request(
+    _url,
     { ...options, method: METHODS.DELETE },
     options.timeout,
   );
@@ -66,7 +60,7 @@ export default class HTTPTransport {
       const isGet = method === METHODS.GET;
 
       xhr.open(method, isGet && !!data ? `${url}${queryStringify(data)}` : url);
-
+      xhr.withCredentials = true;
       Object.keys(headers).forEach((key) => {
         xhr.setRequestHeader(key, headers[key]);
       });
@@ -89,3 +83,6 @@ export default class HTTPTransport {
     });
   };
 }
+
+const httpTransport = new HTTPTransport();
+export default httpTransport;
