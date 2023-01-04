@@ -7,6 +7,7 @@ import InputError from '../input-error';
 import ButtonSwitchPage from '../button-switch-page';
 import router from '../../core/Router';
 import FormMessageError from '../../hoc/withFormMessageError';
+import store from '../../core/Store';
 
 type FormSignupProps = {
   events: Record<string, (e: Event) => void>
@@ -124,11 +125,15 @@ export class FormSignup extends Block {
     this.children['input-error-password'] = new InputError({ content: 'Введите пароль (от 8 до 40 символов, обязательно хотя бы одна заглавная буква и цифра).' });
     this.children['input-error-password-confirm'] = new InputError({ content: 'Введите ещё раз пароль.' });
     this.children['form-message-error'] = new FormMessageError({});
-    this.children.button = new Button({});
+    this.children.button = new Button({ type: 'submit', content: 'Зарегистрироваться' });
     this.children['button-switch-page'] = new ButtonSwitchPage({
       content: 'Войти',
       events: {
-        click: () => router.go('/'),
+        click: () => {
+          store.set('button.content', 'Авторизоваться');
+          store.set('formMessageError.content', '');
+          router.go('/');
+        },
       },
     });
   }

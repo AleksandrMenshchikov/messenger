@@ -1,11 +1,13 @@
 import './form-login.css';
 import template from './form-login.hbs';
 import { Block } from '../../core';
-import Button from '../button';
+import Button from '../../hoc/withButton';
 import InputError from '../input-error';
 import Input from '../input';
 import ButtonSwitchPage from '../button-switch-page';
 import router from '../../core/Router';
+import FormMessageError from '../../hoc/withFormMessageError';
+import store from '../../core/Store';
 
 type FormLoginProps ={
   events: Record<string, (e: Event) => void>
@@ -38,16 +40,6 @@ export class FormLogin extends Block {
         this.handleInputFocusBlur(e);
       },
     };
-    this.children.button = new Button({
-      type: 'submit',
-      content: 'Авторизоваться',
-    });
-    this.children['button-switch-page'] = new ButtonSwitchPage({
-      content: 'Нет аккаунта?',
-      events: {
-        click: () => router.go('/signup'),
-      },
-    });
     this.children['input-login'] = new Input({
       id: 'login',
       classValue: 'input',
@@ -69,6 +61,18 @@ export class FormLogin extends Block {
       maxLength: '40',
       pattern: '^(?=.*[A-Z])(?=.*[0-9])\\S*$',
       events,
+    });
+    this.children['form-message-error'] = new FormMessageError({});
+    this.children.button = new Button({});
+    this.children['button-switch-page'] = new ButtonSwitchPage({
+      content: 'Нет аккаунта?',
+      events: {
+        click: () => {
+          store.set('button.content', 'Зарегистрироваться');
+          store.set('formMessageError.content', '');
+          router.go('/signup');
+        },
+      },
     });
     this.children['input-error-login'] = new InputError({ content: 'Введите логин (от 3 до 20 символов, латиница, может содержать цифры, но не состоять из них, без пробелов, без спецсимволов, допустимы дефис и нижнее подчёркивание).' });
     this.children['input-error-password'] = new InputError({ content: 'Введите пароль (от 8 до 40 символов, обязательно хотя бы одна заглавная буква и цифра).' });

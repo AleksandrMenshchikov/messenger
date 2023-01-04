@@ -6,6 +6,7 @@ import messengerPage from './pages/messenger';
 import loginPage from './pages/login';
 import serverErrorPage from './pages/500';
 import notFoundPage from './pages/404';
+import store from './core/Store';
 
 document.addEventListener('DOMContentLoaded', () => {
   let _404 = '/404';
@@ -19,5 +20,18 @@ document.addEventListener('DOMContentLoaded', () => {
     .use('/messenger', messengerPage)
     .use(_404, notFoundPage)
     .use('/500', serverErrorPage)
-    .start();
+    .start(() => {
+      store.set('formMessageError.content', '');
+      if (window.location.pathname === '/') {
+        store.set('button.content', 'Авторизоваться');
+      } else if (window.location.pathname === '/signup') {
+        store.set('button.content', 'Зарегистрироваться');
+      }
+    });
+
+  if (window.location.pathname === '/') {
+    store.set('button.content', 'Авторизоваться');
+  } else if (window.location.pathname === '/signup') {
+    store.set('button.content', 'Зарегистрироваться');
+  }
 });
