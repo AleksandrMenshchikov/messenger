@@ -3,6 +3,7 @@ import template from './index.hbs';
 import { Block } from '../../core';
 import FormSettings from '../../components/form-settings';
 import ProfileArrow from '../../components/profile-arrow';
+import router from '../../core/Router';
 
 const arrowLeft: URL = new URL(
   '../../../assets/arrowLeft.svg',
@@ -49,7 +50,7 @@ class SettingsPage extends Block {
       arrow: arrowLeft,
       events: {
         click: () => {
-          console.log('click profile-arrow-left');
+          router.back();
         },
       },
     });

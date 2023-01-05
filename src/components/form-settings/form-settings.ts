@@ -7,6 +7,7 @@ import ButtonExit from '../button-exit';
 import Input from '../input';
 import InputError from '../input-error';
 import ButtonAvatar from '../button-avatar';
+import logoutController from '../../controllers/logout-controller';
 
 const avatar: URL = new URL(
   '../../../assets/avatar.svg',
@@ -79,7 +80,11 @@ export class FormSettings extends Block {
         },
       },
     });
-    this.children['button-exit'] = new ButtonExit({});
+    this.children['button-exit'] = new ButtonExit({
+      events: {
+        click: () => logoutController.logout(),
+      },
+    });
     this.children['input-email'] = new Input({
       id: 'email',
       classValue: 'profile__input',

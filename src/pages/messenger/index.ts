@@ -6,6 +6,7 @@ import Clip from '../../components/clip';
 import Dots from '../../components/dots';
 import ButtonOpenProfile from '../../components/button-open-profile';
 import ProfileArrow from '../../components/profile-arrow';
+import router from '../../core/Router';
 
 const foto: URL = new URL(
   '../../../assets/foto.svg',
@@ -62,7 +63,7 @@ class MessengerPage extends Block {
     this.children['button-open-profile'] = new ButtonOpenProfile({
       events: {
         click: () => {
-          console.log('click button-open-profile');
+          router.go('/settings');
         },
       },
     });
