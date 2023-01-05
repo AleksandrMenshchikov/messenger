@@ -8,6 +8,7 @@ import Input from '../input';
 import InputError from '../input-error';
 import ButtonAvatar from '../button-avatar';
 import logoutController from '../../controllers/logout-controller';
+import { ProfileTitle } from '../profile-title/profile-title';
 
 const avatar: URL = new URL(
   '../../../assets/avatar.svg',
@@ -55,6 +56,7 @@ export class FormSettings extends Block {
     };
     this.children.button = new Button({ type: 'submit', content: 'Сохранить' });
     this.children['button-avatar'] = new ButtonAvatar({ avatar, events: { click: () => (this.props.onClickButtonAvatar as (e?: Event)=> void)() } });
+    this.children['profile-title'] = new ProfileTitle({ content: 'SQsqsq' });
     this.children['button-profile-1'] = new ButtonProfile({
       content: 'Изменить данные',
       events: {
