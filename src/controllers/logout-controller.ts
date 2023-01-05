@@ -8,6 +8,7 @@ class LogoutController {
     authApi.delete().then((res) => {
       if ((res as XMLHttpRequest).response === 'OK') {
         store.set('isLoggedIn', false);
+        store.set('button.content', 'Авторизоваться');
         router.replace('/');
       }
     }).catch((err) => console.log(err));
