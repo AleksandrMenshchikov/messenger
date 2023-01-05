@@ -129,6 +129,17 @@ export class FormSettings extends Block {
       pattern: '^[A-ZА-ЯЁ]+[a-zA-Zа-яА-ЯЁё-]*$',
       events,
     });
+    this.children['input-display-name'] = new Input({
+      id: 'display_name',
+      classValue: 'profile__input',
+      type: 'text',
+      name: 'display_name',
+      autocomplete: 'off',
+      minLength: '1',
+      maxLength: '100',
+      pattern: '^[A-ZА-ЯЁ]+[a-zA-Zа-яА-ЯЁё-]*$',
+      events,
+    });
     this.children['input-phone'] = new Input({
       id: 'phone',
       classValue: 'profile__input',
@@ -177,6 +188,7 @@ export class FormSettings extends Block {
     this.children['input-login'].getContent().value = 'ivanivanov';
     this.children['input-first-name'].getContent().value = 'Иван';
     this.children['input-second-name'].getContent().value = 'Иванов';
+    this.children['input-display-name'].getContent().value = 'Иван';
     this.children['input-phone'].getContent().value = '+79099673030';
     this.children['input-password-old'].getContent().value = '111111QW';
 
@@ -184,6 +196,7 @@ export class FormSettings extends Block {
     this.children['input-error-login'] = new InputError({ content: 'Введите логин (от 3 до 20 символов, латиница, может содержать цифры, но не состоять из них, без пробелов, без спецсимволов, допустимы дефис и нижнее подчёркивание).' });
     this.children['input-error-first-name'] = new InputError({ content: 'Введите имя (латиница или кириллица, первая буква должна быть заглавной, без пробелов и без цифр, нет спецсимволов, допустим только дефис).' });
     this.children['input-error-second-name'] = new InputError({ content: 'Введите фамилию (латиница или кириллица, первая буква должна быть заглавной, без пробелов и без цифр, нет спецсимволов, допустим только дефис).' });
+    this.children['input-error-display-name'] = new InputError({ content: 'Введите имя (латиница или кириллица, первая буква должна быть заглавной, без пробелов и без цифр, нет спецсимволов, допустим только дефис).' });
     this.children['input-error-phone'] = new InputError({ content: 'Введите телефон (от 10 до 15 символов, состоит из цифр, может начинается с плюса).' });
     this.children['input-error-password-old'] = new InputError({ content: 'Введите старый пароль (от 8 до 40 символов, обязательно хотя бы одна заглавная буква и цифра).' });
     this.children['input-error-password'] = new InputError({ content: 'Введите новый пароль (от 8 до 40 символов, обязательно хотя бы одна заглавная буква и цифра).' });
