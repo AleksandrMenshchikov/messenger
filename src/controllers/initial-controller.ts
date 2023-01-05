@@ -20,6 +20,13 @@ class InitialController {
         if ((res as XMLHttpRequest).status === 200) {
           store.set('isLoggedIn', true);
           store.set('user', JSON.parse((res as XMLHttpRequest).response));
+          const state = store.getState();
+          store.set('profileInputEmail.value', state.user.email);
+          store.set('profileInputLogin.value', state.user.login);
+          store.set('profileInputFirstName.value', state.user.first_name);
+          store.set('profileInputSecondName.value', state.user.second_name);
+          store.set('profileInputDisplayName.value', String(state.user.display_name));
+          store.set('profileInputPhone.value', state.user.phone);
         }
       }).catch((err) => {
         console.log(err);

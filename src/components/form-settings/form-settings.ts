@@ -4,11 +4,17 @@ import { Block } from '../../core';
 import ButtonProfile from '../button-profile';
 import Button from '../button';
 import ButtonExit from '../button-exit';
-import Input from '../input';
+import ProfileInputEmail from '../../hoc/withProfileInputEmail';
+import ProfileInputLogin from '../../hoc/withProfileInputLogin';
+import ProfileInputFirstName from '../../hoc/withProfileInputFirstName';
+import ProfileInputSecondName from '../../hoc/withProfileInputSecondName';
+import ProfileInputDisplayName from '../../hoc/withProfileInputDisplayName';
+import ProfileInputPhone from '../../hoc/withProfileInputPhone';
 import InputError from '../input-error';
 import ButtonAvatar from '../button-avatar';
 import logoutController from '../../controllers/logout-controller';
 import { ProfileTitle } from '../profile-title/profile-title';
+import Input from '../input';
 
 const avatar: URL = new URL(
   '../../../assets/avatar.svg',
@@ -29,7 +35,6 @@ export class FormSettings extends Block {
   constructor(props: FormSettingsProps) {
     super(props);
     this.profileData = this.element.querySelector('.profile-data') as HTMLElement;
-    this.profileData.querySelectorAll('input').forEach((elem) => { elem.setAttribute('disabled', 'true'); });
     this.profilePasswords = this.element.querySelector('.profile-passwords') as HTMLElement;
     this.profilePasswords.style.display = 'none';
   }
@@ -87,7 +92,7 @@ export class FormSettings extends Block {
         click: () => logoutController.logout(),
       },
     });
-    this.children['input-email'] = new Input({
+    this.children['input-email'] = new ProfileInputEmail({
       id: 'email',
       classValue: 'profile__input',
       type: 'email',
@@ -98,7 +103,7 @@ export class FormSettings extends Block {
       pattern: '^[a-zA-Z]+[a-zA-Z0-9-._]*@[a-zA-Z]+\\.[a-zA-Z]+$',
       events,
     });
-    this.children['input-login'] = new Input({
+    this.children['input-login'] = new ProfileInputLogin({
       id: 'login',
       classValue: 'profile__input',
       type: 'text',
@@ -109,7 +114,7 @@ export class FormSettings extends Block {
       pattern: '^(?=.*[a-zA-Z])(?:.*[a-zA-Z0-9-_])$',
       events,
     });
-    this.children['input-first-name'] = new Input({
+    this.children['input-first-name'] = new ProfileInputFirstName({
       id: 'first_name',
       classValue: 'profile__input',
       type: 'text',
@@ -120,7 +125,7 @@ export class FormSettings extends Block {
       pattern: '^[A-ZА-ЯЁ]+[a-zA-Zа-яА-ЯЁё-]*$',
       events,
     });
-    this.children['input-second-name'] = new Input({
+    this.children['input-second-name'] = new ProfileInputSecondName({
       id: 'second_name',
       classValue: 'profile__input',
       type: 'text',
@@ -131,7 +136,7 @@ export class FormSettings extends Block {
       pattern: '^[A-ZА-ЯЁ]+[a-zA-Zа-яА-ЯЁё-]*$',
       events,
     });
-    this.children['input-display-name'] = new Input({
+    this.children['input-display-name'] = new ProfileInputDisplayName({
       id: 'display_name',
       classValue: 'profile__input',
       type: 'text',
@@ -142,7 +147,7 @@ export class FormSettings extends Block {
       pattern: '^[A-ZА-ЯЁ]+[a-zA-Zа-яА-ЯЁё-]*$',
       events,
     });
-    this.children['input-phone'] = new Input({
+    this.children['input-phone'] = new ProfileInputPhone({
       id: 'phone',
       classValue: 'profile__input',
       type: 'tel',
@@ -186,7 +191,7 @@ export class FormSettings extends Block {
       pattern: '^(?=.*[A-Z])(?=.*[0-9])\\S*$',
       events,
     });
-    this.children['input-email'].getContent().value = 'pochta@yandex.ru';
+
     this.children['input-login'].getContent().value = 'ivanivanov';
     this.children['input-first-name'].getContent().value = 'Иван';
     this.children['input-second-name'].getContent().value = 'Иванов';

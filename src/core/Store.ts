@@ -16,6 +16,24 @@ class Store extends EventBus {
     formMessageError: {
       content: '',
     },
+    profileInputEmail: {
+      value: '',
+    },
+    profileInputLogin: {
+      value: '',
+    },
+    profileInputFirstName: {
+      value: '',
+    },
+    profileInputSecondName: {
+      value: '',
+    },
+    profileInputDisplayName: {
+      value: '',
+    },
+    profileInputPhone: {
+      value: '',
+    },
   };
 
   public getState() {
