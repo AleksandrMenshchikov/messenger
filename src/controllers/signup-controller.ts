@@ -12,12 +12,13 @@ class SignupController {
         if ((res as XMLHttpRequest).status === 200) {
           authApi.request().then((res) => {
             if ((res as XMLHttpRequest).status === 200) {
+              store.set('isLoggedIn', true);
               store.set('user', JSON.parse((res as XMLHttpRequest).response));
               router.replace('/messenger');
             }
           }).catch((err) => {
             store.set('formMessageError', { content: 'Что-то пошло не так:(' });
-            throw new Error(err);
+            console.log(err);
           }).finally(() => {
             store.set('button.content', 'Зарегистрироваться');
           });
@@ -26,7 +27,7 @@ class SignupController {
         }
       }).catch((err) => {
         store.set('formMessageError', { content: 'Что-то пошло не так:(' });
-        throw new Error(err);
+        console.log(err);
       }).finally(() => {
         store.set('button.content', 'Зарегистрироваться');
       });

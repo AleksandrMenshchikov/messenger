@@ -7,8 +7,10 @@ import loginPage from './pages/login';
 import serverErrorPage from './pages/500';
 import notFoundPage from './pages/404';
 import store from './core/Store';
+import initialController from './controllers/initial-controller';
 
 document.addEventListener('DOMContentLoaded', () => {
+  initialController.getUser();
   let _404 = '/404';
   if (!['/', '/signup', '/settings', '/messenger'].includes(window.location.pathname)) {
     _404 = window.location.pathname !== '/500' ? window.location.pathname : '/404';
