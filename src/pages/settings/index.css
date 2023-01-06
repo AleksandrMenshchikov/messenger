@@ -23,41 +23,6 @@
   opacity: 1;
 }
 
-.modal-profile-avatar__wrapper {
-  background: var(--color-white);
-  box-shadow: 0 0 6px var(--box-shadow);
-  border-radius: 12px;
-  padding: 40px 30px;
-  width: 340px;
-}
-
-.modal-profile-avatar__title {
-  margin: 0 auto 40px;
-  font-weight: 500;
-  font-size: 1.5rem;
-  color: var(--color-black);
-  text-align: center;
-}
-
-.modal-profile-avatar__label {
-  display: block;
-  font-weight: 500;
-  font-size: 1.2rem;
-  text-align: center;
-  text-decoration-line: underline;
-  color: var(--color-blue);
-  cursor: pointer;
-  width: 122px;
-  margin: auto;
-}
-
-.modal-profile-avatar__input {
-  display: block;
-  width: 0;
-  height: 0;
-  overflow: hidden;
-}
-
 .modal-profile-avatar__button {
   margin-top: 40px;
   width: 100%;

@@ -37,6 +37,12 @@ class Store extends EventBus {
     profileTitle: {
       content: '',
     },
+    labelFile: {
+      content: '',
+    },
+    modalProfileAvatarTitle: {
+      content: '',
+    },
   };
 
   public getState() {

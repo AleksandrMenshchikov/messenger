@@ -4,6 +4,8 @@ import { Block } from '../../core';
 import FormSettings from '../../components/form-settings';
 import ProfileArrow from '../../components/profile-arrow';
 import router from '../../core/Router';
+import store from '../../core/Store';
+import FormAvatar from '../../components/form-avatar';
 
 const arrowLeft: URL = new URL(
   '../../../assets/arrowLeft.svg',
@@ -17,12 +19,15 @@ class SettingsPage extends Block {
 
   modalProfileAvatar: HTMLElement;
 
+  inputAvatar: HTMLInputElement;
+
   constructor({
     arrowLeft,
   }: Record<string, URL>) {
     super({
       arrowLeft,
     });
+    this.inputAvatar = (this.element.querySelector('.form-avatar') as HTMLFormElement).avatar;
     this.modalProfileAvatar = this.element.querySelector('.modal-profile-avatar') as HTMLElement;
     this.profileData = this.element.querySelector('.profile-data') as HTMLElement;
     this.profileData.querySelectorAll('input').forEach((elem) => { elem.setAttribute('disabled', 'true'); });
@@ -54,8 +59,18 @@ class SettingsPage extends Block {
         },
       },
     });
+    this.children['form-avatar'] = new FormAvatar({
+      events: {
+        submit: (e) => {
+          e.preventDefault();
+        },
+      },
+    });
     this.children['form-settings'] = new FormSettings({
       onClickButtonAvatar: () => {
+        this.inputAvatar.value = '';
+        store.set('labelFile.content', 'Выбрать файл на компьютере');
+        store.set('modalProfileAvatarTitle.content', 'Загрузите файл');
         this.element.style.height = '100vh';
         this.element.style.overflow = 'hidden';
         this.modalProfileAvatar.classList.add('modal-profile-avatar_active');

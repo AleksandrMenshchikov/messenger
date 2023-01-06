@@ -1,0 +1,11 @@
+.modal-profile-avatar__label {
+  display: block;
+  font-weight: 500;
+  font-size: 1.2rem;
+  text-align: center;
+  text-decoration-line: underline;
+  color: var(--color-blue);
+  cursor: pointer;
+  width: 122px;
+  margin: auto auto 40px;
+}
