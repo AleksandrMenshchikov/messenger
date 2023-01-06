@@ -7,7 +7,7 @@ class AuthApi extends BaseAPI {
   create(obj: Record<string, unknown>) {
     return httpTransport.post(URLs['https://ya-praktikum.tech/api/v2/auth/signup'], {
       headers: {
-        'content-type': 'application/json', // Данные отправляем в формате JSON
+        'content-type': 'application/json',
       },
       data: obj,
     });
@@ -20,7 +20,7 @@ class AuthApi extends BaseAPI {
   get(obj: Record<string, unknown>) {
     return httpTransport.post(URLs['https://ya-praktikum.tech/api/v2/auth/signin'], {
       headers: {
-        'content-type': 'application/json', // Данные отправляем в формате JSON
+        'content-type': 'application/json',
       },
       data: obj,
     });

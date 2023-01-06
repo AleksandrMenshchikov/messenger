@@ -7,6 +7,7 @@ import router from '../../core/Router';
 import store from '../../core/Store';
 import FormAvatar from '../../components/form-avatar';
 import avatarController from '../../controllers/avatar-controller';
+import profileController from '../../controllers/profile-controller';
 
 const arrowLeft: URL = new URL(
   '../../../assets/arrowLeft.svg',
@@ -113,7 +114,7 @@ class SettingsPage extends Block {
                 display_name: form.display_name.value,
                 phone: form.phone.value,
               };
-              console.log(obj);
+              profileController.updateProfile(obj);
             }
           } else {
             this.profilePasswords.querySelectorAll('input').forEach((elem) => {

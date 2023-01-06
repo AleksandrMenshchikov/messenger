@@ -60,6 +60,9 @@ class Store extends EventBus {
     buttonFormAvatar: {
       content: '',
     },
+    buttonProfile: {
+      content: '',
+    },
   };
 
   public getState() {

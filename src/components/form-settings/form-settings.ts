@@ -2,7 +2,7 @@ import './form-settings.css';
 import template from './form-settings.hbs';
 import { Block } from '../../core';
 import ButtonProfile from '../button-profile';
-import Button from '../button';
+import ButtonProfileSubmit from '../../hoc/withButtonProfile';
 import ButtonExit from '../button-exit';
 import ProfileInputEmail from '../../hoc/withProfileInputEmail';
 import ProfileInputLogin from '../../hoc/withProfileInputLogin';
@@ -15,6 +15,7 @@ import InputError from '../input-error';
 import ButtonAvatar from '../button-avatar';
 import logoutController from '../../controllers/logout-controller';
 import Input from '../input';
+import store from '../../core/Store';
 
 type FormSettingsProps = {
   events: Record<string, (e: Event) => void>
@@ -54,13 +55,14 @@ export class FormSettings extends Block {
         this.handleInputFocusBlur(e);
       },
     };
-    this.children.button = new Button({ type: 'submit', content: 'Сохранить' });
+    this.children.button = new ButtonProfileSubmit({ type: 'submit' });
     this.children['button-avatar'] = new ButtonAvatar({ events: { click: () => (this.props.onClickButtonAvatar as (e?: Event)=> void)() } });
     this.children['profile-title'] = new ProfileTitle({});
     this.children['button-profile-1'] = new ButtonProfile({
       content: 'Изменить данные',
       events: {
         click: () => {
+          store.set('buttonProfile.content', 'Сохранить');
           this.profileData.querySelectorAll('input').forEach((elem) => { elem.removeAttribute('disabled'); });
           this.children['button-profile-1'].hide();
           this.children['button-profile-2'].hide();

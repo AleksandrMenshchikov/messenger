@@ -1,4 +1,5 @@
 /* eslint-disable class-methods-use-this */
+import httpTransport from '../../utils/HTTPTransport';
 import BaseAPI from './base-api';
 import URLs from './urls';
 
@@ -9,6 +10,15 @@ class UsersApi extends BaseAPI {
       credentials: 'include',
       mode: 'cors',
       body: form,
+    });
+  }
+
+  updateProfile(obj: Record<string, unknown>) {
+    return httpTransport.put(URLs['https://ya-praktikum.tech/api/v2/user/profile'], {
+      headers: {
+        'content-type': 'application/json',
+      },
+      data: obj,
     });
   }
 }

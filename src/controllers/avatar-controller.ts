@@ -18,6 +18,12 @@ class AvatarController {
           store.set('user.avatar', `${URLs.hostAvatar}${data.avatar}`);
           const modalProfileAvatar = document.body.querySelector('.modal-profile-avatar') as HTMLElement;
           modalProfileAvatar.classList.remove('modal-profile-avatar_active');
+          const containerSettings = document.body.querySelector('.container-settings') as HTMLElement;
+          const timer = setTimeout(() => {
+            containerSettings.style.height = 'auto';
+            containerSettings.style.overflow = 'auto';
+            clearTimeout(timer);
+          }, 200);
         })
         .catch((err) => {
           store.set('formAvatarError.content', 'Что-то пошло нет так:(');
