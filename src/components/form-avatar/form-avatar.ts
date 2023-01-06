@@ -6,6 +6,7 @@ import ModalProfileAvatarTitle from '../../hoc/withModalProfileAvatarTitle';
 import LabelFile from '../../hoc/withLabelFile';
 import InputFile from '../input-file';
 import Button from '../button';
+import FormAvatarError from '../../hoc/withFormAvatarError';
 
 type FormAvatarProps ={
   events: Record<string, (e: Event) => void>
@@ -27,10 +28,12 @@ export class FormAvatar extends Block {
         change: (e) => {
           store.set('modalProfileAvatarTitle.content', 'Файл загружен');
           store.set('labelFile.content', (e.target as HTMLInputElement).files?.[0].name);
+          store.set('formAvatarError.content', '');
         },
       },
     });
     this.children.button = new Button({ type: 'submit', content: 'Поменять' });
+    this.children['form-avatar-error'] = new FormAvatarError({});
   }
 
   // eslint-disable-next-line class-methods-use-this

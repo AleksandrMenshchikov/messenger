@@ -2,6 +2,6 @@
   background: var(--color-white);
   box-shadow: 0 0 6px var(--box-shadow);
   border-radius: 12px;
-  padding: 40px 30px;
+  padding: 40px 30px 26px;
   width: 340px;
 }

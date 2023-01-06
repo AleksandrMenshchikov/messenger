@@ -1,0 +1,9 @@
+.form-avatar__error {
+  display: block;
+  color: var(--color-red);
+  font-weight: 500;
+  font-size: 1.2rem;
+  width: 100%;
+  text-align: center;
+  margin-top: 14px;
+}

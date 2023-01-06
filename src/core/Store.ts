@@ -43,6 +43,9 @@ class Store extends EventBus {
     modalProfileAvatarTitle: {
       content: '',
     },
+    formAvatarError: {
+      content: '',
+    },
   };
 
   public getState() {

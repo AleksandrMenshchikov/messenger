@@ -63,6 +63,9 @@ class SettingsPage extends Block {
       events: {
         submit: (e) => {
           e.preventDefault();
+          if (!this.inputAvatar.value) {
+            store.set('formAvatarError.content', 'Нужно выбрать файл');
+          }
         },
       },
     });
@@ -71,6 +74,7 @@ class SettingsPage extends Block {
         this.inputAvatar.value = '';
         store.set('labelFile.content', 'Выбрать файл на компьютере');
         store.set('modalProfileAvatarTitle.content', 'Загрузите файл');
+        store.set('formAvatarError.content', '');
         this.element.style.height = '100vh';
         this.element.style.overflow = 'hidden';
         this.modalProfileAvatar.classList.add('modal-profile-avatar_active');
