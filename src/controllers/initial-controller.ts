@@ -28,7 +28,7 @@ class InitialController {
           store.set('user', JSON.parse((res as XMLHttpRequest).response));
           const state = store.getState();
           if (state.user.avatar) {
-            store.set('user.avatar', `${URLs.host}${state.user.avatar}`);
+            store.set('user.avatar', `${URLs.hostAvatar}${state.user.avatar}`);
           } else {
             store.set('user.avatar', avatarUrl);
           }

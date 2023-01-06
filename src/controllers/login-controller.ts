@@ -1,7 +1,13 @@
 /* eslint-disable class-methods-use-this */
 import authApi from '../api/auth-api';
+import URLs from '../api/urls';
 import router from '../core/Router';
 import store from '../core/Store';
+
+const avatarUrl: URL = new URL(
+  '../../assets/avatar.svg',
+  import.meta.url,
+);
 
 class LoginController {
   getUser(obj: Record<string, unknown>) {
@@ -15,6 +21,11 @@ class LoginController {
               store.set('isLoggedIn', true);
               store.set('user', JSON.parse((res as XMLHttpRequest).response));
               const state = store.getState();
+              if (state.user.avatar) {
+                store.set('user.avatar', `${URLs.hostAvatar}${state.user.avatar}`);
+              } else {
+                store.set('user.avatar', avatarUrl);
+              }
               store.set('profileInputEmail.value', state.user.email);
               store.set('profileInputLogin.value', state.user.login);
               store.set('profileInputFirstName.value', state.user.first_name);

@@ -1,5 +1,5 @@
 enum URLs {
-  host = 'https://ya-praktikum.tech/api/v2',
+  hostAvatar = 'https://ya-praktikum.tech/api/v2/resources',
   'https://ya-praktikum.tech/api/v2/auth/signup' = 'https://ya-praktikum.tech/api/v2/auth/signup',
   'https://ya-praktikum.tech/api/v2/auth/signin' = 'https://ya-praktikum.tech/api/v2/auth/signin',
   'https://ya-praktikum.tech/api/v2/auth/user' = 'https://ya-praktikum.tech/api/v2/auth/user',

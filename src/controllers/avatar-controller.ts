@@ -15,7 +15,7 @@ class AvatarController {
           return Promise.reject(new Error(`${res.status}`));
         })
         .then((data) => {
-          store.set('user.avatar', `${URLs.host}${data.avatar}`);
+          store.set('user.avatar', `${URLs.hostAvatar}${data.avatar}`);
           const modalProfileAvatar = document.body.querySelector('.modal-profile-avatar') as HTMLElement;
           modalProfileAvatar.classList.remove('modal-profile-avatar_active');
         })
