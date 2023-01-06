@@ -105,6 +105,7 @@ class SettingsPage extends Block {
                 login: form.login.value,
                 first_name: form.first_name.value,
                 second_name: form.second_name.value,
+                display_name: form.display_name.value,
                 phone: form.phone.value,
               };
               console.log(obj);
