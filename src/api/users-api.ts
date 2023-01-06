@@ -21,6 +21,15 @@ class UsersApi extends BaseAPI {
       data: obj,
     });
   }
+
+  updatePassword(obj: Record<string, unknown>) {
+    return httpTransport.put(URLs['https://ya-praktikum.tech/api/v2/user/password'], {
+      headers: {
+        'content-type': 'application/json',
+      },
+      data: obj,
+    });
+  }
 }
 
 const usersApi = new UsersApi();

@@ -8,6 +8,7 @@ import store from '../../core/Store';
 import FormAvatar from '../../components/form-avatar';
 import avatarController from '../../controllers/avatar-controller';
 import profileController from '../../controllers/profile-controller';
+import passwordController from '../../controllers/password-controller';
 
 const arrowLeft: URL = new URL(
   '../../../assets/arrowLeft.svg',
@@ -127,11 +128,10 @@ class SettingsPage extends Block {
             });
             if (counterErrors === 0 && form.password.value === form['password-confirm'].value) {
               const obj = {
-                passwordOld: form['password-old'].value,
-                password: form.password.value,
-                passwordNew: form['password-confirm'].value,
+                oldPassword: form['password-old'].value,
+                newPassword: form.password.value,
               };
-              console.log(obj);
+              passwordController.updatePassword(obj);
             } else {
               form['password-confirm'].parentElement?.nextElementSibling?.classList.add('error_active');
             }

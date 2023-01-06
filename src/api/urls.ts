@@ -5,7 +5,8 @@ enum URLs {
   'https://ya-praktikum.tech/api/v2/auth/user' = 'https://ya-praktikum.tech/api/v2/auth/user',
   'https://ya-praktikum.tech/api/v2/auth/logout' = 'https://ya-praktikum.tech/api/v2/auth/logout',
   'https://ya-praktikum.tech/api/v2/user/profile/avatar' = 'https://ya-praktikum.tech/api/v2/user/profile/avatar',
-  'https://ya-praktikum.tech/api/v2/user/profile' = 'https://ya-praktikum.tech/api/v2/user/profile'
+  'https://ya-praktikum.tech/api/v2/user/profile' = 'https://ya-praktikum.tech/api/v2/user/profile',
+  'https://ya-praktikum.tech/api/v2/user/password' = 'https://ya-praktikum.tech/api/v2/user/password'
 }
 
 export default URLs;
