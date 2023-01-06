@@ -75,6 +75,7 @@ export class FormSettings extends Block {
       content: 'Изменить пароль',
       events: {
         click: () => {
+          store.set('buttonProfile.content', 'Сохранить');
           this.profilePasswords.style.display = 'block';
           this.profileData.style.display = 'none';
           this.children['button-profile-1'].hide();
