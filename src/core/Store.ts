@@ -63,6 +63,9 @@ class Store extends EventBus {
     buttonProfile: {
       content: '',
     },
+    passwordError: {
+      content: '',
+    },
   };
 
   public getState() {

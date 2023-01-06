@@ -16,6 +16,7 @@ import ButtonAvatar from '../button-avatar';
 import logoutController from '../../controllers/logout-controller';
 import Input from '../input';
 import store from '../../core/Store';
+import PasswordError from '../../hoc/withPasswordError';
 
 type FormSettingsProps = {
   events: Record<string, (e: Event) => void>
@@ -189,6 +190,7 @@ export class FormSettings extends Block {
       pattern: '^(?=.*[A-Z])(?=.*[0-9])\\S*$',
       events,
     });
+    this.children['password-error'] = new PasswordError({});
 
     this.children['input-error-email'] = new InputError({ content: 'Введите email.' });
     this.children['input-error-login'] = new InputError({ content: 'Введите логин (от 3 до 20 символов, латиница, может содержать цифры, но не состоять из них, без пробелов, без спецсимволов, допустимы дефис и нижнее подчёркивание).' });
