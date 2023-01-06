@@ -35,18 +35,23 @@ class SettingsPage extends Block {
     this.profilePasswords = this.element.querySelector('.profile-passwords') as HTMLElement;
     this.profilePasswords.style.display = 'none';
 
-    this.element.addEventListener('click', (e) => {
-      if (e.target === this.modalProfileAvatar) {
+    const closeModalAvatar = () => {
+      this.modalProfileAvatar.classList.remove('modal-profile-avatar_active');
+      const timer = setTimeout(() => {
         this.element.style.height = 'auto';
         this.element.style.overflow = 'auto';
-        this.modalProfileAvatar.classList.remove('modal-profile-avatar_active');
+        clearTimeout(timer);
+      }, 200);
+    };
+
+    this.element.addEventListener('click', (e) => {
+      if (e.target === this.modalProfileAvatar) {
+        closeModalAvatar();
       }
     });
     this.element.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') {
-        this.element.style.height = 'auto';
-        this.element.style.overflow = 'auto';
-        this.modalProfileAvatar.classList.remove('modal-profile-avatar_active');
+        closeModalAvatar();
       }
     });
   }
