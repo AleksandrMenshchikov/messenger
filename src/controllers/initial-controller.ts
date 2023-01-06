@@ -27,6 +27,7 @@ class InitialController {
           store.set('profileInputSecondName.value', state.user.second_name);
           store.set('profileInputDisplayName.value', String(state.user.display_name));
           store.set('profileInputPhone.value', state.user.phone);
+          store.set('profileTitle.content', String(state.user.display_name));
         }
       }).catch((err) => {
         console.log(err);

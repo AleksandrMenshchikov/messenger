@@ -34,6 +34,9 @@ class Store extends EventBus {
     profileInputPhone: {
       value: '',
     },
+    profileTitle: {
+      content: '',
+    },
   };
 
   public getState() {
