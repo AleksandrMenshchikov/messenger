@@ -187,13 +187,6 @@ export class FormSettings extends Block {
       events,
     });
 
-    this.children['input-login'].getContent().value = 'ivanivanov';
-    this.children['input-first-name'].getContent().value = 'Иван';
-    this.children['input-second-name'].getContent().value = 'Иванов';
-    this.children['input-display-name'].getContent().value = 'Иван';
-    this.children['input-phone'].getContent().value = '+79099673030';
-    this.children['input-password-old'].getContent().value = '111111QW';
-
     this.children['input-error-email'] = new InputError({ content: 'Введите email.' });
     this.children['input-error-login'] = new InputError({ content: 'Введите логин (от 3 до 20 символов, латиница, может содержать цифры, но не состоять из них, без пробелов, без спецсимволов, допустимы дефис и нижнее подчёркивание).' });
     this.children['input-error-first-name'] = new InputError({ content: 'Введите имя (латиница или кириллица, первая буква должна быть заглавной, без пробелов и без цифр, нет спецсимволов, допустим только дефис).' });
