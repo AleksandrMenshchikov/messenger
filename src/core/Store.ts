@@ -1,6 +1,11 @@
 import EventBus from './EventBus';
 import set from '../../utils/set';
 
+const avatarUrl: URL = new URL(
+  '../../assets/avatar.svg',
+  import.meta.url,
+);
+
 export enum StoreEvents {
   Updated = 'updated',
 }
@@ -9,6 +14,17 @@ export enum StoreEvents {
 class Store extends EventBus {
   private state: Record<string, any> = {
     isLoggedIn: false,
+    user: {
+      id: '',
+      login: '',
+      first_name: '',
+      second_name: '',
+      email: '',
+      phone: '',
+      display_name: '',
+      avatar: avatarUrl,
+      status: '',
+    },
     button: {
       type: 'submit',
       content: '',
@@ -44,6 +60,9 @@ class Store extends EventBus {
       content: '',
     },
     formAvatarError: {
+      content: '',
+    },
+    buttonFormAvatar: {
       content: '',
     },
   };

@@ -1,6 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable class-methods-use-this */
 import authApi from '../api/auth-api';
+import URLs from '../api/urls';
 import Loader from '../components/loader';
 import router from '../core/Router';
 import store from '../core/Store';
@@ -21,6 +22,9 @@ class InitialController {
           store.set('isLoggedIn', true);
           store.set('user', JSON.parse((res as XMLHttpRequest).response));
           const state = store.getState();
+          if (state.user.avatar) {
+            store.set('user.avatar', `${URLs.host}${state.user.avatar}`);
+          }
           store.set('profileInputEmail.value', state.user.email);
           store.set('profileInputLogin.value', state.user.login);
           store.set('profileInputFirstName.value', state.user.first_name);
@@ -80,7 +84,7 @@ class InitialController {
         }
       });
       clearTimeout(timer);
-    }, 2000);
+    }, 1000);
   }
 }
 

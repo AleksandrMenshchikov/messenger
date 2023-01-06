@@ -6,6 +6,7 @@ import ProfileArrow from '../../components/profile-arrow';
 import router from '../../core/Router';
 import store from '../../core/Store';
 import FormAvatar from '../../components/form-avatar';
+import avatarController from '../../controllers/avatar-controller';
 
 const arrowLeft: URL = new URL(
   '../../../assets/arrowLeft.svg',
@@ -65,6 +66,10 @@ class SettingsPage extends Block {
           e.preventDefault();
           if (!this.inputAvatar.value) {
             store.set('formAvatarError.content', 'Нужно выбрать файл');
+          } else {
+            const form = e.target as HTMLFormElement;
+            avatarController.updateAvatar(new FormData(form));
+            store.set('formAvatarError.content', '');
           }
         },
       },
@@ -75,6 +80,7 @@ class SettingsPage extends Block {
         store.set('labelFile.content', 'Выбрать файл на компьютере');
         store.set('modalProfileAvatarTitle.content', 'Загрузите файл');
         store.set('formAvatarError.content', '');
+        store.set('buttonFormAvatar.content', 'Поменять');
         this.element.style.height = '100vh';
         this.element.style.overflow = 'hidden';
         this.modalProfileAvatar.classList.add('modal-profile-avatar_active');

@@ -40,7 +40,7 @@ class LoginController {
         store.set('button.content', 'Авторизоваться');
       });
       clearTimeout(timer);
-    }, 2000);
+    }, 1000);
   }
 }
 

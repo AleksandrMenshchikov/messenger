@@ -8,4 +8,6 @@
   cursor: pointer;
   width: 122px;
   margin: auto auto 40px;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }

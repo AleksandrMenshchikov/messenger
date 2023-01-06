@@ -40,7 +40,7 @@ class SignupController {
         store.set('button.content', 'Зарегистрироваться');
       });
       clearTimeout(timer);
-    }, 2000);
+    }, 1000);
   }
 }
 

@@ -5,7 +5,7 @@ import store from '../../core/Store';
 import ModalProfileAvatarTitle from '../../hoc/withModalProfileAvatarTitle';
 import LabelFile from '../../hoc/withLabelFile';
 import InputFile from '../input-file';
-import Button from '../button';
+import Button from '../../hoc/withButtonFormAvatar';
 import FormAvatarError from '../../hoc/withFormAvatarError';
 
 type FormAvatarProps ={
@@ -26,13 +26,18 @@ export class FormAvatar extends Block {
       events:
       {
         change: (e) => {
-          store.set('modalProfileAvatarTitle.content', 'Файл загружен');
-          store.set('labelFile.content', (e.target as HTMLInputElement).files?.[0].name);
+          if ((e.target as HTMLInputElement).value) {
+            store.set('labelFile.content', (e.target as HTMLInputElement).files?.[0].name);
+            store.set('modalProfileAvatarTitle.content', 'Файл загружен');
+          } else {
+            store.set('labelFile.content', 'Выбрать файл на компьютере');
+            store.set('modalProfileAvatarTitle.content', 'Загрузите файл');
+          }
           store.set('formAvatarError.content', '');
         },
       },
     });
-    this.children.button = new Button({ type: 'submit', content: 'Поменять' });
+    this.children.button = new Button({ type: 'submit' });
     this.children['form-avatar-error'] = new FormAvatarError({});
   }
 

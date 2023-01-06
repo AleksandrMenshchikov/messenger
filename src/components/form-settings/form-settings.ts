@@ -16,11 +16,6 @@ import ButtonAvatar from '../button-avatar';
 import logoutController from '../../controllers/logout-controller';
 import Input from '../input';
 
-const avatar: URL = new URL(
-  '../../../assets/avatar.svg',
-  import.meta.url,
-);
-
 type FormSettingsProps = {
   events: Record<string, (e: Event) => void>
   onClickButtonAvatar: (e?: Event) => void
@@ -60,7 +55,7 @@ export class FormSettings extends Block {
       },
     };
     this.children.button = new Button({ type: 'submit', content: 'Сохранить' });
-    this.children['button-avatar'] = new ButtonAvatar({ avatar, events: { click: () => (this.props.onClickButtonAvatar as (e?: Event)=> void)() } });
+    this.children['button-avatar'] = new ButtonAvatar({ events: { click: () => (this.props.onClickButtonAvatar as (e?: Event)=> void)() } });
     this.children['profile-title'] = new ProfileTitle({});
     this.children['button-profile-1'] = new ButtonProfile({
       content: 'Изменить данные',
