@@ -1,11 +1,6 @@
 import EventBus from './EventBus';
 import set from '../../utils/set';
 
-const avatarUrl: URL = new URL(
-  '../../assets/avatar.svg',
-  import.meta.url,
-);
-
 export enum StoreEvents {
   Updated = 'updated',
 }
@@ -22,7 +17,7 @@ class Store extends EventBus {
       email: '',
       phone: '',
       display_name: '',
-      avatar: avatarUrl,
+      avatar: '',
       status: '',
     },
     button: {

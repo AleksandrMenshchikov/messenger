@@ -12,6 +12,11 @@ import messengerPage from '../pages/messenger';
 import settingsPage from '../pages/settings';
 import signupPage from '../pages/signup';
 
+const avatarUrl: URL = new URL(
+  '../../assets/avatar.svg',
+  import.meta.url,
+);
+
 class InitialController {
   getUser() {
     const loader = new Loader().getContent();
@@ -24,6 +29,8 @@ class InitialController {
           const state = store.getState();
           if (state.user.avatar) {
             store.set('user.avatar', `${URLs.host}${state.user.avatar}`);
+          } else {
+            store.set('user.avatar', avatarUrl);
           }
           store.set('profileInputEmail.value', state.user.email);
           store.set('profileInputLogin.value', state.user.login);
