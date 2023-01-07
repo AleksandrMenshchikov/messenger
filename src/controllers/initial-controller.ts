@@ -44,7 +44,6 @@ class InitialController {
           usersApi.searchUsers().then((res) => {
             if ((res as XMLHttpRequest).status === 200) {
               store.set('users', JSON.parse((res as XMLHttpRequest).response));
-              console.log(state);
             }
           });
         }
