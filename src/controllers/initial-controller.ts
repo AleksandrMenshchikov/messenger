@@ -1,8 +1,8 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable class-methods-use-this */
 import authApi from '../api/auth-api';
+import chatsApi from '../api/chats-api';
 import URLs from '../api/urls';
-import usersApi from '../api/users-api';
 import Loader from '../components/loader';
 import router from '../core/Router';
 import store from '../core/Store';
@@ -40,12 +40,6 @@ class InitialController {
           store.set('profileInputDisplayName.value', String(state.user.display_name));
           store.set('profileInputPhone.value', state.user.phone);
           store.set('profileTitle.content', String(state.user.display_name));
-
-          usersApi.searchUsers().then((res) => {
-            if ((res as XMLHttpRequest).status === 200) {
-              store.set('users', JSON.parse((res as XMLHttpRequest).response));
-            }
-          });
         }
       }).catch((err) => {
         console.log(err);

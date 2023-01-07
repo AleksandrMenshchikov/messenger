@@ -23,36 +23,10 @@
   margin-bottom: 14px;
 }
 
-.search__input {
-  display: block;
-  height: 32px;
-  width: 100%;
-  border: none;
-  background: var(--color-middle-gray);
-  border-radius: 5px;
-  color: var(--color-black);
-  font-size: 1.4rem;
-  padding: 0 10px 0 24px;
-  font-weight: 500;
-}
-
-.search__input::placeholder {
-  color: var(--color-dark-gray);
-}
-
 .search__icon {
   position: absolute;
   top: 50%;
   transform: translate(6px, -50%);
-}
-
-.list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  overflow: auto;
-  height: calc(100vh - 103px);
-  box-sizing: content-box;
 }
 
 .messages {

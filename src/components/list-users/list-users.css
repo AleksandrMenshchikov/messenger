@@ -1,0 +1,5 @@
+.list__item-text_users {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
