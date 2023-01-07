@@ -20,6 +20,7 @@ class Store extends EventBus {
       avatar: '',
       status: '',
     },
+    users: [],
     button: {
       type: 'submit',
       content: '',

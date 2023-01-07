@@ -30,6 +30,17 @@ class UsersApi extends BaseAPI {
       data: obj,
     });
   }
+
+  searchUsers() {
+    return httpTransport.post(URLs['https://ya-praktikum.tech/api/v2/user/search'], {
+      headers: {
+        'content-type': 'application/json',
+      },
+      data: {
+        login: 'string',
+      },
+    });
+  }
 }
 
 const usersApi = new UsersApi();
