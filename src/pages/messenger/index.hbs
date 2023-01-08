@@ -1,20 +1,4 @@
 <div>
-
-  <div class="modal-clip">
-    <button class="modal-clip__group">
-      <img src="{{foto}}" alt="Иконка" />
-      <p class="modal-add-delete-user__text">Фото или Видео</p>
-    </button>
-    <button class="modal-add-delete-user__group">
-      <img src="{{file}}" alt="Иконка" />
-      <p class="modal-add-delete-user__text">Файл</p>
-    </button>
-    <button class="modal-add-delete-user__group">
-      <img src="{{location}}" alt="Иконка" />
-      <p class="modal-add-delete-user__text">Локация</p>
-    </button>
-  </div>
-
   <main class="container">
     <nav class="nav">
       <div class="button-profile-container">
@@ -31,6 +15,20 @@
     {{!-- {{{empty-messages}}} --}}
     <div class="messages">
       {{{modal-add-delete-user}}}
+      <div class="modal-clip">
+        <button class="modal-clip__group">
+          <img src="{{foto}}" alt="Иконка" />
+          <p class="modal-add-delete-user__text">Фото или Видео</p>
+        </button>
+        <button class="modal-add-delete-user__group">
+          <img src="{{file}}" alt="Иконка" />
+          <p class="modal-add-delete-user__text">Файл</p>
+        </button>
+        <button class="modal-add-delete-user__group">
+          <img src="{{location}}" alt="Иконка" />
+          <p class="modal-add-delete-user__text">Локация</p>
+        </button>
+      </div>
       <div class="messages__head">
         <img class="messages__head-avatar"
           src="https://www.lightsong.net/wp-content/uploads/2020/12/blank-profile-circle.png" alt="Аватар" />

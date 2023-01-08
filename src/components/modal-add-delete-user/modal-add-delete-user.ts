@@ -6,6 +6,6 @@ import { Block } from '../../core';
 export class ModalAddDeleteUser extends Block {
   // eslint-disable-next-line class-methods-use-this
   render() {
-    return this.compile(template, { });
+    return this.compile(template, { ...this.props });
   }
 }

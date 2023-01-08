@@ -69,6 +69,9 @@ class Store extends EventBus {
     passwordError: {
       content: '',
     },
+    modalAddDeleteUser: {
+      isOpened: false,
+    },
   };
 
   public getState() {

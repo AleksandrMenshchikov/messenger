@@ -12,7 +12,8 @@ import searchController from '../../controllers/search-controller';
 import ButtonSearch from '../../components/button-search';
 import ListUsers from '../../hoc/withListUsers';
 import EmptyMessages from '../../components/empty-messages';
-import ModalAddDeleteUser from '../../components/modal-add-delete-user';
+import ModalAddDeleteUser from '../../hoc/withModalAddDeleteUser';
+import store from '../../core/Store';
 
 const foto: URL = new URL(
   '../../../assets/foto.svg',
@@ -45,6 +46,22 @@ class MessengerPage extends Block {
       foto, file, location, search, arrowRight,
     });
     this.messageTextarea = this.element.querySelector('.message-textarea') as HTMLElement;
+
+    const closeModals = () => {
+      store.set('modalAddDeleteUser.isOpened', false);
+      this.children['modal-add-delete-user'].hide();
+    };
+
+    this.element.addEventListener('click', (e) => {
+      if (!(e.target as HTMLElement).closest('.modal-add-delete-user') && !(e.target as HTMLElement).closest('.dots-container')) {
+        closeModals();
+      }
+    });
+    this.element.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeModals();
+      }
+    });
   }
 
   initChildren(): void {
@@ -82,7 +99,19 @@ class MessengerPage extends Block {
     });
     this.children['list-users'] = new ListUsers({});
     this.children.clip = new Clip();
-    this.children.dots = new Dots();
+    this.children.dots = new Dots({
+      events: {
+        click: () => {
+          const state = store.getState();
+          store.set('modalAddDeleteUser.isOpened', !state.modalAddDeleteUser.isOpened);
+          if (state.modalAddDeleteUser.isOpened) {
+            this.children['modal-add-delete-user'].show();
+          } else {
+            this.children['modal-add-delete-user'].hide();
+          }
+        },
+      },
+    });
     this.children['button-open-profile'] = new ButtonOpenProfile({
       events: {
         click: () => {
@@ -106,6 +135,7 @@ class MessengerPage extends Block {
 
     this.children['button-search'].hide();
     this.children['list-users'].hide();
+    this.children['modal-add-delete-user'].hide();
   }
 
   // eslint-disable-next-line class-methods-use-this
