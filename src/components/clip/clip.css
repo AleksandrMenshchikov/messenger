@@ -1,3 +1,14 @@
+.clip-container {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: none;
+  background: transparent;
+}
+
 .clip {
   cursor: pointer;
 }
