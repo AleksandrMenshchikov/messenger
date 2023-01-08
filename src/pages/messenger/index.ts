@@ -12,6 +12,7 @@ import searchController from '../../controllers/search-controller';
 import ButtonSearch from '../../components/button-search';
 import ListUsers from '../../hoc/withListUsers';
 import EmptyMessages from '../../components/empty-messages';
+import ModalAddDeleteUser from '../../components/modal-add-delete-user';
 
 const foto: URL = new URL(
   '../../../assets/foto.svg',
@@ -101,6 +102,7 @@ class MessengerPage extends Block {
       },
     });
     this.children['empty-messages'] = new EmptyMessages({});
+    this.children['modal-add-delete-user'] = new ModalAddDeleteUser({});
 
     this.children['button-search'].hide();
     this.children['list-users'].hide();

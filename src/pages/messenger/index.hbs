@@ -1,14 +1,5 @@
 <div>
-  <div class="modal-add-delete-user">
-    <button class="modal-add-delete-user__group">
-      <span class="modal-add-delete-user__add-icon"></span>
-      <p class="modal-add-delete-user__text">Добавить пользователя</p>
-    </button>
-    <button class="modal-add-delete-user__group">
-      <span class="modal-add-delete-user__delete-icon"></span>
-      <p class="modal-add-delete-user__text">Удалить пользователя</p>
-    </button>
-  </div>
+
   <div class="modal-clip">
     <button class="modal-clip__group">
       <img src="{{foto}}" alt="Иконка" />
@@ -37,8 +28,9 @@
       {{{list-members}}}
       {{{list-users}}}
     </nav>
-    {{{empty-messages}}}
-    {{!-- <div class="messages">
+    {{!-- {{{empty-messages}}} --}}
+    <div class="messages">
+      {{{modal-add-delete-user}}}
       <div class="messages__head">
         <img class="messages__head-avatar"
           src="https://www.lightsong.net/wp-content/uploads/2020/12/blank-profile-circle.png" alt="Аватар" />
@@ -50,6 +42,6 @@
         <span class="message-textarea" name="message" placeholder="Сообщение" role="textbox" contenteditable></span>
         {{{profile-arrow-right}}}
       </div>
-    </div> --}}
+    </div>
   </main>
 </div>

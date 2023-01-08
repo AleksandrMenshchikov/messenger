@@ -1,0 +1,90 @@
+.modal-add-delete-user {
+  position: absolute;
+  top: 65px;
+  right: 10px;
+  background: var(--color-white);
+  box-shadow: 0 0 6px var(--box-shadow);
+  border-radius: 12px;
+  padding: 10px;
+  display: grid;
+  gap: 5px;
+  z-index: 1000;
+}
+
+.modal-add-delete-user__group {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+  border-radius: 12px;
+  transition: all 0.2s;
+}
+
+.modal-add-delete-user__group:hover {
+  background: var(--color-middle-gray);
+}
+
+.modal-add-delete-user__add-icon {
+  display: block;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 2px solid var(--color-blue);
+  position: relative;
+}
+
+.modal-add-delete-user__add-icon::after {
+  position: absolute;
+  content: "";
+  width: 2px;
+  height: 11px;
+  top: 50%;
+  left: 50%;
+  background-color: var(--color-blue);
+  transform: translate(-50%, -50%);
+}
+
+.modal-add-delete-user__add-icon::before {
+  position: absolute;
+  content: "";
+  width: 11px;
+  height: 2px;
+  top: 50%;
+  left: 50%;
+  background-color: var(--color-blue);
+  transform: translate(-50%, -50%);
+}
+
+.modal-add-delete-user__delete-icon {
+  display: block;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 2px solid var(--color-blue);
+  position: relative;
+}
+
+.modal-add-delete-user__delete-icon::after {
+  position: absolute;
+  content: "";
+  width: 2px;
+  height: 11px;
+  top: 50%;
+  left: 50%;
+  background-color: var(--color-blue);
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.modal-add-delete-user__delete-icon::before {
+  position: absolute;
+  content: "";
+  width: 11px;
+  height: 2px;
+  top: 50%;
+  left: 50%;
+  background-color: var(--color-blue);
+  transform: translate(-50%, -50%) rotate(45deg);
+}
