@@ -49,7 +49,6 @@ class MessengerPage extends Block {
     this.children['input-search'] = new InputSearch({
       events: {
         input: (e) => {
-          console.log((e.target as HTMLInputElement).value.trim().length);
           if ((e.target as HTMLInputElement).value.trim().length > 0) {
             searchController.searchUsers((e.target as HTMLInputElement).value);
             this.children['list-members'].hide();

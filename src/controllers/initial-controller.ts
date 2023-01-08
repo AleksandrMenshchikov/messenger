@@ -40,6 +40,8 @@ class InitialController {
           store.set('profileInputDisplayName.value', String(state.user.display_name));
           store.set('profileInputPhone.value', state.user.phone);
           store.set('profileTitle.content', String(state.user.display_name));
+
+          chatsApi.getChats();
         }
       }).catch((err) => {
         console.log(err);
