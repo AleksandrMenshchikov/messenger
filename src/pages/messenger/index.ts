@@ -11,6 +11,7 @@ import InputSearch from '../../components/input-search';
 import searchController from '../../controllers/search-controller';
 import ButtonSearch from '../../components/button-search';
 import ListUsers from '../../hoc/withListUsers';
+import EmptyMessages from '../../components/empty-messages';
 
 const foto: URL = new URL(
   '../../../assets/foto.svg',
@@ -99,6 +100,7 @@ class MessengerPage extends Block {
         },
       },
     });
+    this.children['empty-messages'] = new EmptyMessages({});
 
     this.children['button-search'].hide();
     this.children['list-users'].hide();
