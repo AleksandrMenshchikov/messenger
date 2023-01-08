@@ -23,6 +23,9 @@ class Store extends EventBus {
     users: {
       data: null,
     },
+    currentMember: {
+      data: null,
+    },
     button: {
       type: 'submit',
       content: '',

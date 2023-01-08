@@ -1,4 +1,6 @@
 <div>
+  {{{modal-add-delete-user}}}
+  {{{modal-clip}}}
   <main class="container">
     <nav class="nav">
       <div class="button-profile-container">
@@ -13,20 +15,6 @@
       {{{list-users}}}
     </nav>
     {{!-- {{{empty-messages}}} --}}
-    <div class="messages">
-      {{{modal-add-delete-user}}}
-      {{{modal-clip}}}
-      <div class="messages__head">
-        <img class="messages__head-avatar"
-          src="https://www.lightsong.net/wp-content/uploads/2020/12/blank-profile-circle.png" alt="Аватар" />
-        <p class="messages__head-title">Вадим</p>
-        {{{dots}}}
-      </div>
-      <div class="messages__footer">
-        {{{clip}}}
-        <span class="message-textarea" name="message" placeholder="Сообщение" role="textbox" contenteditable></span>
-        {{{profile-arrow-right}}}
-      </div>
-    </div>
+    {{{messages}}}
   </main>
 </div>

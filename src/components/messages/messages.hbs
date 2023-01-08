@@ -1,0 +1,14 @@
+<div class="messages">
+  <div class="messages__head">
+    <img class="messages__head-avatar"
+      onerror="this.src='https://www.lightsong.net/wp-content/uploads/2020/12/blank-profile-circle.png'"
+      src={{data.avatar}} alt="Аватар" />
+    <p class="messages__head-title">{{data.login}}</p>
+    {{{dots}}}
+  </div>
+  <div class="messages__footer">
+    {{{clip}}}
+    <span class="message-textarea" name="message" placeholder="Сообщение" role="textbox" contenteditable></span>
+    {{{profile-arrow-right}}}
+  </div>
+</div>
