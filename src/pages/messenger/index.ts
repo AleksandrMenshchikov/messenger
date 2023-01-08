@@ -52,9 +52,11 @@ class MessengerPage extends Block {
           if ((e.target as HTMLInputElement).value.trim().length > 0) {
             this.children['list-members'].hide();
             this.children['list-users'].show();
+            this.children['button-search'].show();
           } else {
             this.children['list-members'].show();
             this.children['list-users'].hide();
+            this.children['button-search'].hide();
           }
           searchController.searchUsers((e.target as HTMLInputElement).value);
         },
@@ -66,6 +68,7 @@ class MessengerPage extends Block {
           this.children['input-search'].getContent().value = '';
           this.children['list-members'].show();
           this.children['list-users'].hide();
+          this.children['button-search'].hide();
         },
       },
     });
@@ -96,6 +99,8 @@ class MessengerPage extends Block {
         },
       },
     });
+
+    this.children['button-search'].hide();
   }
 
   // eslint-disable-next-line class-methods-use-this
