@@ -14,6 +14,7 @@ import ListUsers from '../../hoc/withListUsers';
 import EmptyMessages from '../../components/empty-messages';
 import ModalAddDeleteUser from '../../hoc/withModalAddDeleteUser';
 import store from '../../core/Store';
+import ModalClip from '../../hoc/withModalClip';
 
 const foto: URL = new URL(
   '../../../assets/foto.svg',
@@ -39,27 +40,29 @@ const arrowRight: URL = new URL(
 class MessengerPage extends Block {
   messageTextarea: HTMLElement;
 
-  constructor({
-    foto, file, location, search, arrowRight,
-  }: Record<string, URL>) {
-    super({
-      foto, file, location, search, arrowRight,
-    });
-    this.messageTextarea = this.element.querySelector('.message-textarea') as HTMLElement;
+  messagesFooter: HTMLElement;
 
-    const closeModals = () => {
-      store.set('modalAddDeleteUser.isOpened', false);
-      this.children['modal-add-delete-user'].hide();
-    };
+  constructor({ search, arrowRight }: Record<string, URL>) {
+    super({ search, arrowRight });
+    this.messageTextarea = this.element.querySelector('.message-textarea') as HTMLElement;
+    this.messagesFooter = this.element.querySelector('.messages__footer') as HTMLElement;
 
     this.element.addEventListener('click', (e) => {
       if (!(e.target as HTMLElement).closest('.modal-add-delete-user') && !(e.target as HTMLElement).closest('.dots-container')) {
-        closeModals();
+        store.set('modalAddDeleteUser.isOpened', false);
+        this.children['modal-add-delete-user'].hide();
+      }
+      if (!(e.target as HTMLElement).closest('.modal-clip') && !(e.target as HTMLElement).closest('.clip-container')) {
+        store.set('modalClip.isOpened', false);
+        this.children['modal-clip'].hide();
       }
     });
     this.element.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') {
-        closeModals();
+        store.set('modalAddDeleteUser.isOpened', false);
+        this.children['modal-add-delete-user'].hide();
+        store.set('modalClip.isOpened', false);
+        this.children['modal-clip'].hide();
       }
     });
   }
@@ -98,7 +101,22 @@ class MessengerPage extends Block {
       },
     });
     this.children['list-users'] = new ListUsers({});
-    this.children.clip = new Clip();
+    this.children.clip = new Clip({
+      events: {
+        click: () => {
+          const state = store.getState();
+          store.set('modalClip.isOpened', !state.modalClip.isOpened);
+          if (state.modalClip.isOpened) {
+            const messagesFooterHeight = this.messagesFooter.getBoundingClientRect().height;
+            this.children['modal-clip'].getContent()
+              .querySelector('.modal-clip').style.bottom = `${messagesFooterHeight + 20}px`;
+            this.children['modal-clip'].show();
+          } else {
+            this.children['modal-clip'].hide();
+          }
+        },
+      },
+    });
     this.children.dots = new Dots({
       events: {
         click: () => {
@@ -132,10 +150,12 @@ class MessengerPage extends Block {
     });
     this.children['empty-messages'] = new EmptyMessages({});
     this.children['modal-add-delete-user'] = new ModalAddDeleteUser({});
+    this.children['modal-clip'] = new ModalClip({ foto, file, location });
 
     this.children['button-search'].hide();
     this.children['list-users'].hide();
     this.children['modal-add-delete-user'].hide();
+    this.children['modal-clip'].hide();
   }
 
   // eslint-disable-next-line class-methods-use-this
@@ -144,8 +164,6 @@ class MessengerPage extends Block {
   }
 }
 
-const messengerPage = new MessengerPage({
-  foto, file, location, search, arrowRight,
-});
+const messengerPage = new MessengerPage({ search, arrowRight });
 
 export default messengerPage;

@@ -72,6 +72,9 @@ class Store extends EventBus {
     modalAddDeleteUser: {
       isOpened: false,
     },
+    modalClip: {
+      isOpened: false,
+    },
   };
 
   public getState() {

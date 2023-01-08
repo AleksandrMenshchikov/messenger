@@ -1,15 +1,17 @@
-import './clip.css';
-import template from './clip.hbs';
+import './modal-clip.css';
+import template from './modal-clip.hbs';
 import { Block } from '../../core';
 
-type ClipProps = {
-  events?: Record<string, (e?:Event) => void>
+type ModalClipProps = {
+  foto: URL,
+  file: URL,
+  location: URL
 }
 
 // eslint-disable-next-line import/prefer-default-export
-export class Clip extends Block {
+export class ModalClip extends Block {
 // eslint-disable-next-line no-useless-constructor
-  constructor(props: ClipProps) {
+  constructor(props: ModalClipProps) {
     super(props);
   }
 

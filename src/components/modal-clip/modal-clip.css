@@ -1,0 +1,28 @@
+.modal-clip {
+  position: absolute;
+  bottom: 65px;
+  left: 336px;
+  background: var(--color-white);
+  box-shadow: 0 0 6px var(--box-shadow);
+  border-radius: 12px;
+  padding: 10px;
+  display: grid;
+  gap: 5px;
+  z-index: 1000;
+}
+
+.modal-clip__group {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+  border-radius: 12px;
+  transition: all 0.2s;
+}
+
+.modal-clip__group:hover {
+  background: var(--color-middle-gray);
+}
