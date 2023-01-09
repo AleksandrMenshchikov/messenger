@@ -70,12 +70,13 @@ class MessengerPage extends Block {
         this.children['modal-users'].hide();
       }
     });
-    this.element.addEventListener('keydown', (e) => {
+    document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') {
         store.set('modalAddDeleteUser.isOpened', false);
         this.children['modal-add-delete-user'].hide();
         store.set('modalClip.isOpened', false);
         this.children['modal-clip'].hide();
+        this.children['modal-users'].hide();
       }
     });
   }
