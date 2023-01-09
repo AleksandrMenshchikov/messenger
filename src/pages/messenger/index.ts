@@ -13,6 +13,7 @@ import ModalAddDeleteUser from '../../hoc/withModalAddDeleteUser';
 import store from '../../core/Store';
 import ModalClip from '../../hoc/withModalClip';
 import Messages from '../../hoc/withMessages';
+import ModalUsers from '../../components/modal-users';
 
 declare global {
   interface Window { handleUsers: (id: number)=> void; }
@@ -64,6 +65,9 @@ class MessengerPage extends Block {
       if (!(e.target as HTMLElement).closest('.modal-clip') && !(e.target as HTMLElement).closest('.clip-container')) {
         store.set('modalClip.isOpened', false);
         this.children['modal-clip'].hide();
+      }
+      if ((e.target as HTMLElement).className === 'modal-users') {
+        this.children['modal-users'].hide();
       }
     });
     this.element.addEventListener('keydown', (e) => {
@@ -147,13 +151,24 @@ class MessengerPage extends Block {
       },
     });
     this.children['empty-messages'] = new EmptyMessages({});
-    this.children['modal-add-delete-user'] = new ModalAddDeleteUser({});
+    this.children['modal-add-delete-user'] = new ModalAddDeleteUser({
+      onClickButtonAddUser: () => {
+        this.children['modal-users'].show();
+        this.children['modal-add-delete-user'].hide();
+      },
+      onClickButtonDeleteUser: () => {
+        this.children['modal-users'].show();
+        this.children['modal-add-delete-user'].hide();
+      },
+    });
     this.children['modal-clip'] = new ModalClip({ foto, file, location });
+    this.children['modal-users'] = new ModalUsers({});
 
     this.children['button-search'].hide();
     this.children['list-users'].hide();
     this.children['modal-add-delete-user'].hide();
     this.children['modal-clip'].hide();
+    this.children['modal-users'].hide();
   }
 
   // eslint-disable-next-line class-methods-use-this
