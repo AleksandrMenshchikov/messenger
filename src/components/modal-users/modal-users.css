@@ -11,9 +11,16 @@
 }
 
 .modal-user__wrapper {
-  width: 340px;
-  height: 200px;
+  width: 370px;
   box-shadow: var(--box-shadow);
   border-radius: 12px;
   background-color: var(--color-white);
+  padding: 30px;
+}
+
+.modal-user__title {
+  font-weight: 500;
+  font-size: 1.5rem;
+  margin: 10px 0 30px;
+  text-align: center;
 }

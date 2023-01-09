@@ -1,4 +1,4 @@
-<ul class="list">
+<ul class="list-users">
   {{#each data}}
   <li class="list__item" data-id={{this.id}} onclick="handleUsers({{this.id}})">
     <span class="list__divider"></span>
@@ -15,5 +15,5 @@
     </div>
   </li>
   {{/each}}
-  <span class="list__divider"></span>
+  {{{list-divider}}}
 </ul>

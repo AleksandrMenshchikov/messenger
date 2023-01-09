@@ -68,6 +68,7 @@ class MessengerPage extends Block {
       }
       if ((e.target as HTMLElement).className === 'modal-users') {
         this.children['modal-users'].hide();
+        this.children['modal-users'].children['button-search'].getContent().click();
       }
     });
     document.addEventListener('keydown', (e) => {
@@ -77,6 +78,7 @@ class MessengerPage extends Block {
         store.set('modalClip.isOpened', false);
         this.children['modal-clip'].hide();
         this.children['modal-users'].hide();
+        this.children['modal-users'].children['button-search'].getContent().click();
       }
     });
   }
@@ -163,7 +165,7 @@ class MessengerPage extends Block {
       },
     });
     this.children['modal-clip'] = new ModalClip({ foto, file, location });
-    this.children['modal-users'] = new ModalUsers({});
+    this.children['modal-users'] = new ModalUsers({ search });
 
     this.children['button-search'].hide();
     this.children['list-users'].hide();
