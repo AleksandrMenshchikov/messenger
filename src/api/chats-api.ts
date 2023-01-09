@@ -18,6 +18,17 @@ class ChatsApi extends BaseAPI {
       },
     });
   }
+
+  deleteChat(chatId: number) {
+    return httpTransport.delete(URLs['https://ya-praktikum.tech/api/v2/chats'], {
+      headers: {
+        'content-type': 'application/json',
+      },
+      data: {
+        chatId,
+      },
+    });
+  }
 }
 
 const chatsApi = new ChatsApi();
