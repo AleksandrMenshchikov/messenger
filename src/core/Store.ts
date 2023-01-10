@@ -29,6 +29,9 @@ class Store extends EventBus {
     chats: {
       data: null,
     },
+    chatsUsers: {
+      data: {},
+    },
     currentChat: {
       data: null,
     },

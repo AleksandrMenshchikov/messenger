@@ -43,6 +43,10 @@ class ChatsApi extends BaseAPI {
       },
     });
   }
+
+  getChatUsers(chatId: number) {
+    return httpTransport.get(`${URLs['https://ya-praktikum.tech/api/v2/chats']}/${chatId}/users`, {});
+  }
 }
 
 const chatsApi = new ChatsApi();
