@@ -72,6 +72,12 @@ class MessengerPage extends Block {
         this.children['modal-users'].hide();
         this.children['modal-users'].children['button-search'].getContent().click();
       }
+      if ((e.target as HTMLElement).className === 'modal-edit') {
+        this.children['modal-edit'].children['form-edit'].getContent().reset();
+        const inputError = this.children['modal-edit'].children['form-edit'].getContent().querySelector('.error');
+        inputError.classList.remove('error_active');
+        this.children['modal-edit'].hide();
+      }
     });
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') {
@@ -81,6 +87,10 @@ class MessengerPage extends Block {
         this.children['modal-clip'].hide();
         this.children['modal-users'].hide();
         this.children['modal-users'].children['button-search'].getContent().click();
+        this.children['modal-edit'].children['form-edit'].getContent().reset();
+        const inputError = this.children['modal-edit'].children['form-edit'].getContent().querySelector('.error');
+        inputError.classList.remove('error_active');
+        this.children['modal-edit'].hide();
       }
     });
   }
@@ -114,7 +124,15 @@ class MessengerPage extends Block {
     });
     this.children['list-chats'] = new ListChats({});
     this.children['list-users'] = new ListUsers({});
-    this.children['button-edit'] = new ButtonEdit({});
+    this.children['button-edit'] = new ButtonEdit({
+      events: {
+        click: () => {
+          const inputError = this.children['modal-edit'].children['form-edit'].getContent().querySelector('.error');
+          inputError.classList.remove('error_active');
+          this.children['modal-edit'].show();
+        },
+      },
+    });
     this.children['button-open-profile'] = new ButtonOpenProfile({
       events: {
         click: () => {
@@ -173,6 +191,7 @@ class MessengerPage extends Block {
     this.children['modal-add-delete-user'].hide();
     this.children['modal-clip'].hide();
     this.children['modal-users'].hide();
+    this.children['modal-edit'].hide();
   }
 
   // eslint-disable-next-line class-methods-use-this
