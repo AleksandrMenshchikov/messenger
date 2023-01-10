@@ -156,10 +156,12 @@ class MessengerPage extends Block {
     this.children['empty-messages'] = new EmptyMessages({});
     this.children['modal-add-delete-user'] = new ModalAddDeleteUser({
       onClickButtonAddUser: () => {
+        store.set('modalUsersTitle.title', 'Добавить пользователя');
         this.children['modal-users'].show();
         this.children['modal-add-delete-user'].hide();
       },
       onClickButtonDeleteUser: () => {
+        store.set('modalUsersTitle.title', 'Удалить пользователя');
         this.children['modal-users'].show();
         this.children['modal-add-delete-user'].hide();
       },

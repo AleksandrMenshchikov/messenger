@@ -78,6 +78,9 @@ class Store extends EventBus {
     modalClip: {
       isOpened: false,
     },
+    modalUsersTitle: {
+      title: '',
+    },
   };
 
   public getState() {

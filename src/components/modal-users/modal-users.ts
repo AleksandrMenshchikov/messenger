@@ -5,6 +5,7 @@ import InputSearch from '../input-search';
 import ButtonSearch from '../button-search';
 import searchController from '../../controllers/search-controller';
 import ListUsers from '../../hoc/withListUsers';
+import ModalUsersTitle from '../../hoc/withModalUsersTitle';
 
 type ModalUsersProps = {
   events?: Record<string, (e?:Event) => void>
@@ -19,6 +20,7 @@ export class ModalUsers extends Block {
   }
 
   initChildren(): void {
+    this.children['modal-users-title'] = new ModalUsersTitle({ });
     this.children['input-search'] = new InputSearch({
       events: {
         input: (e) => {
