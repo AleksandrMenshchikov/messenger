@@ -5,7 +5,6 @@ import ButtonOpenProfile from '../../components/button-open-profile';
 import router from '../../core/Router';
 import ListChats from '../../hoc/withListChats';
 import InputSearch from '../../components/input-search';
-import searchController from '../../controllers/search-controller';
 import ButtonSearch from '../../components/button-search';
 import ListUsers from '../../hoc/withListUsers';
 import EmptyMessages from '../../components/empty-messages';
@@ -100,13 +99,8 @@ class MessengerPage extends Block {
       events: {
         input: (e) => {
           if ((e.target as HTMLInputElement).value.trim().length > 0) {
-            searchController.searchUsers((e.target as HTMLInputElement).value);
-            this.children['list-members'].hide();
-            this.children['list-users'].show();
             this.children['button-search'].show();
           } else {
-            this.children['list-users'].hide();
-            this.children['list-members'].show();
             this.children['button-search'].hide();
           }
         },
@@ -116,8 +110,6 @@ class MessengerPage extends Block {
       events: {
         click: () => {
           this.children['input-search'].getContent().value = '';
-          this.children['list-members'].show();
-          this.children['list-users'].hide();
           this.children['button-search'].hide();
         },
       },
