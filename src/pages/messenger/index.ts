@@ -3,7 +3,7 @@ import template from './index.hbs';
 import { Block } from '../../core';
 import ButtonOpenProfile from '../../components/button-open-profile';
 import router from '../../core/Router';
-import ListMembers from '../../components/list-members';
+import ListChats from '../../hoc/withListChats';
 import InputSearch from '../../components/input-search';
 import searchController from '../../controllers/search-controller';
 import ButtonSearch from '../../components/button-search';
@@ -110,12 +110,7 @@ class MessengerPage extends Block {
         },
       },
     });
-    this.children['list-members'] = new ListMembers({
-      data: {
-        1: { name: 'Alex', text: 'dwdwd' },
-        2: { name: 'Mic', text: 'dwdwd' },
-      },
-    });
+    this.children['list-chats'] = new ListChats({});
     this.children['list-users'] = new ListUsers({});
     this.children['button-open-profile'] = new ButtonOpenProfile({
       events: {

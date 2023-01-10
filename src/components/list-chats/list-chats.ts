@@ -1,15 +1,15 @@
-import './list-members.css';
-import template from './list-members.hbs';
+import './list-chats.css';
+import template from './list-chats.hbs';
 import { Block } from '../../core';
 
-type ListMembersProps = {
+type ListChatsProps = {
   data: Record<string, unknown>
 }
 
 // eslint-disable-next-line import/prefer-default-export
-export class ListMembers extends Block {
+export class ListChats extends Block {
   // eslint-disable-next-line no-useless-constructor
-  constructor(props:ListMembersProps) {
+  constructor(props:ListChatsProps) {
     super(props);
   }
 
