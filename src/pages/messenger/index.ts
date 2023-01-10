@@ -62,6 +62,8 @@ window.handleChats = function fn(id: number) {
         (elem as HTMLElement).style.backgroundColor = '';
       }
     });
+    const emptyMessages = document.querySelector('.empty-messages') as HTMLElement;
+    emptyMessages.style.display = 'none';
   }
 };
 
@@ -86,6 +88,7 @@ class MessengerPage extends Block {
   constructor({ search }: Record<string, URL>) {
     super({ search });
 
+    console.log(store.getState());
     this.element.addEventListener('click', (e) => {
       if (!(e.target as HTMLElement).closest('.modal-add-delete-user') && !(e.target as HTMLElement).closest('.dots-container')) {
         store.set('modalAddDeleteUser.isOpened', false);
@@ -212,6 +215,7 @@ class MessengerPage extends Block {
     this.children['modal-clip'].hide();
     this.children['modal-users'].hide();
     this.children['modal-edit'].hide();
+    this.children.messages.hide();
   }
 
   // eslint-disable-next-line class-methods-use-this
