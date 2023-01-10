@@ -16,6 +16,7 @@ import Messages from '../../hoc/withMessages';
 import ModalUsers from '../../components/modal-users';
 import ButtonEdit from '../../components/button-edit';
 import ModalEdit from '../../components/modal-edit';
+import chatsController from '../../controllers/chats-controller';
 
 declare global {
   interface Window {
@@ -38,6 +39,9 @@ window.handleUsers = function fn(id: number) {
     }
     store.set('currentMember.data', null);
     store.set('currentMember.data', user);
+    const chatId = store.getState().currentChat.data.id;
+    const memberId = store.getState().currentMember.data.id;
+    chatsController.addUserToChat(chatId, memberId);
   }
 };
 
@@ -88,7 +92,6 @@ class MessengerPage extends Block {
   constructor({ search }: Record<string, URL>) {
     super({ search });
 
-    console.log(store.getState());
     this.element.addEventListener('click', (e) => {
       if (!(e.target as HTMLElement).closest('.modal-add-delete-user') && !(e.target as HTMLElement).closest('.dots-container')) {
         store.set('modalAddDeleteUser.isOpened', false);

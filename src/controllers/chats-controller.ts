@@ -33,6 +33,14 @@ class ChatsController {
       })
       .catch((err) => console.log(err));
   }
+
+  addUserToChat(chatId: number, memberId: number) {
+    return chatsApi.addUserToChat(chatId, memberId)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => console.log(err));
+  }
 }
 
 const chatsController = new ChatsController();
