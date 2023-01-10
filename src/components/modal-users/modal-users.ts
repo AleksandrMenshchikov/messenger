@@ -28,6 +28,7 @@ export class ModalUsers extends Block {
             searchController.searchUsers((e.target as HTMLInputElement).value);
             this.children['list-users'].show();
             this.children['button-search'].show();
+            this.children['list-users'].children['list-divider'].show();
           } else {
             this.children['list-users'].hide();
             this.children['button-search'].hide();
