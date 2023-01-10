@@ -54,7 +54,6 @@ class InitialController {
                 return acc;
               }, {});
               store.set('chats.data', obj);
-              console.log(store.getState().chats);
             } else {
               console.log(JSON.parse((res as XMLHttpRequest).response.reason));
             }

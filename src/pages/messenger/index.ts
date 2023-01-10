@@ -14,6 +14,7 @@ import store from '../../core/Store';
 import ModalClip from '../../hoc/withModalClip';
 import Messages from '../../hoc/withMessages';
 import ModalUsers from '../../components/modal-users';
+import ButtonEdit from '../../components/button-edit';
 
 declare global {
   interface Window { handleUsers: (id: number)=> void; }
@@ -112,6 +113,7 @@ class MessengerPage extends Block {
     });
     this.children['list-chats'] = new ListChats({});
     this.children['list-users'] = new ListUsers({});
+    this.children['button-edit'] = new ButtonEdit({});
     this.children['button-open-profile'] = new ButtonOpenProfile({
       events: {
         click: () => {
