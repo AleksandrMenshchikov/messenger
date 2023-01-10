@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 import './index.css';
 import template from './index.hbs';
 import { Block } from '../../core';
@@ -54,6 +55,13 @@ window.handleChats = function fn(id: number) {
     }
     store.set('currentChat.data', null);
     store.set('currentChat.data', chat);
+    [...document.querySelector('.list')?.children as HTMLCollection].forEach((elem) => {
+      if ((elem as HTMLElement).dataset.id === String(id)) {
+        (elem as HTMLElement).style.backgroundColor = '#e4edfd';
+      } else {
+        (elem as HTMLElement).style.backgroundColor = '';
+      }
+    });
   }
 };
 
