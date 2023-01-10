@@ -15,6 +15,7 @@ import ModalClip from '../../hoc/withModalClip';
 import Messages from '../../hoc/withMessages';
 import ModalUsers from '../../components/modal-users';
 import ButtonEdit from '../../components/button-edit';
+import ModalEdit from '../../components/modal-edit';
 
 declare global {
   interface Window { handleUsers: (id: number)=> void; }
@@ -165,6 +166,7 @@ class MessengerPage extends Block {
     });
     this.children['modal-clip'] = new ModalClip({ foto, file, location });
     this.children['modal-users'] = new ModalUsers({ search });
+    this.children['modal-edit'] = new ModalEdit({});
 
     this.children['button-search'].hide();
     this.children['list-users'].hide();

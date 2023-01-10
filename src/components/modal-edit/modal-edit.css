@@ -1,0 +1,26 @@
+.modal-edit {
+  position: absolute;
+  background: var(--color-background-modal);
+  box-shadow: 0 0 6px var(--box-shadow);
+  z-index: 3000;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-edit__wrapper {
+  width: 370px;
+  box-shadow: var(--box-shadow);
+  border-radius: 12px;
+  background-color: var(--color-white);
+  padding: 30px;
+}
+
+.modal-edit__title {
+  font-weight: 500;
+  font-size: 1.5rem;
+  margin: 10px 0 30px;
+  text-align: center;
+}
