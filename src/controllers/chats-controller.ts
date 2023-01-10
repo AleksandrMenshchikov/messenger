@@ -54,6 +54,27 @@ class ChatsController {
       })
       .catch((err) => console.log(err));
   }
+
+  deleteUserFromChat(chatId: number, memberId: number) {
+    return chatsApi.deleteUserFromChat(chatId, memberId)
+      .then((res) => {
+        if ((res as XMLHttpRequest).status === 200) {
+          chatsApi.getChatUsers(chatId)
+            .then((res) => {
+              if ((res as XMLHttpRequest).status === 200) {
+                const arr = JSON.parse((res as XMLHttpRequest).response);
+                store.set(`chatsUsers.data.${chatId}`, arr);
+                const modalUsers = document.querySelector('.modal-users') as HTMLElement;
+                const button = modalUsers.querySelector('button')as HTMLButtonElement;
+                button.click();
+                (modalUsers.parentElement as HTMLElement).style.display = 'none';
+              }
+            })
+            .catch((err) => console.log(err));
+        }
+      })
+      .catch((err) => console.log(err));
+  }
 }
 
 const chatsController = new ChatsController();

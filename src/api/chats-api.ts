@@ -44,6 +44,20 @@ class ChatsApi extends BaseAPI {
     });
   }
 
+  deleteUserFromChat(chatId: number, memberId: number) {
+    return httpTransport.delete(URLs['https://ya-praktikum.tech/api/v2/chats/users'], {
+      headers: {
+        'content-type': 'application/json',
+      },
+      data: {
+        users: [
+          memberId,
+        ],
+        chatId,
+      },
+    });
+  }
+
   getChatUsers(chatId: number) {
     return httpTransport.get(`${URLs['https://ya-praktikum.tech/api/v2/chats']}/${chatId}/users`, {});
   }

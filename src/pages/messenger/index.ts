@@ -41,7 +41,11 @@ window.handleUsers = function fn(id: number) {
     store.set('currentMember.data', user);
     const chatId = store.getState().currentChat.data.id;
     const memberId = store.getState().currentMember.data.id;
-    chatsController.addUserToChat(chatId, memberId);
+    if (store.getState().modalUsersTitle.title === 'Добавить пользователя') {
+      chatsController.addUserToChat(chatId, memberId);
+    } else {
+      chatsController.deleteUserFromChat(chatId, memberId);
+    }
   }
 };
 
