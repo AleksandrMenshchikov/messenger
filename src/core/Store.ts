@@ -29,6 +29,9 @@ class Store extends EventBus {
     chats: {
       data: null,
     },
+    currentChat: {
+      data: null,
+    },
     button: {
       type: 'submit',
       content: '',

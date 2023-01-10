@@ -17,7 +17,10 @@ import ButtonEdit from '../../components/button-edit';
 import ModalEdit from '../../components/modal-edit';
 
 declare global {
-  interface Window { handleUsers: (id: number)=> void; }
+  interface Window {
+    handleUsers: (id: number)=> void;
+    handleChats: (id: number)=> void;
+  }
 }
 
 window.handleUsers = function fn(id: number) {
@@ -34,6 +37,23 @@ window.handleUsers = function fn(id: number) {
     }
     store.set('currentMember.data', null);
     store.set('currentMember.data', user);
+  }
+};
+
+window.handleChats = function fn(id: number) {
+  const state = store.getState().chats;
+  let chat = null;
+  if (state.data) {
+    // eslint-disable-next-line no-restricted-syntax
+    for (const key in state.data) {
+      if (Object.prototype.hasOwnProperty.call(state.data, key)) {
+        if (state.data[key].id === id) {
+          chat = state.data[key];
+        }
+      }
+    }
+    store.set('currentChat.data', null);
+    store.set('currentChat.data', chat);
   }
 };
 
