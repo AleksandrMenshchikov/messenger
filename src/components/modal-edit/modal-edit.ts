@@ -2,6 +2,7 @@ import './modal-edit.css';
 import template from './modal-edit.hbs';
 import { Block } from '../../core';
 import FormEdit from '../form-edit';
+import chatsController from '../../controllers/chats-controller';
 
 // type ModalEditProps = {
 
@@ -23,8 +24,8 @@ export class ModalEdit extends Block {
           const input = form.querySelector('input') as HTMLInputElement;
           if (input?.value.trim().length > 2) {
             input.nextElementSibling?.classList.remove('error_active');
-            const obj = { title: input.value.trim() };
-            console.log(obj);
+            const title = input.value.trim();
+            chatsController.createChat(title);
           } else {
             input?.nextElementSibling?.classList.add('error_active');
           }

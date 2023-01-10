@@ -53,6 +53,7 @@ class InitialController {
                 }
                 return acc;
               }, {});
+              store.set('chats.data', null);
               store.set('chats.data', obj);
             } else {
               console.log(JSON.parse((res as XMLHttpRequest).response.reason));
