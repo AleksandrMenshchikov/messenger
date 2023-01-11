@@ -93,6 +93,13 @@
 
 .messages__group-member {
   font-size: 1.2rem;
+  line-height: 15px;
+  margin: 0;
+}
+
+.messages__group-user {
+  font-size: 1.2rem;
+  line-height: 15px;
   margin: 0;
 }
 
