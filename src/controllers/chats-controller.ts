@@ -120,11 +120,12 @@ class ChatsController {
 
           socket.addEventListener('message', (event) => {
             console.log('Получены данные', event.data);
+            console.log(store.getState().chats);
           });
 
           socket.addEventListener('error', () => {
             store.set('currentChat.data', null);
-            const list = document.querySelectorAll('.list__item') as NodeList;
+            const list = document.querySelectorAll('.list__item-inner') as NodeList;
             list.forEach((item) => {
             // eslint-disable-next-line no-param-reassign
               (item as HTMLElement).style.backgroundColor = '';

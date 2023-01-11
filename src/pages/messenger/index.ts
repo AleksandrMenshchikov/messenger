@@ -64,13 +64,16 @@ window.handleChats = function fn(id: number) {
     store.set('currentChat.data', null);
     store.set('currentChat.data', chat);
     chatsController.getTokenChat(id);
-    [...document.querySelector('.list')?.children as HTMLCollection].forEach((elem) => {
-      if ((elem as HTMLElement).dataset.id === String(id)) {
-        (elem as HTMLElement).style.backgroundColor = '#e4edfd';
-      } else {
-        (elem as HTMLElement).style.backgroundColor = '';
-      }
-    });
+    const list = document.querySelectorAll('.list__item-inner') as NodeList;
+    if (list) {
+      list.forEach((elem) => {
+        if ((elem as HTMLElement).parentElement?.dataset.id === String(id)) {
+          (elem as HTMLElement).style.backgroundColor = '#e4edfd';
+        } else {
+          (elem as HTMLElement).style.backgroundColor = '';
+        }
+      });
+    }
     const emptyMessages = document.querySelector('.empty-messages') as HTMLElement;
     emptyMessages.style.display = 'none';
   }
