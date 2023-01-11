@@ -61,6 +61,10 @@ class ChatsApi extends BaseAPI {
   getChatUsers(chatId: number) {
     return httpTransport.get(`${URLs['https://ya-praktikum.tech/api/v2/chats']}/${chatId}/users`, {});
   }
+
+  getTokenChat(chatId: number) {
+    return httpTransport.post(`${URLs['https://ya-praktikum.tech/api/v2/chats/token']}/${chatId}`, {});
+  }
 }
 
 const chatsApi = new ChatsApi();

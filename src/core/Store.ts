@@ -90,6 +90,7 @@ class Store extends EventBus {
     modalUsersTitle: {
       title: '',
     },
+    socket: WebSocket,
   };
 
   public getState() {

@@ -75,6 +75,47 @@ class ChatsController {
       })
       .catch((err) => console.log(err));
   }
+
+  getTokenChat(chatId: number) {
+    return chatsApi.getTokenChat(chatId)
+      .then((res) => {
+        if ((res as XMLHttpRequest).status === 200) {
+          const { token } = JSON.parse((res as XMLHttpRequest).response);
+          store.set('socket', null);
+          const socket = new WebSocket(`wss://ya-praktikum.tech/ws/chats/${store.getState().user.id}/${chatId}/${token}`);
+          let timer: NodeJS.Timer;
+          socket.addEventListener('open', () => {
+            console.log('Соединение установлено');
+
+            timer = setInterval(() => {
+              socket.send('ping');
+            }, 50000);
+          });
+
+          socket.addEventListener('close', (event) => {
+            clearInterval(timer);
+            if (event.wasClean) {
+              console.log('Соединение закрыто чисто');
+            } else {
+              console.log('Обрыв соединения');
+            }
+
+            console.log(`Код: ${event.code}`);
+          });
+
+          socket.addEventListener('message', (event) => {
+            console.log('Получены данные', event.data);
+          });
+
+          socket.addEventListener('error', () => {
+            console.log('Ошибка соединения');
+          });
+
+          store.set('socket', socket);
+        }
+      })
+      .catch((err) => console.log(err));
+  }
 }
 
 const chatsController = new ChatsController();

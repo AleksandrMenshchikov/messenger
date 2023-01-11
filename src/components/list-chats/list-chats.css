@@ -63,6 +63,7 @@
 }
 
 .list__item-subtitle-text {
+  display: block;
   font-weight: 500;
   font-size: 1.2rem;
   color: var(--color-dark-gray);

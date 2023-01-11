@@ -63,6 +63,7 @@ window.handleChats = function fn(id: number) {
     }
     store.set('currentChat.data', null);
     store.set('currentChat.data', chat);
+    chatsController.getTokenChat(id);
     [...document.querySelector('.list')?.children as HTMLCollection].forEach((elem) => {
       if ((elem as HTMLElement).dataset.id === String(id)) {
         (elem as HTMLElement).style.backgroundColor = '#e4edfd';
@@ -195,7 +196,17 @@ class MessengerPage extends Block {
       onClickProfileArrow: () => {
         const content = (this.element.querySelector('.message-textarea') as HTMLElement).textContent?.trim();
         if (content && content.length > 0) {
-          console.log(content);
+          const { socket } = store.getState();
+          if (socket instanceof WebSocket) {
+            socket.send(JSON.stringify({
+              content,
+              type: 'message',
+            }));
+            socket.send(JSON.stringify({
+              content: '0',
+              type: 'get old',
+            }));
+          }
         }
       },
     });

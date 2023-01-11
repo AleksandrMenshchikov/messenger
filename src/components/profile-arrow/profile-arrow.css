@@ -1,3 +1,13 @@
+.profile__arrow-button {
+  border: none;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  border-radius: 50%;
+  background: transparent;
+}
+
 .profile__arrow-img {
   cursor: pointer;
+  border-radius: 50%;
 }

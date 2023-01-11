@@ -10,6 +10,7 @@ enum URLs {
   'https://ya-praktikum.tech/api/v2/user/search' = 'https://ya-praktikum.tech/api/v2/user/search',
   'https://ya-praktikum.tech/api/v2/chats' = 'https://ya-praktikum.tech/api/v2/chats',
   'https://ya-praktikum.tech/api/v2/chats/users' = 'https://ya-praktikum.tech/api/v2/chats/users',
+  'https://ya-praktikum.tech/api/v2/chats/token' = 'https://ya-praktikum.tech/api/v2/chats/token',
 }
 
 export default URLs;
