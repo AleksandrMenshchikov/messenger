@@ -1,16 +1,18 @@
 .messages {
-  padding: 10px 20px;
   width: 100%;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  max-height: 100vh;
 }
 
 .messages__head {
-  height: 44px;
+  min-height: 54px;
   border-bottom: 1px solid var(--color-gray);
   display: flex;
   gap: 10px;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .messages__head-avatar {
@@ -19,6 +21,7 @@
   object-fit: contain;
   object-position: center;
   border-radius: 50%;
+  margin-left: 20px;
 }
 
 .messages__head-title {
@@ -29,18 +32,16 @@
   text-overflow: ellipsis;
   margin: 0;
   align-self: center;
-  margin-bottom: 10px;
   width: calc(100vw - 445px);
 }
 
 .messages__footer {
-  min-height: 44px;
   border-top: 1px solid var(--color-gray);
   margin-top: auto;
   display: flex;
   align-items: center;
   gap: 10px;
-  padding-top: 10px;
+  padding: 10px 0;
 }
 
 .message-textarea {
@@ -60,4 +61,57 @@
   font-weight: 500;
   font-size: 1.2rem;
   color: var(--color-dark-gray);
+}
+
+.messages__content {
+  max-height: calc(0.85 * 100vh);
+  overflow-y: auto;
+}
+
+.messages__group {
+  margin: 30px 0;
+}
+
+.messages__group-date {
+  display: block;
+  font-weight: 500;
+  font-size: 1.2rem;
+  color: var(--color-dark-gray);
+  text-align: center;
+}
+
+.messages__group-member-container {
+  max-width: 400px;
+  width: fit-content;
+  padding: 11px;
+  background: var(--color-light-gray);
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  margin: 20px auto 20px 20px;
+}
+
+.messages__group-member {
+  font-size: 1.2rem;
+  margin: 0;
+}
+
+.messages__group-member-date {
+  font-weight: 500;
+  font-size: 0.9rem;
+  color: var(--color-dark-gray);
+  display: block;
+  margin-top: 5px;
+  text-align: end;
+}
+
+.messages__group-user-container {
+  max-width: 400px;
+  width: fit-content;
+  padding: 11px;
+  background: var(--color-light-blue);
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  margin: 20px 20px 20px auto;
 }

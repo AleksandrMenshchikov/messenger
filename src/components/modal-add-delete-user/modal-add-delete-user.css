@@ -1,7 +1,7 @@
 .modal-add-delete-user {
   position: absolute;
   top: 65px;
-  right: 10px;
+  right: 20px;
   background: var(--color-white);
   box-shadow: 0 0 6px var(--box-shadow);
   border-radius: 12px;
