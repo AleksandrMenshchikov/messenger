@@ -87,6 +87,11 @@ class ChatsController {
           socket.addEventListener('open', () => {
             console.log('Соединение установлено');
 
+            socket.send(JSON.stringify({
+              content: '0',
+              type: 'get old',
+            }));
+
             timer = setInterval(() => {
               socket.send('ping');
             }, 50000);
@@ -94,6 +99,16 @@ class ChatsController {
 
           socket.addEventListener('close', (event) => {
             clearInterval(timer);
+            store.set('currentChat.data', null);
+            const list = document.querySelectorAll('.list__item') as NodeList;
+            list.forEach((item) => {
+            // eslint-disable-next-line no-param-reassign
+              (item as HTMLElement).style.backgroundColor = '';
+            });
+            const emptyMessages = document.querySelector('.empty-messages') as HTMLElement;
+            emptyMessages.style.display = 'flex';
+            const messages = document.querySelector('.messages') as HTMLElement;
+            messages.style.display = 'none';
             if (event.wasClean) {
               console.log('Соединение закрыто чисто');
             } else {
@@ -108,6 +123,16 @@ class ChatsController {
           });
 
           socket.addEventListener('error', () => {
+            store.set('currentChat.data', null);
+            const list = document.querySelectorAll('.list__item') as NodeList;
+            list.forEach((item) => {
+            // eslint-disable-next-line no-param-reassign
+              (item as HTMLElement).style.backgroundColor = '';
+            });
+            const emptyMessages = document.querySelector('.empty-messages') as HTMLElement;
+            emptyMessages.style.display = 'flex';
+            const messages = document.querySelector('.messages') as HTMLElement;
+            messages.style.display = 'none';
             console.log('Ошибка соединения');
           });
 
