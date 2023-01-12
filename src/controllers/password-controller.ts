@@ -25,7 +25,6 @@ class PasswordController {
               } else {
                 elem.style.display = 'block';
               }
-              console.log(elem);
             });
           }
         })

@@ -191,7 +191,6 @@ class ChatsController {
             } else {
               store.set('messagesContent.data', null);
             }
-            console.log(store.getState().messagesContent.data);
           });
 
           socket.addEventListener('error', () => {
