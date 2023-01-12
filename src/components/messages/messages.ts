@@ -4,6 +4,7 @@ import { Block } from '../../core';
 import Dots from '../dots';
 import Clip from '../clip';
 import ProfileArrow from '../profile-arrow';
+import MessagesContent from '../../hoc/withMessagesContent';
 
 const arrowRight: URL = new URL(
   '../../../assets/arrowRight.svg',
@@ -41,6 +42,7 @@ export class Messages extends Block {
         click: () => (this.props.onClickProfileArrow as () => void)(),
       },
     });
+    this.children['messages-content'] = new MessagesContent({});
   }
 
   // eslint-disable-next-line class-methods-use-this

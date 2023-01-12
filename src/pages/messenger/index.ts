@@ -51,6 +51,7 @@ window.handleUsers = function fn(id: number) {
 
 window.handleChats = function fn(id: number) {
   const state = store.getState().chats;
+
   let chat = null;
   if (state.data) {
     // eslint-disable-next-line no-restricted-syntax
@@ -63,7 +64,6 @@ window.handleChats = function fn(id: number) {
     }
     store.set('currentChat.data', null);
     store.set('currentChat.data', chat);
-    chatsController.getTokenChat(id);
     const list = document.querySelectorAll('.list__item-inner') as NodeList;
     if (list) {
       list.forEach((elem) => {
@@ -76,6 +76,7 @@ window.handleChats = function fn(id: number) {
     }
     const emptyMessages = document.querySelector('.empty-messages') as HTMLElement;
     emptyMessages.style.display = 'none';
+    chatsController.getTokenChat(id);
   }
 };
 

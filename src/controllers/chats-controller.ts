@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-syntax */
 /* eslint-disable class-methods-use-this */
 import chatsApi from '../api/chats-api';
 import URLs from '../api/urls';
@@ -83,6 +84,7 @@ class ChatsController {
           const { token } = JSON.parse((res as XMLHttpRequest).response);
           store.set('socket', null);
           const socket = new WebSocket(`wss://ya-praktikum.tech/ws/chats/${store.getState().user.id}/${chatId}/${token}`);
+          store.set('socket', socket);
           let timer: NodeJS.Timer;
           socket.addEventListener('open', () => {
             console.log('Соединение установлено');
@@ -119,8 +121,77 @@ class ChatsController {
           });
 
           socket.addEventListener('message', (event) => {
-            console.log('Получены данные', event.data);
-            console.log(store.getState().chats);
+            const data = JSON.parse(event.data);
+            if (data.length) {
+              const chatId = data[0].chat_id;
+              const chats = store.getState().chats.data;
+              if (chats) {
+                for (const key in chats) {
+                  if (Object.prototype.hasOwnProperty.call(chats, key)) {
+                    if (chats[key].id === chatId) {
+                      const userId = store.getState().user.id;
+
+                      const obj = data.reduceRight((
+                        acc: any,
+                        currentValue: any,
+                      ) => {
+                        const rowDate = currentValue.time;
+                        const date = new Date(currentValue.time).toLocaleDateString();
+                        const time = new Date(currentValue.time).toLocaleTimeString().slice(0, -3);
+                        if (acc[date]) {
+                          if (userId === currentValue.user_id) {
+                            acc[date][Math.abs(currentValue.id - data.length)] = {
+                              ownContent: currentValue.content,
+                              rowDate,
+                              time,
+                            };
+                          } else {
+                            acc[date][Math.abs(currentValue.id - data.length)] = {
+                              memberContent: currentValue.content,
+                              rowDate,
+                              time,
+                            };
+                          }
+                        } else if (userId === currentValue.user_id) {
+                          acc[date] = {
+                            [Math.abs(currentValue.id - data.length)]: {
+                              ownContent: currentValue.content,
+                              rowDate,
+                              time,
+                            },
+                          };
+                        } else {
+                          acc[date] = {
+                            [Math.abs(currentValue.id - data.length)]:
+                            {
+                              memberContent: currentValue.content,
+                              rowDate,
+                              time,
+                            },
+                          };
+                        }
+                        return acc;
+                      }, {});
+                      const newObj: any = {};
+                      for (const key in obj) {
+                        if (Object.prototype.hasOwnProperty.call(obj, key)) {
+                          newObj[0] = { date: key, messages: obj[key] };
+                        }
+                      }
+                      store.getState().messagesContent.data = null;
+                      store.getState().messagesContent.data = newObj;
+                    } else {
+                      store.getState().messagesContent.data = null;
+                    }
+                  }
+                }
+              } else {
+                store.getState().messagesContent.data = null;
+              }
+            } else {
+              store.getState().messagesContent.data = null;
+            }
+            console.log(store.getState().messagesContent.data);
           });
 
           socket.addEventListener('error', () => {
