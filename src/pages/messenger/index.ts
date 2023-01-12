@@ -122,7 +122,7 @@ class MessengerPage extends Block {
         this.children['modal-edit'].hide();
       }
     });
-    document.addEventListener('keydown', (e) => {
+    this.element.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') {
         store.set('modalAddDeleteUser.isOpened', false);
         this.children['modal-add-delete-user'].hide();
