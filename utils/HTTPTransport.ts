@@ -12,6 +12,8 @@ type Options = {
   timeout?: 5000
 };
 
+type HTTPMethod = (_url: string, options?: Options) => Promise<unknown>
+
 function queryStringify(data: {[x: string]: unknown}) {
   if (typeof data !== 'object') {
     throw new Error('Data must be object');
@@ -22,25 +24,25 @@ function queryStringify(data: {[x: string]: unknown}) {
 }
 
 class HTTPTransport {
-  get = (_url: string, options: Options) => this.request(
+  get: HTTPMethod = (_url, options = {}) => this.request(
     _url,
     { ...options, method: METHODS.GET },
     options.timeout,
   );
 
-  post = (_url: string, options: Options) => this.request(
+  post: HTTPMethod = (_url, options = {}) => this.request(
     _url,
     { ...options, method: METHODS.POST },
     options.timeout,
   );
 
-  put = (_url: string, options: Options) => this.request(
+  put: HTTPMethod = (_url, options = {}) => this.request(
     _url,
     { ...options, method: METHODS.PUT },
     options.timeout,
   );
 
-  delete = (_url: string, options:Options) => this.request(
+  delete: HTTPMethod = (_url, options = {}) => this.request(
     _url,
     { ...options, method: METHODS.DELETE },
     options.timeout,
