@@ -5,7 +5,7 @@ import URLs from './urls';
 
 class UsersApi extends BaseAPI {
   updateAvatar(form: FormData) {
-    return fetch(URLs['https://ya-praktikum.tech/api/v2/user/profile/avatar'], {
+    return fetch(`${URLs.BASE_URL}/user/profile/avatar`, {
       method: 'PUT',
       credentials: 'include',
       mode: 'cors',
@@ -14,7 +14,7 @@ class UsersApi extends BaseAPI {
   }
 
   updateProfile(obj: Record<string, unknown>) {
-    return httpTransport.put(URLs['https://ya-praktikum.tech/api/v2/user/profile'], {
+    return httpTransport.put(`${URLs.BASE_URL}/user/profile`, {
       headers: {
         'content-type': 'application/json',
       },
@@ -23,7 +23,7 @@ class UsersApi extends BaseAPI {
   }
 
   updatePassword(obj: Record<string, unknown>) {
-    return httpTransport.put(URLs['https://ya-praktikum.tech/api/v2/user/password'], {
+    return httpTransport.put(`${URLs.BASE_URL}/user/password`, {
       headers: {
         'content-type': 'application/json',
       },
@@ -32,7 +32,7 @@ class UsersApi extends BaseAPI {
   }
 
   searchUsers(login: string) {
-    return httpTransport.post(URLs['https://ya-praktikum.tech/api/v2/user/search'], {
+    return httpTransport.post(`${URLs.BASE_URL}/user/search`, {
       headers: {
         'content-type': 'application/json',
       },

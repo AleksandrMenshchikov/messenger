@@ -5,11 +5,11 @@ import URLs from './urls';
 
 class ChatsApi extends BaseAPI {
   getChats() {
-    return httpTransport.get(URLs['https://ya-praktikum.tech/api/v2/chats'], {});
+    return httpTransport.get(`${URLs.BASE_URL}/chats`, {});
   }
 
   createChat(title: string) {
-    return httpTransport.post(URLs['https://ya-praktikum.tech/api/v2/chats'], {
+    return httpTransport.post(`${URLs.BASE_URL}/chats`, {
       headers: {
         'content-type': 'application/json',
       },
@@ -20,7 +20,7 @@ class ChatsApi extends BaseAPI {
   }
 
   deleteChat(chatId: number) {
-    return httpTransport.delete(URLs['https://ya-praktikum.tech/api/v2/chats'], {
+    return httpTransport.delete(`${URLs.BASE_URL}/chats`, {
       headers: {
         'content-type': 'application/json',
       },
@@ -31,7 +31,7 @@ class ChatsApi extends BaseAPI {
   }
 
   addUserToChat(chatId: number, memberId: number) {
-    return httpTransport.put(URLs['https://ya-praktikum.tech/api/v2/chats/users'], {
+    return httpTransport.put(`${URLs.BASE_URL}/chats/users`, {
       headers: {
         'content-type': 'application/json',
       },
@@ -45,7 +45,7 @@ class ChatsApi extends BaseAPI {
   }
 
   deleteUserFromChat(chatId: number, memberId: number) {
-    return httpTransport.delete(URLs['https://ya-praktikum.tech/api/v2/chats/users'], {
+    return httpTransport.delete(`${URLs.BASE_URL}/chats/users`, {
       headers: {
         'content-type': 'application/json',
       },
@@ -59,11 +59,11 @@ class ChatsApi extends BaseAPI {
   }
 
   getChatUsers(chatId: number) {
-    return httpTransport.get(`${URLs['https://ya-praktikum.tech/api/v2/chats']}/${chatId}/users`, {});
+    return httpTransport.get(`${URLs.BASE_URL}/chats/${chatId}/users`, {});
   }
 
   getTokenChat(chatId: number) {
-    return httpTransport.post(`${URLs['https://ya-praktikum.tech/api/v2/chats/token']}/${chatId}`, {});
+    return httpTransport.post(`${URLs.BASE_URL}/chats/token/${chatId}`, {});
   }
 }
 

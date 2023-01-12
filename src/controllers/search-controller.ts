@@ -11,7 +11,7 @@ class SearchController {
         const obj = arr.reduce((acc, item, index) => {
           acc[index] = item;
           if ((acc[index] as Record<string, unknown>).avatar) {
-            (acc[index] as Record<string, unknown>).avatar = `${URLs.hostAvatar}${(acc[index] as Record<string, unknown>).avatar}`;
+            (acc[index] as Record<string, unknown>).avatar = `${URLs.BASE_URL_AVATAR}${(acc[index] as Record<string, unknown>).avatar}`;
           } else {
             (acc[index] as Record<string, unknown>).avatar = 'https://www.lightsong.net/wp-content/uploads/2020/12/blank-profile-circle.png';
           }

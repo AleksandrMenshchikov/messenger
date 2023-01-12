@@ -5,7 +5,7 @@ import URLs from './urls';
 
 class AuthApi extends BaseAPI {
   create(obj: Record<string, unknown>) {
-    return httpTransport.post(URLs['https://ya-praktikum.tech/api/v2/auth/signup'], {
+    return httpTransport.post(`${URLs.BASE_URL}/auth/signup`, {
       headers: {
         'content-type': 'application/json',
       },
@@ -14,11 +14,11 @@ class AuthApi extends BaseAPI {
   }
 
   request() {
-    return httpTransport.get(URLs['https://ya-praktikum.tech/api/v2/auth/user'], {});
+    return httpTransport.get(`${URLs.BASE_URL}/auth/user`, {});
   }
 
   get(obj: Record<string, unknown>) {
-    return httpTransport.post(URLs['https://ya-praktikum.tech/api/v2/auth/signin'], {
+    return httpTransport.post(`${URLs.BASE_URL}/auth/signin`, {
       headers: {
         'content-type': 'application/json',
       },
@@ -27,7 +27,7 @@ class AuthApi extends BaseAPI {
   }
 
   delete() {
-    return httpTransport.post(URLs['https://ya-praktikum.tech/api/v2/auth/logout'], {});
+    return httpTransport.post(`${URLs.BASE_URL}/auth/logout`, {});
   }
 }
 

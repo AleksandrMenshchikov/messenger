@@ -30,7 +30,7 @@ class InitialController {
           store.set('user', JSON.parse((res as XMLHttpRequest).response));
           const state = store.getState();
           if (state.user.avatar) {
-            store.set('user.avatar', `${URLs.hostAvatar}${state.user.avatar}`);
+            store.set('user.avatar', `${URLs.BASE_URL_AVATAR}${state.user.avatar}`);
           } else {
             store.set('user.avatar', avatarUrl);
           }
@@ -48,7 +48,7 @@ class InitialController {
               const obj = arr.reduce((acc, item, index) => {
                 acc[index] = item;
                 if ((acc[index] as Record<string, unknown>).avatar) {
-                  (acc[index] as Record<string, unknown>).avatar = `${URLs.hostAvatar}${(acc[index] as Record<string, unknown>).avatar}`;
+                  (acc[index] as Record<string, unknown>).avatar = `${URLs.BASE_URL_AVATAR}${(acc[index] as Record<string, unknown>).avatar}`;
                 } else {
                   (acc[index] as Record<string, unknown>).avatar = 'https://www.lightsong.net/wp-content/uploads/2020/12/blank-profile-circle.png';
                 }

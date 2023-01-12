@@ -13,7 +13,7 @@ class ProfileController {
           if ((res as XMLHttpRequest).status === 200) {
             const { avatar, ...rest } = JSON.parse((res as XMLHttpRequest).response);
             if (avatar) {
-              store.set('user.avatar', `${URLs.hostAvatar}${avatar}`);
+              store.set('user.avatar', `${URLs.BASE_URL_AVATAR}${avatar}`);
             }
             store.set('user', rest);
             store.set('profileTitle.content', rest.display_name);
