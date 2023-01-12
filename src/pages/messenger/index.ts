@@ -62,6 +62,7 @@ window.handleChats = function fn(id: number) {
         }
       }
     }
+    store.set('messagesContent.data', null);
     store.set('currentChat.data', null);
     store.set('currentChat.data', chat);
     const list = document.querySelectorAll('.list__item-inner') as NodeList;

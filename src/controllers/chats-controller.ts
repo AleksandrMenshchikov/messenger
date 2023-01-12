@@ -122,6 +122,9 @@ class ChatsController {
 
           socket.addEventListener('message', (event) => {
             const data = JSON.parse(event.data);
+            if (data.type && data.type === 'error') {
+              return;
+            }
             if (data.length) {
               const chatId = data[0].chat_id;
               const chats = store.getState().chats.data;
@@ -175,11 +178,13 @@ class ChatsController {
                       const newObj: any = {};
                       for (const key in obj) {
                         if (Object.prototype.hasOwnProperty.call(obj, key)) {
-                          newObj[0] = { date: key, messages: obj[key] };
+                          newObj[key] = { date: key, messages: obj[key] };
                         }
                       }
                       store.set('messagesContent.data', null);
                       store.set('messagesContent.data', newObj);
+                      const messagesContent = document.querySelector('.messages__content') as HTMLElement;
+                      messagesContent.scrollTop = messagesContent.scrollHeight;
                     } else {
                       store.set('messagesContent.data', null);
                     }
