@@ -133,7 +133,6 @@ class ChatsController {
                   if (Object.prototype.hasOwnProperty.call(chats, key)) {
                     if (chats[key].id === chatId) {
                       const userId = store.getState().user.id;
-
                       const obj = data.reduceRight((
                         acc: any,
                         currentValue: any,
