@@ -20,6 +20,7 @@ const avatarUrl: URL = new URL(
 
 class InitialController {
   getUser() {
+    // chatsApi.deleteChat(682);
     const loader = new Loader().getContent();
     document.body.prepend(loader);
     const timer = setTimeout(() => {
