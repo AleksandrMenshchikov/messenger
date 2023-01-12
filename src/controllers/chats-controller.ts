@@ -133,6 +133,11 @@ class ChatsController {
                   if (Object.prototype.hasOwnProperty.call(chats, key)) {
                     if (chats[key].id === chatId) {
                       const userId = store.getState().user.id;
+                      const element = document.querySelector(`[data-id="${chatId}"]`) as HTMLElement;
+                      const textElement = element.querySelector('.list__item-subtitle-text') as HTMLElement;
+                      textElement.textContent = data[0].content;
+                      const textArea = document.querySelector('.message-textarea') as HTMLElement;
+                      textArea.textContent = '';
                       const obj = data.reduceRight((
                         acc: any,
                         currentValue: any,
@@ -184,8 +189,6 @@ class ChatsController {
                       store.set('messagesContent.data', newObj);
                       const messagesContent = document.querySelector('.messages__content') as HTMLElement;
                       messagesContent.scrollTop = messagesContent.scrollHeight;
-                    } else {
-                      store.set('messagesContent.data', null);
                     }
                   }
                 }
