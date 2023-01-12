@@ -178,18 +178,18 @@ class ChatsController {
                           newObj[0] = { date: key, messages: obj[key] };
                         }
                       }
-                      store.getState().messagesContent.data = null;
-                      store.getState().messagesContent.data = newObj;
+                      store.set('messagesContent.data', null);
+                      store.set('messagesContent.data', newObj);
                     } else {
-                      store.getState().messagesContent.data = null;
+                      store.set('messagesContent.data', null);
                     }
                   }
                 }
               } else {
-                store.getState().messagesContent.data = null;
+                store.set('messagesContent.data', null);
               }
             } else {
-              store.getState().messagesContent.data = null;
+              store.set('messagesContent.data', null);
             }
             console.log(store.getState().messagesContent.data);
           });
