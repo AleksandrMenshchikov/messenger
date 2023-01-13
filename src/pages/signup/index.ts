@@ -1,9 +1,10 @@
 import './index.css';
 import template from './index.hbs';
-import { Block, renderDOM } from '../../core';
+import { Block } from '../../core';
 import FormSignup from '../../components/form-signup';
+import signupController from '../../controllers/signup-controller';
 
-class Index extends Block {
+class SignupPage extends Block {
   initChildren(): void {
     this.children['form-signup'] = new FormSignup({
       events: {
@@ -33,7 +34,7 @@ class Index extends Block {
               phone: form.phone.value,
               password: form.password.value,
             };
-            console.log(obj);
+            signupController.createUser(obj);
           }
         },
       },
@@ -46,6 +47,5 @@ class Index extends Block {
   }
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-  renderDOM('#app', new Index());
-});
+const signupPage = new SignupPage();
+export default signupPage;

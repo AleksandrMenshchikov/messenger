@@ -25,7 +25,7 @@
   position: absolute;
   top: 5px;
   font-size: 1.4rem;
-  color: var(--color-gray);
+  color: var(--color-dark-gray);
   pointer-events: none;
   transition: 0.3s ease all;
 }

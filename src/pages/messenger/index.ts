@@ -1,12 +1,85 @@
+/* eslint-disable no-param-reassign */
 import './index.css';
 import template from './index.hbs';
-import { renderDOM, Block } from '../../core';
-import Member from '../../components/member';
-import Clip from '../../components/clip';
-import Dots from '../../components/dots';
-import FormMessenger from '../../components/form-messenger';
+import { Block } from '../../core';
 import ButtonOpenProfile from '../../components/button-open-profile';
-import ProfileArrow from '../../components/profile-arrow';
+import router from '../../core/Router';
+import ListChats from '../../hoc/withListChats';
+import InputSearch from '../../components/input-search';
+import ButtonSearch from '../../components/button-search';
+import ListUsers from '../../hoc/withListUsers';
+import EmptyMessages from '../../components/empty-messages';
+import ModalAddDeleteUser from '../../hoc/withModalAddDeleteUser';
+import store from '../../core/Store';
+import ModalClip from '../../hoc/withModalClip';
+import Messages from '../../hoc/withMessages';
+import ModalUsers from '../../components/modal-users';
+import ButtonEdit from '../../components/button-edit';
+import ModalEdit from '../../components/modal-edit';
+import chatsController from '../../controllers/chats-controller';
+
+declare global {
+  interface Window {
+    handleUsers: (id: number)=> void;
+    handleChats: (id: number)=> void;
+  }
+}
+
+window.handleUsers = function fn(id: number) {
+  const state = store.getState().users;
+  let user = null;
+  if (state.data) {
+    // eslint-disable-next-line no-restricted-syntax
+    for (const key in state.data) {
+      if (Object.prototype.hasOwnProperty.call(state.data, key)) {
+        if (state.data[key].id === id) {
+          user = state.data[key];
+        }
+      }
+    }
+    store.set('currentMember.data', null);
+    store.set('currentMember.data', user);
+    const chatId = store.getState().currentChat.data.id;
+    const memberId = store.getState().currentMember.data.id;
+    if (store.getState().modalUsersTitle.title === 'Добавить пользователя') {
+      chatsController.addUserToChat(chatId, memberId);
+    } else {
+      chatsController.deleteUserFromChat(chatId, memberId);
+    }
+  }
+};
+
+window.handleChats = function fn(id: number) {
+  const state = store.getState().chats;
+
+  let chat = null;
+  if (state.data) {
+    // eslint-disable-next-line no-restricted-syntax
+    for (const key in state.data) {
+      if (Object.prototype.hasOwnProperty.call(state.data, key)) {
+        if (state.data[key].id === id) {
+          chat = state.data[key];
+        }
+      }
+    }
+    store.set('messagesContent.data', null);
+    store.set('currentChat.data', null);
+    store.set('currentChat.data', chat);
+    const list = document.querySelectorAll('.list__item-inner') as NodeList;
+    if (list) {
+      list.forEach((elem) => {
+        if ((elem as HTMLElement).parentElement?.dataset.id === String(id)) {
+          (elem as HTMLElement).style.backgroundColor = '#e4edfd';
+        } else {
+          (elem as HTMLElement).style.backgroundColor = '';
+        }
+      });
+    }
+    const emptyMessages = document.querySelector('.empty-messages') as HTMLElement;
+    emptyMessages.style.display = 'none';
+    chatsController.getTokenChat(id);
+  }
+};
 
 const foto: URL = new URL(
   '../../../assets/foto.svg',
@@ -20,149 +93,152 @@ const location: URL = new URL(
   '../../../assets/location.svg',
   import.meta.url,
 );
-const arrowLeft: URL = new URL(
-  '../../../assets/arrowLeft.svg',
-  import.meta.url,
-);
 const search: URL = new URL(
   '../../../assets/search.svg',
   import.meta.url,
 );
-const arrowRight: URL = new URL(
-  '../../../assets/arrowRight.svg',
-  import.meta.url,
-);
 
-class Index extends Block {
-  profilePasswords: HTMLElement;
+class MessengerPage extends Block {
+  constructor({ search }: Record<string, URL>) {
+    super({ search });
 
-  profileData: HTMLElement;
-
-  modalProfileAvatar: HTMLElement;
-
-  profile: HTMLElement;
-
-  messageTextarea: HTMLElement;
-
-  constructor({
-    foto, file, location, arrowLeft, avatar, search, arrowRight,
-  }: Record<string, URL>) {
-    super({
-      foto, file, location, arrowLeft, avatar, search, arrowRight,
-    });
-    this.messageTextarea = this.element.querySelector('.message-textarea') as HTMLElement;
-    this.profile = this.element.querySelector('.profile') as HTMLElement;
-    this.modalProfileAvatar = this.element.querySelector('.modal-profile-avatar') as HTMLElement;
-    this.profileData = this.element.querySelector('.profile-data') as HTMLElement;
-    this.profileData.querySelectorAll('input').forEach((elem) => { elem.setAttribute('disabled', 'true'); });
-    this.profilePasswords = this.element.querySelector('.profile-passwords') as HTMLElement;
-    this.profilePasswords.style.display = 'none';
-
-    const list = (this.element as HTMLElement).querySelector('.list');
-    let strChildren = '';
-    // eslint-disable-next-line no-restricted-syntax
-    for (const key in this.children.members) {
-      if (key.includes('member')) {
-        if (Object.prototype.hasOwnProperty.call(this.children.members, key)) {
-          strChildren += this.children.members[key].getContent().outerHTML;
-        }
+    this.element.addEventListener('click', (e) => {
+      if (!(e.target as HTMLElement).closest('.modal-add-delete-user') && !(e.target as HTMLElement).closest('.dots-container')) {
+        store.set('modalAddDeleteUser.isOpened', false);
+        this.children['modal-add-delete-user'].hide();
       }
-    }
-    list?.insertAdjacentHTML('afterbegin', strChildren);
-
-    document.addEventListener(
-      'click',
-      (e) => e.target === this.modalProfileAvatar
-          && this.modalProfileAvatar.classList.remove('modal-profile-avatar_active'),
-    );
-    document.addEventListener(
-      'keydown',
-      (e) => e.key === 'Escape' && this.modalProfileAvatar.classList.remove('modal-profile-avatar_active'),
-    );
+      if (!(e.target as HTMLElement).closest('.modal-clip') && !(e.target as HTMLElement).closest('.clip-container')) {
+        store.set('modalClip.isOpened', false);
+        this.children['modal-clip'].hide();
+      }
+      if ((e.target as HTMLElement).className === 'modal-users') {
+        this.children['modal-users'].hide();
+        this.children['modal-users'].children['button-search'].getContent().click();
+      }
+      if ((e.target as HTMLElement).className === 'modal-edit') {
+        this.children['modal-edit'].children['form-edit'].getContent().reset();
+        const inputError = this.children['modal-edit'].children['form-edit'].getContent().querySelector('.error');
+        inputError.classList.remove('error_active');
+        this.children['modal-edit'].hide();
+      }
+    });
+    this.element.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        store.set('modalAddDeleteUser.isOpened', false);
+        this.children['modal-add-delete-user'].hide();
+        store.set('modalClip.isOpened', false);
+        this.children['modal-clip'].hide();
+        this.children['modal-users'].hide();
+        this.children['modal-users'].children['button-search'].getContent().click();
+        this.children['modal-edit'].children['form-edit'].getContent().reset();
+        const inputError = this.children['modal-edit'].children['form-edit'].getContent().querySelector('.error');
+        inputError.classList.remove('error_active');
+        this.children['modal-edit'].hide();
+      }
+    });
   }
 
   initChildren(): void {
-    this.children.members = {};
-    [...new Array(15).keys()].forEach((_, index) => {
-      (this.children.members as Record<string, unknown>)[`member${index}`] = new Member();
+    this.children['input-search'] = new InputSearch({
+      events: {
+        input: (e) => {
+          if ((e.target as HTMLInputElement).value.trim().length > 0) {
+            this.children['button-search'].show();
+          } else {
+            this.children['button-search'].hide();
+          }
+        },
+      },
     });
-    this.children.clip = new Clip();
-    this.children.dots = new Dots();
+    this.children['button-search'] = new ButtonSearch({
+      events: {
+        click: () => {
+          this.children['input-search'].getContent().value = '';
+          this.children['button-search'].hide();
+        },
+      },
+    });
+    this.children['list-chats'] = new ListChats({});
+    this.children['list-users'] = new ListUsers({});
+    this.children['button-edit'] = new ButtonEdit({
+      events: {
+        click: () => {
+          const inputError = this.children['modal-edit'].children['form-edit'].getContent().querySelector('.error');
+          inputError.classList.remove('error_active');
+          this.children['modal-edit'].show();
+        },
+      },
+    });
     this.children['button-open-profile'] = new ButtonOpenProfile({
       events: {
         click: () => {
-          this.profile.classList.add('profile_active');
+          router.go('/settings');
         },
       },
     });
-    this.children['profile-arrow-left'] = new ProfileArrow({
-      arrow: arrowLeft,
-      events: {
-        click: () => {
-          this.profile.classList.remove('profile_active');
-        },
+    this.children.messages = new Messages({
+      onClickDots: () => {
+        const state = store.getState();
+        store.set('modalAddDeleteUser.isOpened', !state.modalAddDeleteUser.isOpened);
+        if (state.modalAddDeleteUser.isOpened) {
+          this.children['modal-add-delete-user'].show();
+        } else {
+          this.children['modal-add-delete-user'].hide();
+        }
       },
-    });
-    this.children['profile-arrow-right'] = new ProfileArrow({
-      arrow: arrowRight,
-      events: {
-        click: () => {
-          const content = this.messageTextarea.textContent?.trim();
-          if (content && content.length > 0) {
-            console.log(this.messageTextarea.textContent?.trim());
+      onClickClip: () => {
+        const state = store.getState();
+        store.set('modalClip.isOpened', !state.modalClip.isOpened);
+        if (state.modalClip.isOpened) {
+          const messagesFooterHeight = (this.element.querySelector('.messages__footer') as HTMLElement).getBoundingClientRect().height;
+          this.children['modal-clip'].getContent()
+            .querySelector('.modal-clip').style.bottom = `${messagesFooterHeight + 20}px`;
+          this.children['modal-clip'].show();
+        } else {
+          this.children['modal-clip'].hide();
+        }
+      },
+      onClickProfileArrow: () => {
+        const content = (this.element.querySelector('.message-textarea') as HTMLElement).textContent?.trim();
+        if (content && content.length > 0) {
+          const { socket } = store.getState();
+          if (socket instanceof WebSocket) {
+            socket.send(JSON.stringify({
+              content,
+              type: 'message',
+            }));
+            socket.send(JSON.stringify({
+              content: '0',
+              type: 'get old',
+            }));
           }
-        },
+        }
       },
     });
-    this.children['form-messenger'] = new FormMessenger({
-      onClickButtonAvatar: () => this.modalProfileAvatar.classList.add('modal-profile-avatar_active'),
-      events: {
-        submit: (e) => {
-          e.preventDefault();
-          const form = e.currentTarget as HTMLFormElement;
-          let counterErrors = 0;
-          if (this.profilePasswords.style.display === 'none') {
-            this.profileData.querySelectorAll('input').forEach((elem) => {
-              if (elem.checkValidity()) {
-                elem.parentElement?.nextElementSibling?.classList.remove('error_active');
-              } else {
-                counterErrors += 1;
-                elem.parentElement?.nextElementSibling?.classList.add('error_active');
-              }
-            });
-            if (counterErrors === 0) {
-              const obj = {
-                email: form.email.value,
-                login: form.login.value,
-                first_name: form.first_name.value,
-                second_name: form.second_name.value,
-                phone: form.phone.value,
-              };
-              console.log(obj);
-            }
-          } else {
-            this.profilePasswords.querySelectorAll('input').forEach((elem) => {
-              if (elem.checkValidity()) {
-                elem.parentElement?.nextElementSibling?.classList.remove('error_active');
-              } else {
-                counterErrors += 1;
-                elem.parentElement?.nextElementSibling?.classList.add('error_active');
-              }
-            });
-            if (counterErrors === 0 && form.password.value === form['password-confirm'].value) {
-              const obj = {
-                passwordOld: form['password-old'].value,
-                password: form.password.value,
-                passwordNew: form['password-confirm'].value,
-              };
-              console.log(obj);
-            } else {
-              form['password-confirm'].parentElement?.nextElementSibling?.classList.add('error_active');
-            }
-          }
-        },
+    this.children['empty-messages'] = new EmptyMessages({});
+    this.children['modal-add-delete-user'] = new ModalAddDeleteUser({
+      onClickButtonAddUser: () => {
+        store.set('modalUsersTitle.title', 'Добавить пользователя');
+        this.children['modal-users'].show();
+        this.children['modal-add-delete-user'].hide();
+      },
+      onClickButtonDeleteUser: () => {
+        store.set('modalUsersTitle.title', 'Удалить пользователя');
+        this.children['modal-users'].show();
+        this.children['modal-add-delete-user'].hide();
       },
     });
+    this.children['modal-clip'] = new ModalClip({ foto, file, location });
+    this.children['modal-users'] = new ModalUsers({ search });
+    this.children['modal-edit'] = new ModalEdit({});
+
+    this.children['button-search'].hide();
+    this.children['list-users'].hide();
+    this.children['modal-add-delete-user'].hide();
+    this.children['modal-clip'].hide();
+    this.children['modal-users'].hide();
+    this.children['modal-edit'].hide();
+    this.children.messages.hide();
   }
 
   // eslint-disable-next-line class-methods-use-this
@@ -171,8 +247,6 @@ class Index extends Block {
   }
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-  renderDOM('#app', new Index({
-    foto, file, location, arrowLeft, search, arrowRight,
-  }));
-});
+const messengerPage = new MessengerPage({ search });
+
+export default messengerPage;

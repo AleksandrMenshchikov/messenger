@@ -1,0 +1,7 @@
+.form-message-error {
+  display: block;
+  font-size: 1.2rem;
+  color: var(--color-red);
+  margin: 14px 0;
+  text-align: center;
+}

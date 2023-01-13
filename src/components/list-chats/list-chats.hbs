@@ -1,0 +1,26 @@
+<ul class="list">
+  {{#each data}}
+  <li class="list__item" data-id={{this.id}} onclick="handleChats({{this.id}})">
+    <span class="list__divider"></span>
+    <div class="list__item-inner">
+      <img class="list__item-avatar"
+        onerror="this.src='https://www.lightsong.net/wp-content/uploads/2020/12/blank-profile-circle.png'"
+        src={{this.avatar}} alt="Аватар" />
+      <div class="list__item-text">
+        <p class="list__item-title">{{this.title}}</p>
+        <p class="list__item-subtitle">
+          <span class="list__item-subtitle-you">{{this.last_message.user.display_name}}</span>
+          <span class="list__item-subtitle-text">{{this.last_message.content}}</span>
+        </p>
+      </div>
+      <div class="list__item-time-counter">
+        {{!-- <span class="list__item-time">12:00</span> --}}
+        {{#if this.unread_count}}
+        <span class="list__item-counter">{{this.unread_count}}</span>
+        {{/if}}
+      </div>
+    </div>
+  </li>
+  {{/each}}
+  <span class="list__divider"></span>
+</ul>

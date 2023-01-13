@@ -1,0 +1,6 @@
+.modal-profile-avatar__input {
+  display: block;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}

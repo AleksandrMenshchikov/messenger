@@ -4,13 +4,13 @@
   "description": "messenger",
   "browserslist": "> 0.5%, last 2 versions, not dead",
   "scripts": {
-    "dev": "rm -rf dist && parcel src/pages/index.html --no-cache --open",
-    "build": "rm -rf dist && npm run test && parcel build src/pages/index.html --no-cache",
+    "dev": "rm -rf dist && parcel src/index.html --no-cache --open",
+    "build": "rm -rf dist && npm run lint && parcel build src/index.html --no-cache --no-content-hash --no-scope-hoist --no-optimize",
     "start": "node app.ts",
+    "prepare": "husky install",
     "lintjs": "./node_modules/.bin/eslint .",
     "lintcss": "./node_modules/.bin/stylelint \"**/*.css\"",
-    "prepare": "husky install",
-    "test": "npm run lintjs && npm run lintcss"
+    "lint": "npm run lintjs && npm run lintcss"
   },
   "repository": {
     "type": "git",

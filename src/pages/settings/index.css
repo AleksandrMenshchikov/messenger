@@ -1,0 +1,48 @@
+.container-settings {
+  position: relative;
+}
+
+.modal-profile-avatar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: var(--color-background-modal);
+  z-index: 2010;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s;
+}
+
+.modal-profile-avatar_active {
+  pointer-events: auto;
+  opacity: 1;
+}
+
+.modal-profile-avatar__button {
+  margin-top: 40px;
+  width: 100%;
+  background-color: var(--color-blue);
+  border-radius: 8px;
+  height: 37px;
+  cursor: pointer;
+  border: none;
+  color: var(--color-white);
+}
+
+.profile {
+  background-color: var(--color-white);
+  display: flex;
+}
+
+.profile__arrow {
+  width: 64px;
+  background: var(--color-light-gray);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

@@ -1,0 +1,19 @@
+<ul class="list-users">
+  {{#each data}}
+  <li class="list__item" data-id={{this.id}} onclick="handleUsers({{this.id}})">
+    <span class="list__divider"></span>
+    <div class="list__item-inner">
+      <img class="list__item-avatar"
+        onerror="this.src='https://www.lightsong.net/wp-content/uploads/2020/12/blank-profile-circle.png'"
+        src={{this.avatar}} alt="Аватар" />
+      <div class="list__item-text_users">
+        <p class="list__item-title">{{this.login}}</p>
+        <p class="list__item-subtitle">
+          <span class="list__item-subtitle-text">{{this.first_name}} {{this.second_name}}</span>
+        </p>
+      </div>
+    </div>
+  </li>
+  {{/each}}
+  {{{list-divider}}}
+</ul>

@@ -1,0 +1,6 @@
+.profile__form-data-title {
+  font-weight: 600;
+  font-size: 1.6rem;
+  color: var(--color-black);
+  margin: 20px auto 50px;
+}

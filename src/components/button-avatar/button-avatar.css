@@ -7,6 +7,11 @@
   margin-top: 60px;
   cursor: pointer;
   position: relative;
+  padding: 0;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .profile__form-avatar-text {
@@ -18,9 +23,8 @@
   border-radius: 50%;
   font-weight: 500;
   font-size: 1.3rem;
-  color: var(--color-white);
-  background: var(--color-black);
-  opacity: 0;
+  color: transparent;
+  background: rgb(0 0 0 / 0%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -29,5 +33,6 @@
 }
 
 .profile__form-button-avatar:hover .profile__form-avatar-text {
-  opacity: 0.5;
+  background: rgb(0 0 0 / 50%);
+  color: var(--color-white);
 }

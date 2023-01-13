@@ -7,10 +7,12 @@ const enum METHODS {
 
 type Options = {
   headers?: {[x:string]: string}
-  method: string;
+  method?: string;
   data?: {[x: string]: unknown};
-  timeout: 5000
+  timeout?: 5000
 };
+
+type HTTPMethod = (_url: string, options?: Options) => Promise<unknown>
 
 function queryStringify(data: {[x: string]: unknown}) {
   if (typeof data !== 'object') {
@@ -22,26 +24,26 @@ function queryStringify(data: {[x: string]: unknown}) {
 }
 
 class HTTPTransport {
-  get = (url: string, options: Options) => this.request(
-    url,
+  get: HTTPMethod = (_url, options = {}) => this.request(
+    _url,
     { ...options, method: METHODS.GET },
     options.timeout,
   );
 
-  post = (url: string, options: Options) => this.request(
-    url,
+  post: HTTPMethod = (_url, options = {}) => this.request(
+    _url,
     { ...options, method: METHODS.POST },
     options.timeout,
   );
 
-  put = (url: string, options: Options) => this.request(
-    url,
+  put: HTTPMethod = (_url, options = {}) => this.request(
+    _url,
     { ...options, method: METHODS.PUT },
     options.timeout,
   );
 
-  delete = (url: string, options:Options) => this.request(
-    url,
+  delete: HTTPMethod = (_url, options = {}) => this.request(
+    _url,
     { ...options, method: METHODS.DELETE },
     options.timeout,
   );
@@ -60,7 +62,7 @@ class HTTPTransport {
       const isGet = method === METHODS.GET;
 
       xhr.open(method, isGet && !!data ? `${url}${queryStringify(data)}` : url);
-
+      xhr.withCredentials = true;
       Object.keys(headers).forEach((key) => {
         xhr.setRequestHeader(key, headers[key]);
       });
