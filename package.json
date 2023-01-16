@@ -8,9 +8,9 @@
     "build": "rm -rf dist && npm run lint && parcel build src/index.html --no-cache --no-content-hash --no-scope-hoist --no-optimize",
     "start": "node app.ts",
     "prepare": "husky install",
-    "lintjs": "./node_modules/.bin/eslint .",
-    "lintcss": "./node_modules/.bin/stylelint \"**/*.css\"",
-    "lint": "npm run lintjs && npm run lintcss"
+    "lint:js": "./node_modules/.bin/eslint .",
+    "lint:css": "./node_modules/.bin/stylelint \"**/*.css\"",
+    "lint": "npm run lint:js && npm run lint:css"
   },
   "repository": {
     "type": "git",
