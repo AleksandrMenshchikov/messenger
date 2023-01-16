@@ -4,8 +4,8 @@
   "description": "messenger",
   "browserslist": "> 0.5%, last 2 versions, not dead",
   "scripts": {
-    "dev": "rm -rf dist && parcel src/index.html --no-cache --open",
-    "build": "rm -rf dist && npm run lint && parcel build src/index.html --no-cache --no-content-hash --no-scope-hoist --no-optimize",
+    "dev": "rimraf dist && parcel src/index.html --no-cache --open",
+    "build": "rimraf dist && npm run lint && parcel build src/index.html --no-cache --no-content-hash --no-scope-hoist --no-optimize",
     "start": "node app.ts",
     "prepare": "husky install",
     "lint:js": "./node_modules/.bin/eslint .",
