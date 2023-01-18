@@ -12,7 +12,7 @@ import ProfileInputDisplayName from '../../hoc/withProfileInputDisplayName';
 import ProfileInputPhone from '../../hoc/withProfileInputPhone';
 import ProfileTitle from '../../hoc/withProfileTitle';
 import InputError from '../input-error';
-import ButtonAvatar from '../button-avatar';
+import ButtonAvatar from '../../hoc/withButtonAvatar';
 import logoutController from '../../controllers/logout-controller';
 import Input from '../input';
 import store from '../../core/Store';

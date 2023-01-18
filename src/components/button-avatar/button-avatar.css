@@ -36,3 +36,8 @@
   background: rgb(0 0 0 / 50%);
   color: var(--color-white);
 }
+
+.avatar {
+  max-width: 130px;
+  max-height: 130px;
+}
