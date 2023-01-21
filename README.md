@@ -12,4 +12,4 @@
 ## Хостинг
 * https://messenger-sh63.onrender.com
 
-![](https://cloud.mail.ru/public/TPhn/4Sap5mDSQ)
+![Deploy by docker](https://cloud.mail.ru/public/TPhn/4Sap5mDSQ)
