@@ -10,4 +10,4 @@
 * npm run start - запускает приложение на http://localhost:3000
 
 ## Хостинг
-* https://zippy-dolphin-8d875b.netlify.app/
+* https://messenger-sh63.onrender.com
