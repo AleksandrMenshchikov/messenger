@@ -4,6 +4,7 @@
   "description": "messenger",
   "browserslist": "> 0.25%, not dead",
   "scripts": {
+    "prepare": "husky install",
     "dev": "webpack serve --open --config webpack.dev.js",
     "build": "webpack --config webpack.prod.js",
     "start": "node app.js",
