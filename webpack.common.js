@@ -13,13 +13,6 @@ module.exports = {
     path: path.resolve(__dirname, './dist'),
     filename: 'main.js',
   },
-  devServer: {
-    static: path.resolve(__dirname, './dist'),
-    open: true,
-    compress: true,
-    port: 4000,
-    historyApiFallback: true,
-  },
   module: {
     rules: [
       { test: /\.hbs$/, loader: 'handlebars-loader' },
