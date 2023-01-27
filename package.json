@@ -52,7 +52,7 @@
     "webpack-merge": "5.8.0"
   },
   "dependencies": {
-    "core-js": "3.27.1",
+    "core-js": "3.27.2",
     "express": "4.18.2",
     "nanoid": "4.0.0"
   }
