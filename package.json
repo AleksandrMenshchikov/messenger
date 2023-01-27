@@ -10,7 +10,8 @@
     "start": "node app.js",
     "lint:js": "./node_modules/.bin/eslint .",
     "lint:css": "./node_modules/.bin/stylelint \"**/*.css\"",
-    "lint:all": "npm run lint:js && npm run lint:css"
+    "lint:all": "npm run lint:js && npm run lint:css",
+    "test": "jest"
   },
   "repository": {
     "type": "git",
