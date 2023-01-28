@@ -10,7 +10,7 @@ jest.mock('nanoid', () => ({ nanoid: () => Math.floor(Math.random() * (99000 - 1
 
 describe('Router', () => {
   describe('router.use("./", loginPage), router.use("./signup", signupPage), router.use("./settings", settingsPage), router.use("./messenger", messengerPage), router.use("./404", notFoundPage), router.use("./500", serverErrorPage)', () => {
-    test('should return Router', () => {
+    test('should return Router and call method "start"', () => {
       router.use('./', loginPage);
       router.use('./signup', signupPage);
       router.use('./settings', settingsPage);
@@ -18,6 +18,9 @@ describe('Router', () => {
       router.use('./400', notFoundPage);
       router.use('./500', serverErrorPage);
       expect(Router).toStrictEqual(Router);
+      const callback = jest.fn();
+      router.start(callback());
+      expect(callback).toHaveBeenCalledTimes(1);
     });
   });
 
