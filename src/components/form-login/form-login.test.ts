@@ -13,11 +13,8 @@ describe('button', () => {
     }).getContent();
     const app = document.body.querySelector('#app') as HTMLDivElement;
     app.appendChild(element);
-    const formLogin = app.querySelector('.form') as HTMLFormElement;
+    const formLogin = app.querySelector('form') as HTMLFormElement;
     expect(formLogin).toBeInTheDocument();
-    formLogin.addEventListener('submit', () => {
-      mock();
-    });
     expect(mock).toHaveBeenCalledTimes(1);
   });
 });
