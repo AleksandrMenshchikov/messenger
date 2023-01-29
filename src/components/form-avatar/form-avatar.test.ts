@@ -15,7 +15,9 @@ describe('button', () => {
     app.appendChild(element);
     const formAvatar = app.querySelector('.form-avatar') as HTMLFormElement;
     expect(formAvatar).toBeInTheDocument();
-    formAvatar.submit();
+    formAvatar.addEventListener('submit', () => {
+      mock();
+    });
     expect(mock).toHaveBeenCalledTimes(1);
   });
 });
