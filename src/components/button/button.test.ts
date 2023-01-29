@@ -6,7 +6,7 @@ describe('button', () => {
   test('should work event on click ', () => {
     const mock = jest.fn();
     document.body.innerHTML = '<div id="app"></div>';
-    const button = new Button({
+    const element = new Button({
       type: 'button',
       content: 'click me',
       events: {
@@ -14,7 +14,8 @@ describe('button', () => {
       },
     }).getContent();
     const app = document.body.querySelector('#app') as HTMLDivElement;
-    app.appendChild(button);
+    app.appendChild(element);
+    const button = app.querySelector('button') as HTMLButtonElement;
     button.click();
     expect(mock).toHaveBeenCalledTimes(1);
   });
