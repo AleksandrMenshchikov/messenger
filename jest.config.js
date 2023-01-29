@@ -1,5 +1,5 @@
 module.exports = {
-  testEnvironment: 'jsdom',
+  testEnvironment: 'jest-environment-jsdom',
   moduleNameMapper: {
     '\\.(css)$': 'identity-obj-proxy',
   },
@@ -7,4 +7,7 @@ module.exports = {
     '\\.hbs$': 'jest-handlebars',
     '^.+\\.[t|j]sx?$': 'babel-jest',
   },
+  setupFilesAfterEnv: [
+    '<rootDir>/src/tests/setup.ts',
+  ],
 };
