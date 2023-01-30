@@ -2,7 +2,7 @@ import authApi from './auth-api';
 
 describe('auth-api', () => {
   test('should return response', async () => {
-    const response = await authApi.create({
+    const response1 = await authApi.create({
       email: '',
       login: '',
       first_name: '',
@@ -10,28 +10,18 @@ describe('auth-api', () => {
       phone: '',
       password: '',
     }) as XMLHttpRequest;
+    expect(JSON.parse(response1.responseText).reason).toStrictEqual('email is not valid');
 
-    expect(JSON.parse(response.responseText).reason).toStrictEqual('email is not valid');
-  });
+    const response2 = await authApi.request() as XMLHttpRequest;
+    expect(JSON.parse(response2.responseText).reason).toStrictEqual('Cookie is not valid');
 
-  test('should return response', async () => {
-    const response = await authApi.request() as XMLHttpRequest;
-
-    expect(JSON.parse(response.responseText).reason).toStrictEqual('Cookie is not valid');
-  });
-
-  test('should return response', async () => {
-    const response = await authApi.get({
+    const respons3 = await authApi.get({
       login: '',
       password: '',
     }) as XMLHttpRequest;
+    expect(JSON.parse(respons3.responseText).reason).toStrictEqual('Login or password is incorrect');
 
-    expect(JSON.parse(response.responseText).reason).toStrictEqual('Login or password is incorrect');
-  });
-
-  test('should return response', async () => {
-    const response = await authApi.delete() as XMLHttpRequest;
-
-    expect(JSON.parse(response.responseText).reason).toStrictEqual('Cookie is not valid');
+    const response4 = await authApi.delete() as XMLHttpRequest;
+    expect(JSON.parse(response4.responseText).reason).toStrictEqual('Cookie is not valid');
   });
 });
