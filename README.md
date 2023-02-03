@@ -6,8 +6,11 @@
 * npm install - загружает все пакеты приложения
 * npm run dev - запускает приложение в режиме разработки
 * npm run build - собирает приложение в папку dist
-* npm run test - запускает проверку приложения на соответствие ESLint и Stylelint
 * npm run start - запускает приложение на http://localhost:3000
+* npm run lint - запускает проверку приложения на соответствие ESLint и Stylelint
+* npm run test - запускает тесты
 
 ## Хостинг
-* https://zippy-dolphin-8d875b.netlify.app/
+* https://messenger-sh63.onrender.com
+
+[Deploy by docker](https://cloud.mail.ru/public/TPhn/4Sap5mDSQ)
